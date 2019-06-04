@@ -3,7 +3,7 @@ package Graphics.south;
 
 import Graphics.south.center.Center;
 import Graphics.south.left.Left;
-import Graphics.south.rigth.Rigth;
+import Graphics.south.right.Right;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -13,7 +13,7 @@ public class South extends JPanel {
 
    Left left = new Left();
    Center center = new Center();
-   Rigth rigth = new Rigth();
+   Right rigth = new Right();
 
     public South(){
         this.setLayout(new BorderLayout());
