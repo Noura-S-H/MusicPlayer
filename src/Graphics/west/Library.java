@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class Library extends JPanel {
 
+
+    private final String[] name = {" Add To Library","Songs","Albums","Favorites","Shair"};
     private JButton buttons[] = new JButton[5];
 
     public Library() {
@@ -27,7 +29,22 @@ public class Library extends JPanel {
     }
 
 
-    
+    public void setButtonsProperties(JButton button){
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setBackground(new Color(3, 11, 21));
+        button.setHorizontalAlignment(SwingConstants.LEFT);
+        //button.setFont(new Font("Open Sans", Font.BOLD, 12));
+        button.setForeground(Color.white);
+        button.setOpaque(true);
+        button.setPreferredSize(new Dimension(200, 30));
+    }
+
+    public  void setLableProperties(JLabel label){
+        label.setOpaque(true);
+        label.setSize(new Dimension(200,30));
+        label.setBackground(new Color(3, 11, 21 ));
+        label.setForeground(Color.WHITE);
+    }
 
 
 
