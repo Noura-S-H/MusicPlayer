@@ -9,20 +9,18 @@ import java.util.jar.JarEntry;
 
 public class RunningTime extends JPanel {
 
-    private final int STARTSECOND = 0, ENDSECOND = 100;
     JSlider runningTime;
 
-    public RunningTime(){
+    public RunningTime(int startsecond, int endsecond){
         super();
         this.setLayout(new BorderLayout());
-        runningTime = new JSlider(STARTSECOND,ENDSECOND,0);
+        runningTime = new JSlider(startsecond,endsecond,0);
         this.setVisible(true);
         runningTime.setPaintTicks(false);
         runningTime.setPaintLabels(true);
         runningTime.setBackground(new Color(3, 11, 21));
 
        // runningTime.putClientProperty( "runningTime.paintThumbArrowShape", Boolean.TRUE );
-
 
         this.add(runningTime);
 
