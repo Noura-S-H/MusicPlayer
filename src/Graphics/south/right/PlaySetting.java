@@ -3,10 +3,10 @@ package Graphics.south.right;
 import javax.swing.*;
 import java.awt.*;
 
-public class Setting extends JPanel {
+public class Playsetting extends JPanel {
 
     JLabel l = new JLabel();
-    public Setting(){
+    public Playsetting(){
         super();
         this.setLayout(new BorderLayout());
 
