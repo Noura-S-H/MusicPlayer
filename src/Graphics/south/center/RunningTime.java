@@ -19,6 +19,7 @@ public class RunningTime extends JPanel {
         runningTime.setPaintTicks(false);
         runningTime.setPaintLabels(true);
         runningTime.setBackground(new Color(3, 11, 21));
+        runningTime.setPreferredSize(new Dimension(endsecond,20));
 
        // runningTime.putClientProperty( "runningTime.paintThumbArrowShape", Boolean.TRUE );
 

@@ -7,7 +7,7 @@ public class PlaySetting extends JPanel {
 
     JLabel emptySpace = new JLabel();
     JLabel speaker = new JLabel();
-    RunningTime volume = new RunningTime(0,0);
+    RunningTime volume = new RunningTime(0,50);
 
     public PlaySetting(){
         super();
@@ -32,7 +32,7 @@ public class PlaySetting extends JPanel {
         label.setOpaque(true);
         label.setBackground(new Color(3, 11, 21  ));
         label.setForeground(Color.WHITE);
-        label.setPreferredSize(new Dimension(100,30));
+        label.setPreferredSize(new Dimension(50,30));
     }
 
     public void setLableIcon(JLabel label){
