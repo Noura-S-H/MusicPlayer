@@ -8,7 +8,7 @@ public class Play extends JPanel {
     private JButton[] playButtons = new JButton[5];
     private String[] buttonIcons = {"23.png","7.png","21.png","18.png","29.png"};
     //private String[] ic = {"list.png","backk.png","play.png","nextt.png","search.png"};
-    private RunningTime playerBar = new RunningTime();
+    private RunningTime playerBar = new RunningTime(0,100);
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
 
