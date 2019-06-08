@@ -9,6 +9,7 @@ public class Play extends JPanel {
     private String[] buttonIcons = {"23.png","7.png","21.png","18.png","29.png"};
     //private String[] ic = {"list.png","backk.png","play.png","nextt.png","search.png"};
     private RunningTime playerBar = new RunningTime();
+    private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
 
 
@@ -30,6 +31,7 @@ public class Play extends JPanel {
         setButtonsProperties(favorites);
         this.add(favorites);
 
+        this.add(playSetting);
 
     }
 

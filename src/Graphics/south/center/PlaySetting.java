@@ -1,12 +1,12 @@
-package Graphics.south.right;
+package Graphics.south.center;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Playsetting extends JPanel {
+public class PlaySetting extends JPanel {
 
     JLabel l = new JLabel();
-    public Playsetting(){
+    public PlaySetting(){
         super();
         this.setLayout(new BorderLayout());
 
