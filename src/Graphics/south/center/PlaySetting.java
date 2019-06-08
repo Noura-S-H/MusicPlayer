@@ -6,15 +6,24 @@ import java.awt.*;
 public class PlaySetting extends JPanel {
 
     JLabel emptySpace = new JLabel();
-    JLabel sound = new JLabel();
+    JLabel speaker = new JLabel();
+    RunningTime volume = new RunningTime(0,0);
 
     public PlaySetting(){
         super();
         this.setLayout(new BorderLayout());
 
         setLableProperties(emptySpace);
-        this.add(emptySpace,BorderLayout.CENTER);
+        setLableProperties(speaker);
+        setLableIcon(speaker);
+
+        this.add(emptySpace,BorderLayout.WEST);
+        this.add(speaker,BorderLayout.CENTER);
+        this.add(volume,BorderLayout.EAST);
+
         this.setVisible(true);
+
+
     }
 
    // 😍 😃
