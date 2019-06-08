@@ -1,4 +1,13 @@
 package Graphics.east;
 
-public class East {
+import javax.swing.*;
+
+public class East extends JPanel {
+    
+
+    public East(){
+        super();
+    }
+
+
 }
