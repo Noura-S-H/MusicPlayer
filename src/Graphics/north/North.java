@@ -13,6 +13,7 @@ public class North extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(search, BorderLayout.WEST);
         this.add(profile,BorderLayout.EAST);
+        this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
     }
 
