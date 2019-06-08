@@ -14,23 +14,26 @@ public class Search extends JPanel {
         this.setLayout(new FlowLayout());
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
-        searchBar = new JTextArea(1,17);
+        searchBar = new JTextArea(1,10);
         searchIcon = new JLabel();
 
 
         setJTaxtFieldProperties(searchBar);
-        setLableProperties(searchIcon);
-        setLableProperties(emptySpace);
+        setIconLabel(searchIcon);
+        setLableProperties(searchIcon,20,20);
+        setLableProperties(emptySpace,190,20);
         this.add(emptySpace);
         this.add(searchIcon);
         this.add(searchBar);
 
     }
 
-    public void setLableProperties(JLabel label){
+    public void setLableProperties(JLabel label,int w,int h){
+        label.setPreferredSize(new Dimension(w,h));
         label.setOpaque(true);
         label.setBackground(new Color(3, 11, 21  ));
         label.setForeground(Color.WHITE);
+
     }
 
     public void setIconLabel(JLabel label){
@@ -43,7 +46,6 @@ public class Search extends JPanel {
         textField.setEditable(true);
         textField.setLineWrap(true);
         textField.setVisible(true);
-        textField.setSize(new Dimension(20,1));
     }
 
 
