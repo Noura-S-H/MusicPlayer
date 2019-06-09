@@ -22,7 +22,7 @@ public class NewPlayList extends JPanel {
         button.setVerticalTextPosition(JButton.TOP);
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setHorizontalTextPosition(JButton.CENTER);
-        button.setPreferredSize(new Dimension(200,30));
+        button.setPreferredSize(new Dimension(150,30));
         button.setForeground(Color.white);
         button.setBackground(new Color(3, 11, 21 ));
     }

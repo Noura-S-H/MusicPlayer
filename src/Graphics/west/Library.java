@@ -36,12 +36,12 @@ public class Library extends JPanel {
         //button.setFont(new Font("Open Sans", Font.BOLD, 12));
         button.setForeground(Color.white);
         button.setOpaque(true);
-        button.setPreferredSize(new Dimension(200, 30));
+        button.setPreferredSize(new Dimension(150, 30));
     }
 
     public  void setLableProperties(JLabel label){
         label.setOpaque(true);
-        label.setSize(new Dimension(200,30));
+        label.setSize(new Dimension(150,30));
         label.setBackground(new Color(3, 11, 21 ));
         label.setForeground(Color.WHITE);
     }

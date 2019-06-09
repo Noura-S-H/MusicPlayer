@@ -36,7 +36,7 @@ public class PlayList extends JPanel {
         label.setOpaque(true);
         label.setBackground(new Color(3, 11, 21));
         label.setForeground(Color.WHITE);
-        label.setPreferredSize(new Dimension(200, 30));
+        label.setPreferredSize(new Dimension(150, 30));
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     }
 

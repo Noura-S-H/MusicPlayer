@@ -18,10 +18,10 @@ public class SongInfo extends JPanel {
         this.setVisible(true);
 
         artworkLable = new JLabel(getImageAlbum(artwork));
-        setLableProperties(artworkLable,200,100);
+        setLableProperties(artworkLable,150,100);
         this.add(artworkLable,BorderLayout.CENTER);
         songInformation = new JLabel(labelSongInfo(songName,singerName),SwingConstants.LEFT);
-        setLableProperties(songInformation,200,40);
+        setLableProperties(songInformation,150,40);
         this.add(songInformation,BorderLayout.SOUTH);
     }
 
