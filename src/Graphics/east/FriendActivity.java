@@ -6,9 +6,8 @@ import java.io.File;
 
 public class FriendActivity extends JPanel {
 
-    DefaultListModel<File> playlist = new DefaultListModel<File>();
-    //⛓️ \uD83D\uDC64 \uD83D\uDC65
-    JList<File> list;
+    DefaultListModel<Friend> friends = new DefaultListModel<Friend>();
+    JList<Friend> friendList;
     private static final String LABEL_TEXT = "  \uD83D\uDC6C Friend Activity ";
 
     public FriendActivity(){
@@ -20,9 +19,9 @@ public class FriendActivity extends JPanel {
         JLabel friendActivity = new JLabel(LABEL_TEXT);
         setLableProperties(friendActivity);
         this.add(friendActivity, BorderLayout.NORTH);
-        list = new JList<File>(playlist);
-        this.add(list, BorderLayout.CENTER);
-        JScrollPane scroll = new JScrollPane(list);
+        friendList = new JList<Friend>(friends);
+        this.add(friendList, BorderLayout.CENTER);
+        JScrollPane scroll = new JScrollPane(friendList);
 
     }
 
@@ -32,13 +31,15 @@ public class FriendActivity extends JPanel {
         label.setForeground(Color.white);
         label.setOpaque(true);
         label.setBackground(new Color(3, 11, 21));
-
-        /*ImageIcon imIcon = new ImageIcon("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\friend\\5 (2).png");
-        Image newimg = imIcon.getImage().getScaledInstance( 20, 20,  java.awt.Image.SCALE_SMOOTH ) ;
-
-        label.setIcon(new ImageIcon( newimg ));*/
     }
 
+    public void addNewFriend(Friend f){
+        friendList.add(f);
+    }
+
+    public void removeFriend(Friend f){
+        friendList.remove(f);
+    }
 
 
 
