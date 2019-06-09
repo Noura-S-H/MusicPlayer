@@ -22,9 +22,6 @@ public class RunningTime extends JPanel {
         runningTime.setPreferredSize(new Dimension(endsecond,20));
 
 
-
-       // runningTime.putClientProperty( "runningTime.paintThumbArrowShape", Boolean.TRUE );
-
         this.add(runningTime);
 
     }

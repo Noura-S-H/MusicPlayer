@@ -10,6 +10,7 @@ public class North extends JPanel {
     Profile profile = new Profile();
     public North(){
         super();
+
         this.setLayout(new BorderLayout());
         this.add(search, BorderLayout.WEST);
         this.add(profile,BorderLayout.EAST);

@@ -43,7 +43,8 @@ public class SongInfo extends JPanel {
 
     public String labelSongInfo(String songName,String singerName){
         String sn = "      " + songName,si = "      " + singerName;
-        String info = "<html>"+"<pre>"+ sn +"<br>"+ si +"</pre>"+ "<br>" +"</html>";
+        String info = sn + si;
+        //String info = "<html>"+"<pre>"+ sn +"<br>"+ si +"</pre>"+ "<br>" +"</html>";
         return info;
     }
 

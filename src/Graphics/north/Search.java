@@ -45,7 +45,7 @@ public class Search extends JPanel {
     public void setJTaxtFieldProperties(JTextArea textField){
         textField.setEditable(true);
         textField.setLineWrap(true);
-        textField.setVisible(true);
+        textField.setBackground(Color.LIGHT_GRAY);
     }
 
 
