@@ -1,5 +1,6 @@
 package Graphics;
 ;
+import Graphics.east.East;
 import Graphics.north.North;
 import Graphics.south.South;
 import Graphics.west.West;
@@ -33,6 +34,7 @@ public class Graphics extends JFrame {
         //PlayList playList = new PlayList();
         //Artwork artwork = new Artwork();
         //FriendActivity friendActivity  = new FriendActivity();
+        East east = new East();
         North north = new North();
         South south = new South();
         West west = new West();
@@ -40,6 +42,7 @@ public class Graphics extends JFrame {
         this.add(new JScrollPane(west),BorderLayout.WEST);
         this.add(new JScrollPane(south),BorderLayout.SOUTH);
         this.add(new JScrollPane(north),BorderLayout.NORTH);
+        this.add(new JScrollPane(east),BorderLayout.EAST);
 
     }
 
