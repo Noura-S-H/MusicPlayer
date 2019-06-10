@@ -8,19 +8,21 @@ import java.awt.*;
 
 public class Profile extends JPanel {
 
-    private JLabel emptySpace;
+    private JLabel proIcon = new JLabel();
+    private JLabel emptySpace = new JLabel();
     private String[] profile = {"Username","id"};
-    private JComboBox<String> profileInfo;
+    private JComboBox<String> profileInfo  = new JComboBox<String>(profile);
 
     public Profile(){
         super();
         this.setLayout(new FlowLayout());
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
-        emptySpace = new JLabel();
-        profileInfo = new JComboBox<String>(profile);
+
+        setIconLabel(proIcon);
         setLableProperties(emptySpace);
         setJComboBoxProperties(profileInfo);
+        this.add(proIcon);
         this.add(profileInfo);
         this.add(emptySpace);
     }
@@ -40,9 +42,15 @@ public class Profile extends JPanel {
 
     public void setLableProperties(JLabel label){
         label.setOpaque(true);
-        label.setPreferredSize(new Dimension(140,30));
+        label.setPreferredSize(new Dimension(140,20));
         label.setBackground(new Color(3, 11, 21 ));
         label.setForeground(Color.WHITE);
+    }
+
+    public void setIconLabel(JLabel label){
+        ImageIcon icon = new ImageIcon("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\wicon\\32.png");
+        Image newimg = icon.getImage().getScaledInstance( 20, 20,  java.awt.Image.SCALE_SMOOTH ) ;
+        label.setIcon(new ImageIcon( newimg ));
     }
 
 

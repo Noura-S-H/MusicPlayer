@@ -1,6 +1,7 @@
 package Graphics.north;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Search extends JPanel {
@@ -31,7 +32,7 @@ public class Search extends JPanel {
     public void setLableProperties(JLabel label,int w,int h){
         label.setPreferredSize(new Dimension(w,h));
         label.setOpaque(true);
-        label.setBackground(new Color(3, 11, 21  ));
+        label.setBackground(new Color(3, 11, 21 ));
         label.setForeground(Color.WHITE);
 
     }
