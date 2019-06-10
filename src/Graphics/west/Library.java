@@ -6,7 +6,7 @@ import java.awt.*;
 public class Library extends JPanel {
 
 
-    private final String[] name = {" Add To Library","Songs","Albums","Favorites","Shair"};
+    private final String[] name = {" Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
     private JButton buttons[] = new JButton[5];
 
     public Library() {

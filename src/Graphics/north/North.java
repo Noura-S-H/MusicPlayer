@@ -7,7 +7,7 @@ public class North extends JPanel {
 
 
     Search search = new Search();
-    Profile profile = new Profile("name");
+    Profile profile = new Profile();
     public North(){
         super();
 
