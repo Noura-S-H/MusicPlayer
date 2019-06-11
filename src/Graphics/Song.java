@@ -1,6 +1,7 @@
 package Graphics;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -46,9 +47,13 @@ public class Song {
             year = id3.substring(93, 97);
         } else{
             JFrame error = new JFrame("ERROR");
-            
+            error.setLayout(new BorderLayout());
+            error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            error.setSize(200, 200);
+            error.setLocation(100, 100);
+            error.add(new JTextArea("does not contain IDv3 information."));
+            error.setVisible(true);
         }
-            System.out.println(" does not contain IDv3 information.");
     }
 
 }
