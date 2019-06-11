@@ -1,4 +1,4 @@
 package Graphics.center;
 
-public class albumsDisplay {
+public class AlbumsDisplay {
 }

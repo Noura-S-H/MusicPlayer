@@ -1,5 +1,5 @@
 package Graphics.center;
 
-public class songsDisplay {
+public class SongsDisplay {
 
 }
