@@ -15,7 +15,7 @@ public class Search extends JPanel {
         this.setLayout(new FlowLayout());
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
-        searchBar = new JTextArea(1,10);
+        searchBar = new JTextArea(1,14);
         searchIcon = new JLabel();
 
 

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Song {
 
-    private File song ;
+    private File song;
     private String title;
     private String artists;
     private String album;
@@ -58,6 +58,25 @@ public class Song {
         }
     }
 
+    public File getSong() {
+        return song;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getArtists() {
+        return artists;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getYear() {
+        return year;
+    }
 }
 
 
