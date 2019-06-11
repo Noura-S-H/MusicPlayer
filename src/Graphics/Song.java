@@ -46,12 +46,14 @@ public class Song {
             album = id3.substring(63, 93);
             year = id3.substring(93, 97);
         } else{
+            String WARRNING_WINDOWS_ICON = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\warrning.png";
             JFrame error = new JFrame("ERROR");
             error.setLayout(new BorderLayout());
             error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            error.setSize(200, 200);
+            error.setSize(300, 100);
             error.setLocation(100, 100);
-            error.add(new JTextArea("does not contain IDv3 information."));
+            error.setIconImage(Toolkit.getDefaultToolkit().getImage(WARRNING_WINDOWS_ICON));
+            error.add(new JLabel("   DOSE NOT CONTAIN IDV3 INFORMATION!"));
             error.setVisible(true);
         }
     }
