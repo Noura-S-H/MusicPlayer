@@ -23,9 +23,10 @@ public class Search extends JPanel {
         setIconLabel(searchIcon);
         setLableProperties(searchIcon,20,20);
         setLableProperties(emptySpace,140,20);
+
         this.add(emptySpace);
         this.add(searchIcon);
-        this.add(searchBar);
+        this.add(new JScrollPane(searchBar));
 
     }
 

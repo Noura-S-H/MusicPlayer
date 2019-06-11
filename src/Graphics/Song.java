@@ -41,10 +41,10 @@ public class Song {
         String id3 = new String(info);
         String tag = id3.substring(0, 3);
         if (tag.equals("TAG")) {
-            title = id3.substring(3, 33);
-            artists = id3.substring(33, 63);
-            album = id3.substring(63, 93);
-            year = id3.substring(93, 97);
+            this.title = id3.substring(3, 33);
+            this.artists = id3.substring(33, 63);
+            this.album = id3.substring(63, 93);
+            this.year = id3.substring(93, 97);
         } else{
             String WARRNING_WINDOWS_ICON = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\warrning.png";
             JFrame error = new JFrame("ERROR");
