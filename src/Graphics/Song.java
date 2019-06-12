@@ -1,28 +1,53 @@
 package Graphics;
 
+
+import com.mpatric.mp3agic.Mp3File;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Song {
+
+    private Mp3File mp3File;
 
     private File song;
     private String title;
     private String artists;
     private String album;
     private String year;
+    private int seconds;
 
     public Song(String path){
         try {
-            song = new File(path);
-            FileInputStream file = new FileInputStream(song);
-            setSongInfo(last128(file));
 
-            file.close();
+            mp3File = new Mp3File(path);
+            //if(mp3File.hasId3v1Tag()) {
+                song = new File(path);
+                FileInputStream file = new FileInputStream(song);
+                setID3v1Info(last128(file));
+                file.close();
+            //}
+            //else if(mp3File.hasId3v2Tag()){
+                setID3v2Info();
+            //}
         } catch (Exception e) {
             System.out.println("Error - " + e.toString());
         }
+        /*Mp3File mp3file = new Mp3File("SomeMp3File.mp3");
+        if (mp3file.hasId3v2Tag()) {
+            ID3v2 id3v2Tag = mp3file.getId3v2Tag();
+            byte[] imageData = id3v2Tag.getAlbumImage();
+            if (imageData != null) {
+                String mimeType = id3v2Tag.getAlbumImageMimeType();
+                // Write image to file - can determine appropriate file extension from the mime type
+                RandomAccessFile file = new RandomAccessFile("album-artwork", "rw");
+                file.write(data);
+                file.close();
+            }
+        }*/
 
     }
 
@@ -37,7 +62,7 @@ public class Song {
         return info;
     }
 
-    public void setSongInfo(byte[] info){
+    public void setID3v1Info(byte[] info){
         String id3 = new String(info);
         String tag = id3.substring(0, 3);
         if (tag.equals("TAG")) {
@@ -58,6 +83,18 @@ public class Song {
         }
     }
 
+    public void setID3v2Info(){
+
+
+    }
+
+    public void print(){
+        System.out.println(title);
+        System.out.println(artists);
+        System.out.println(album);
+        System.out.println(year);
+    }
+
     public File getSong() {
         return song;
     }
@@ -76,6 +113,11 @@ public class Song {
 
     public String getYear() {
         return year;
+    }
+
+    public static void main(String[] args){
+        Song s = new Song("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
+        s.print();
     }
 }
 
