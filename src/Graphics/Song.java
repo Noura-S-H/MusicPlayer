@@ -1,6 +1,7 @@
 package Graphics;
 
 
+import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
 import javax.swing.*;
@@ -24,30 +25,18 @@ public class Song {
         try {
 
             mp3File = new Mp3File(path);
-            //if(mp3File.hasId3v1Tag()) {
+            if(mp3File.hasId3v1Tag()) {
                 song = new File(path);
                 FileInputStream file = new FileInputStream(song);
                 setID3v1Info(last128(file));
                 file.close();
-            //}
-            //else if(mp3File.hasId3v2Tag()){
-                setID3v2Info();
-            //}
+            }
+            else if(mp3File.hasId3v2Tag()){
+                setID3v2Info(mp3File);
+            }
         } catch (Exception e) {
             System.out.println("Error - " + e.toString());
         }
-        /*Mp3File mp3file = new Mp3File("SomeMp3File.mp3");
-        if (mp3file.hasId3v2Tag()) {
-            ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            byte[] imageData = id3v2Tag.getAlbumImage();
-            if (imageData != null) {
-                String mimeType = id3v2Tag.getAlbumImageMimeType();
-                // Write image to file - can determine appropriate file extension from the mime type
-                RandomAccessFile file = new RandomAccessFile("album-artwork", "rw");
-                file.write(data);
-                file.close();
-            }
-        }*/
 
     }
 
@@ -83,9 +72,12 @@ public class Song {
         }
     }
 
-    public void setID3v2Info(){
-
-
+    public void setID3v2Info(Mp3File mp3) {
+        ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+        title = id3v2Tag.getTitle();
+        artists = id3v2Tag.getArtist();
+        album = id3v2Tag.getAlbum();
+        year = id3v2Tag.getYear();
     }
 
     public void print(){
