@@ -4,8 +4,11 @@ package Graphics;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,9 +22,11 @@ public class Song {
     private String artists;
     private String album;
     private String year;
-    private int seconds;
+    private byte[] artwork;
 
     public Song(String path){
+        setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\1.jpg");
+
         try {
 
             mp3File = new Mp3File(path);
@@ -78,6 +83,7 @@ public class Song {
         artists = id3v2Tag.getArtist();
         album = id3v2Tag.getAlbum();
         year = id3v2Tag.getYear();
+        artwork = id3v2Tag.getAlbumImage();
     }
 
     public void print(){
@@ -85,6 +91,18 @@ public class Song {
         System.out.println(artists);
         System.out.println(album);
         System.out.println(year);
+        System.out.println(artwork);
+    }
+
+    public void setDifultArtwork(String path){
+        try {
+            BufferedImage bImage = ImageIO.read(new File(path));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            artwork = bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public File getSong() {
