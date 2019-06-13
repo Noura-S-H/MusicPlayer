@@ -4,11 +4,8 @@ package Graphics;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,7 +19,7 @@ public class Song {
     private String artists;
     private String album;
     private String year;
-    private byte[] artwork;
+    private ImageIcon artwork;
 
     public Song(String path){
         setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\1.jpg");
@@ -78,12 +75,13 @@ public class Song {
     }
 
     public void setID3v2Info(Mp3File mp3) {
-        ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+        ID3v2 id3v2Tag = mp3.getId3v2Tag();
         title = id3v2Tag.getTitle();
         artists = id3v2Tag.getArtist();
         album = id3v2Tag.getAlbum();
         year = id3v2Tag.getYear();
-        artwork = id3v2Tag.getAlbumImage();
+        byte[] ic = id3v2Tag.getAlbumImage();
+        artwork = new ImageIcon(ic);
     }
 
     public void print(){
@@ -95,17 +93,11 @@ public class Song {
     }
 
     public void setDifultArtwork(String path){
-        try {
-            BufferedImage bImage = ImageIO.read(new File(path));
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            artwork = bos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        artwork = new ImageIcon(path);
 
     }
 
-    public byte[] getArtwork() {
+    public ImageIcon getArtwork() {
         return artwork;
     }
 
@@ -129,10 +121,10 @@ public class Song {
         return year;
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         Song s = new Song("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
         s.print();
-    }
+    }*/
 }
 
 
