@@ -30,11 +30,13 @@ public class SongsDisplay extends JPanel {
         }
 
         public void leftPanelDesigne(){
-            JButton lastPlayedSong = new JButton(songslist.get(0).getArtwork());
+
+            JButton lastPlayedSong = new JButton();
             setButtonsProperties(lastPlayedSong);
+
             left.setLayout(new BorderLayout());
             left.setBackground(new Color(3, 11, 21));
-            left.setPreferredSize(new Dimension(300,300));
+            left.setPreferredSize(new Dimension(400,300));
             left.add(lastPlayedSong);
             left.setVisible(true);
 
@@ -51,13 +53,18 @@ public class SongsDisplay extends JPanel {
         }
 
     public void setButtonsProperties(JButton button){
-        //button.setBorder(BorderFactory.createEmptyBorder());
         button.setBackground(new Color(3, 11, 21));
-        //button.setHorizontalAlignment(SwingConstants.LEFT);
-        //button.setFont(new Font("Open Sans", Font.BOLD, 12));
+        //"Brush Script MT" Kunstler Script
+        button.setFont(new Font("Brush Script MT", Font.PLAIN, 16));
         button.setForeground(Color.white);
         button.setOpaque(true);
-        //button.setPreferredSize(new Dimension(100, 100));
+        Image newimg = songslist.get(0).getArtwork().getImage().getScaledInstance(300,300,java.awt.Image.SCALE_SMOOTH);
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setIcon(new ImageIcon( newimg ));
+        button.setText(songslist.get(0).getInfo());
+        button.setVerticalTextPosition(JButton.BOTTOM);
+        button.setHorizontalTextPosition(JButton.CENTER);
+
     }
 
 
