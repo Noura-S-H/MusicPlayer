@@ -15,11 +15,12 @@ public class Song {
     private Mp3File mp3File;
 
     private File song;
+    private ImageIcon artwork;
     private String title;
     private String artists;
     private String album;
     private String year;
-    private ImageIcon artwork;
+    private String info;
 
     public Song(String path){
         setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\1.jpg");
@@ -94,7 +95,10 @@ public class Song {
 
     public void setDifultArtwork(String path){
         artwork = new ImageIcon(path);
+    }
 
+    public String getInfo(){
+        return ("<html>"+title +"<br>"+ artists + "</html>");
     }
 
     public ImageIcon getArtwork() {
