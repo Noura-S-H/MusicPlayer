@@ -1,5 +1,6 @@
 package Graphics;
 ;
+import Graphics.center.Center;
 import Graphics.east.East;
 import Graphics.north.North;
 import Graphics.south.South;
@@ -38,12 +39,13 @@ public class Graphics extends JFrame {
         North north = new North();
         South south = new South();
         West west = new West();
+        Center center = new Center();
         //this.add(new JScrollPane(library), BorderLayout.WEST);
         this.add(new JScrollPane(west),BorderLayout.WEST);
         this.add(new JScrollPane(south),BorderLayout.SOUTH);
         this.add(new JScrollPane(north),BorderLayout.NORTH);
         this.add(new JScrollPane(east),BorderLayout.EAST);
-
+        this.add(new JScrollPane(center),BorderLayout.CENTER);
     }
 
 }
