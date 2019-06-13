@@ -105,6 +105,10 @@ public class Song {
 
     }
 
+    public byte[] getArtwork() {
+        return artwork;
+    }
+
     public File getSong() {
         return song;
     }
