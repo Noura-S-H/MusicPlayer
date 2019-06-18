@@ -21,7 +21,7 @@ public class Song {
     private String artists;
     private String album;
     private String year;
-    private JButton info;;
+    private String info;;
 
     public Song(String path){
         setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\12.jpg");
@@ -98,12 +98,9 @@ public class Song {
         artwork = new ImageIcon(path);
     }
 
-    public JButton getInfo(){
-        info = new JButton();
-        Image newimg = artwork.getImage().getScaledInstance(30,30,java.awt.Image.SCALE_SMOOTH);
-        info.setIcon(new ImageIcon( newimg ));
+    public String getInfo(){
         String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;";
-        info.setText("<html>"+ title +bigTab+ artists+ "&emsp;"+ album +"&emsp;" + year +"</html>");
+        info = "<html>"+ title +bigTab+ artists+ "&emsp;"+ album +"&emsp;" + year +"</html>";
         return info;
     }
 

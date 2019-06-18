@@ -10,19 +10,20 @@ public class SongsDisplay extends JPanel {
         private ArrayList<Song> songslist = new ArrayList<Song>();
         private ArrayList<JButton> songsButtons = new ArrayList<JButton>();
 
+
         public SongsDisplay(){
             super();
-            this.setLayout(new GridLayout(0,3));
+
+            this.setLayout(new GridLayout(100,1));
             this.setBackground(new Color(3, 11, 21));
+
             addsong("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
             addsong("C:\\Users\\hashemi\\Desktop\\uuu.mp3");
             addSongInfoToSongButton();
-            //JButton b = songslist.get(0).getInfo();
-            setButtonsProperties(songsButtons.get(0));
-            setButtonsProperties(songsButtons.get(1));
-            this.add(songsButtons.get(0));
-            this.add(songsButtons.get(1));
-            //this.add(right,BorderLayout.);
+            for(int i = 0; i<songslist.size(); i++){
+                setButtonsProperties(songsButtons.get(i));
+                this.add(songsButtons.get(i));
+            }
             this.setVisible(true);
 
         }
@@ -32,13 +33,14 @@ public class SongsDisplay extends JPanel {
         }
 
     public void setButtonsProperties(JButton button){
-        button.setBackground(new Color(3, 11, 21));
-        //"Brush Script MT" Kunstler Script
-        button.setFont(new Font("Brush Script MT", Font.PLAIN, 15));
-        button.setForeground(Color.white);
-        button.setOpaque(true);
+
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setPreferredSize(new Dimension(600,50));
+        button.setBackground(new Color(3, 11, 21));
+        button.setOpaque(true);
+        button.setPreferredSize(new Dimension(600, 30));
+        button.setFont(new Font("Brush Script MT", Font.PLAIN, 15));
+        button.setHorizontalAlignment(SwingConstants.LEFT);
+        button.setForeground(Color.white);
     }
 
 
@@ -49,7 +51,8 @@ public class SongsDisplay extends JPanel {
 
     public void addSongInfoToSongButton(){
         for(int i = 0; i<songslist.size(); i++){
-            songsButtons.add(songslist.get(i).getInfo()) ;
+            songsButtons.add(new JButton());
+            songsButtons.get(i).setText(songslist.get(i).getInfo());
         }
     }
 
