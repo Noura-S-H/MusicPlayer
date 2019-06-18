@@ -2,7 +2,6 @@ package Graphics.south.left;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 
 public class SongInfo extends JPanel {
@@ -21,7 +20,7 @@ public class SongInfo extends JPanel {
         setLableProperties(artworkLable,150,100);
         this.add(artworkLable,BorderLayout.CENTER);
         songInformation = new JLabel(labelSongInfo(songName,singerName),SwingConstants.LEFT);
-        setLableProperties(songInformation,150,40);
+        setLableProperties(songInformation,150,50);
         this.add(songInformation,BorderLayout.SOUTH);
     }
 
@@ -30,7 +29,7 @@ public class SongInfo extends JPanel {
         label.setBackground(new Color(3, 11, 21 ));
         label.setPreferredSize(new Dimension(width,heiqth));
         // label.setBackground(new Color(26, 89, 79 ));
-        label.setFont(new Font("Bad Script", Font.BOLD, 12));
+        label.setFont(new Font("Brush Script MT", Font.PLAIN, 14));
         label.setForeground(Color.WHITE);
     }
 
@@ -42,9 +41,8 @@ public class SongInfo extends JPanel {
     }
 
     public String labelSongInfo(String songName,String singerName){
-        String sn = "      " + songName,si = "      " + singerName;
-        String info = sn + si;
-        //String info = "<html>"+"<pre>"+ sn +"<br>"+ si +"</pre>"+ "<br>" +"</html>";
+        String sn = "&emsp;";
+        String info = "<html>"+ sn + songName +"<br>"+ sn + singerName +"<br></html>";
         return info;
     }
 

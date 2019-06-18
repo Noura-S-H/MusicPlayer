@@ -99,8 +99,10 @@ public class Song {
     }
 
     public String getInfo(){
-        String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;";
-        info = "<html>"+ title +bigTab+ artists+ "&emsp;"+ album +"&emsp;" + year +"</html>";
+
+
+        String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+        info = "<html>&emsp;"+ title +bigTab+ artists+ "&emsp;"+ album +"&emsp;" + year +"</html>";
         return info;
     }
 
