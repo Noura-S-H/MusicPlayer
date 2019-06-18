@@ -12,35 +12,20 @@ public class SongsDisplay extends JPanel {
 
         public SongsDisplay(){
             super();
-            this.setLayout(new BorderLayout());
+            this.setLayout(new GridLayout(0,3));
             this.setBackground(new Color(3, 11, 21));
-            addsong();
-            JButton b = songslist.get(0).getInfo();
-            setButtonsProperties(b);
-            this.add(b,BorderLayout.WEST);
+            addsong("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\uuu.mp3");
+            addSongInfoToSongButton();
+            //JButton b = songslist.get(0).getInfo();
+            setButtonsProperties(songsButtons.get(0));
+            setButtonsProperties(songsButtons.get(1));
+            this.add(songsButtons.get(0));
+            this.add(songsButtons.get(1));
             //this.add(right,BorderLayout.);
             this.setVisible(true);
 
         }
-
-        /*public void leftPanelDesigne(){
-
-            JButton lastPlayedSong = new JButton();
-            setButtonsProperties(lastPlayedSong);
-            left.setLayout(new BorderLayout());
-            left.setBackground(new Color(3, 11, 21));
-            left.setPreferredSize(new Dimension(400,300));
-            left.add(lastPlayedSong);
-            left.setVisible(true);
-
-        }
-
-        public void rightPanelDesigne(){
-
-            right.setLayout(new BorderLayout());
-            right.setBackground(new Color(3, 11, 21));
-            right.setVisible(true);
-        }*/
 
         public void sortSongByTime(){
 
@@ -52,21 +37,20 @@ public class SongsDisplay extends JPanel {
         button.setFont(new Font("Brush Script MT", Font.PLAIN, 15));
         button.setForeground(Color.white);
         button.setOpaque(true);
-        Image newimg = songslist.get(0).getArtwork().getImage().getScaledInstance(30,30,java.awt.Image.SCALE_SMOOTH);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setIcon(new ImageIcon( newimg ));
-        button.setPreferredSize(new Dimension(600,30));
-        //button.setText(songslist.get(0).getInfo());
-       // button.setVerticalTextPosition(JButton.BOTTOM);
-        //button.setHorizontalTextPosition(JButton.CENTER);
-
+        button.setPreferredSize(new Dimension(600,50));
     }
 
 
-
-    public void addsong(){
-            Song s = new Song("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
+    public void addsong(String path){
+            Song s = new Song(path);
             songslist.add(s);
+    }
+
+    public void addSongInfoToSongButton(){
+        for(int i = 0; i<songslist.size(); i++){
+            songsButtons.add(songslist.get(i).getInfo()) ;
+        }
     }
 
 }
