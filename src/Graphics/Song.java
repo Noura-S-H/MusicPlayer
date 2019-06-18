@@ -14,16 +14,17 @@ public class Song {
 
     private Mp3File mp3File;
 
+
     private File song;
     private ImageIcon artwork;
     private String title;
     private String artists;
     private String album;
     private String year;
-    private String info;
+    private JButton info = new JButton();
 
     public Song(String path){
-        setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\1.jpg");
+        setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\12.jpg");
 
         try {
 
