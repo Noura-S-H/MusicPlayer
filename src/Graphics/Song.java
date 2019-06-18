@@ -98,8 +98,9 @@ public class Song {
         artwork = new ImageIcon(path);
     }
 
-    public String getInfo(){
-        return ("<html>"+title +"<br>"+ artists + "</html>");
+    public JButton getInfo(){
+        info.setText("<html>"+ title +"&emsp;"+ artists+ "&emsp;"+ "</html>");
+        return info;
     }
 
     public ImageIcon getArtwork() {
