@@ -21,7 +21,8 @@ public class Song {
     private String artists;
     private String album;
     private String year;
-    private String info;;
+    private String info;
+    private String lastTimePlayed;
 
     public Song(String path){
         setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\12.jpg");
@@ -100,8 +101,18 @@ public class Song {
 
     public String getInfo(){
 
-        String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-        info = "<html>&emsp;"+ title +bigTab+ artists+ "&emsp;&emsp;"+ album +"&emsp;&emsp;" + year +"</html>";
+        String ti = title,ar = artists,al = album,ye = year;
+        for(int i = 0; i <= 60-title.length(); i=i+4)
+            ti = ti + "&emsp;";
+        for(int i = 0; i <= 38-album.length(); i= i+4)
+            al = al + "&emsp;";
+        for(int i = 0; i <= 38-artists.length(); i= i+4)
+            ar = ar + "&emsp;";
+        for(int i = 0; i <= 40-year.length(); i= i+4)
+            ye = ye + "&emsp;";
+
+        String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+        info = "<html>&emsp;\u2B9E  "+ ti + ar + al + ye +lastTimePlayed+"</html>";
         return info;
     }
 
