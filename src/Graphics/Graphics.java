@@ -13,7 +13,7 @@ public class Graphics extends JFrame {
 
 
     private final String WINDOWS_TITLE = "Jpotify";
-    private final int WIDTH = 1000, HEIGHT = 600;
+    private final int WIDTH = 1100, HEIGHT = 600;
     private final int X = 70, Y = 70;
     private final String WINDOWS_ICON = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\hhh.png";
 
