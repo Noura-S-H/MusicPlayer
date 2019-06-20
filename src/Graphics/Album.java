@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Album extends Song{
+public class Album {
 
 
     private HashMap<String, List<String> > nameAlbum;
     private List<String> songsPath;
 
     public Album(){
-        super();
         nameAlbum = new HashMap<>();
          songsPath = new ArrayList<>();
     }

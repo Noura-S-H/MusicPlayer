@@ -155,6 +155,10 @@ public class Song {
     public String getLastTimePlayed(){
         return lastTimePlayed;
     }
+
+    public String getSongPath(){
+        return song.getPath();
+    }
     /*public static void main(String[] args){
         Song s = new Song("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
         s.print();
