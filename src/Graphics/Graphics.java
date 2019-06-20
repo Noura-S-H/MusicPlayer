@@ -1,6 +1,6 @@
 package Graphics;
-;
-import Graphics.center.Center;
+
+import Graphics.center.LibraryDisplay.Center;
 import Graphics.east.East;
 import Graphics.north.North;
 import Graphics.south.South;
@@ -8,6 +8,8 @@ import Graphics.west.West;
 
 import javax.swing.*;
 import java.awt.*;
+
+;
 
 public class Graphics extends JFrame {
 
