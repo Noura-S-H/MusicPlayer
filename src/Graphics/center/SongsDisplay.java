@@ -47,8 +47,8 @@ public class SongsDisplay extends JPanel {
             for(int i = 0; i < songslist.size() ; i++)
                     data[i] = songslist.get(i).getInfo();
 
-            String[] headLine = {"\uD83D\uDD24 TITLE",
-                    "\uD83C\uDFA4 ️ARTISTS","\uD83D\uDCBF ALBUM","\uD83D\uDCC6 YEAR","\uD83D\uDD52"};
+            String[] headLine = {"  \uD83D\uDD24 TITLE",
+                    "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52"};
 
             songsTable = new JTable(data,headLine);
 
@@ -56,12 +56,13 @@ public class SongsDisplay extends JPanel {
             JTableHeader header = songsTable.getTableHeader();
             header.setBackground(new Color(3,11,21));
             header.setForeground(Color.WHITE);
+            header.setFont(new Font("Sherif", Font.BOLD, 12));
 
             songsTable.setShowGrid(false);
             ((DefaultTableCellRenderer)songsTable.getTableHeader().getDefaultRenderer())
                     .setHorizontalAlignment(JLabel.LEFT);
 
-            songsTable.setFont(new Font("", Font.PLAIN, 12));
+            songsTable.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
             songsTable.setRowHeight(25);
             UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
             songsTable.setPreferredSize(new Dimension(100,200));

@@ -101,8 +101,12 @@ public class Song {
 
     public String[] getInfo(){
 
+        String ti = " > " + findString(title);
+        String ar = findString(artists);
+        String al = findString(album);
+        String ye = findString(year);
 
-        String [] info = { title, artists, album, year, lastTimePlayed};
+        String [] info = { ti, ar, al, ye, lastTimePlayed};
         return info;
     }
 
