@@ -23,15 +23,15 @@ public class SongsDisplay extends JPanel {
             this.setBackground(new Color(3,11,21));
             this.setVisible(true);
 
-            addsong("C:\\Users\\hashemi\\Desktop\\www.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\qqq.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\yyy.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\eee.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\ttt.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\www.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\qqq.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\rrr.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\yyy.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\eee.mp3");
+            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\ttt.mp3");
 
             createListPanel();
-            createPlayingSongPanel(songslist.get(0));
+            createLiveSongPanel(songslist.get(0));
             this.add(list,BorderLayout.CENTER);
             this.add(liveSong,BorderLayout.NORTH);
         }
@@ -39,7 +39,7 @@ public class SongsDisplay extends JPanel {
         public void createListPanel(){
 
             list.setLayout(new BorderLayout());
-            list.setBackground(new Color(3, 11, 21));
+            list.setBackground(new Color(10, 11, 21));
             list.setMaximumSize(new Dimension(800,800));
             list.setVisible(true);
 
@@ -56,10 +56,11 @@ public class SongsDisplay extends JPanel {
 
         }
 
-        public void createPlayingSongPanel(Song s){
+        public void createLiveSongPanel(Song s){
             liveSong.setLayout(new BorderLayout());
-            liveSong.setVisible(true);
             liveSong.setBackground(new Color(3,11,21));
+            liveSong.setVisible(true);
+
             JLabel artworkSong = new JLabel();
             JButton playBt = new JButton("PLAY");
             setLableProperties(artworkSong);
@@ -75,8 +76,7 @@ public class SongsDisplay extends JPanel {
             liveSong.add(playBt,BorderLayout.EAST);
         }
 
-        public void sortSongByTime(){
-        }
+
 
         public void setButtonsProperties(JButton button,int w,int h){
 
@@ -104,7 +104,6 @@ public class SongsDisplay extends JPanel {
             header.setForeground(Color.WHITE);
             header.setFont(new Font("Sherif", Font.BOLD, 12));
             UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
-
             tb.setShowGrid(false);
             ((DefaultTableCellRenderer)tb.getTableHeader().getDefaultRenderer())
                     .setHorizontalAlignment(JLabel.LEFT);
@@ -112,8 +111,7 @@ public class SongsDisplay extends JPanel {
             tb.setForeground(Color.white);
             tb.setBackground(new Color(3,11,21));
             tb.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-            songsTable.setPreferredSize(new Dimension(100,200));
-
+            songsTable.setPreferredSize(new Dimension(100,800));
             TableColumn column = null;
             for(int i = 0; i < 5; i++ ){
                 column = tb.getColumnModel().getColumn(i);
@@ -139,6 +137,7 @@ public class SongsDisplay extends JPanel {
         }
 
 
-
+        public void sortSongByTime(){
+        }
 
 }

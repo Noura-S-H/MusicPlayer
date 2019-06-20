@@ -112,7 +112,6 @@ public class Song {
 
 
     public String findString(String str){
-        System.out.println(str);
         int i;
         String space = "&emsp;";
         char[] c = str.toCharArray();

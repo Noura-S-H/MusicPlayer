@@ -45,7 +45,7 @@ public class Graphics extends JFrame {
         this.add(new JScrollPane(south),BorderLayout.SOUTH);
         this.add(new JScrollPane(north),BorderLayout.NORTH);
         this.add(new JScrollPane(east),BorderLayout.EAST);
-        this.add(new JScrollPane(center),BorderLayout.CENTER);
+        this.add(center,BorderLayout.CENTER);
     }
 
 }
