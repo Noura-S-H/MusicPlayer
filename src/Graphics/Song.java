@@ -101,8 +101,9 @@ public class Song {
 
     public String getInfo(){
 
-        String ti = title,ar = artists,al = album,ye = year;
-        for(int i = 0; i <= 60-title.length(); i=i+4)
+        String ti = title.toString() ,ar = artists,al = album,ye = year;
+
+        for(int i = 0; i <= 30-title.length(); i++)
             ti = ti + "&emsp;";
         for(int i = 0; i <= 38-album.length(); i= i+4)
             al = al + "&emsp;";
@@ -112,7 +113,9 @@ public class Song {
             ye = ye + "&emsp;";
 
         String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-        info = "<html>&emsp;\u2B9E  "+ ti + ar + al + ye +lastTimePlayed+"</html>";
+
+        info = "<html><pre>&emsp\u2B9E  "+ title +"!"+"</pre></html>";
+  //      info = "<html>&emsp;\u2B9E  "+ ti + ar + al + ye +lastTimePlayed+"</html>";
         return info;
     }
 
@@ -140,6 +143,9 @@ public class Song {
         return year;
     }
 
+    public String getLastTimePlayed(){
+        return lastTimePlayed;
+    }
     /*public static void main(String[] args){
         Song s = new Song("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
         s.print();
