@@ -3,12 +3,16 @@ package Graphics.center;
 import Graphics.Song;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class SongsDisplay extends JPanel {
         private ArrayList<Song> songslist = new ArrayList<Song>();
         private ArrayList<JButton> songsButtons = new ArrayList<JButton>();
+
+        private JTable songsTable;
 
         JPanel list = new JPanel();
         JPanel liveSong = new JPanel();
@@ -29,30 +33,46 @@ public class SongsDisplay extends JPanel {
             createPlayingSongPanel(songslist.get(0));
             this.add(list,BorderLayout.CENTER);
             this.add(liveSong,BorderLayout.NORTH);
-
         }
 
         public void createListPanel(){
 
-            list.setLayout(new GridLayout(100,1));
+            list.setLayout(new BorderLayout());
             list.setBackground(new Color(3, 11, 21));
+            list.setMaximumSize(new Dimension(800,800));
             list.setVisible(true);
 
-            JLabel headLine = new JLabel(setHeadLinePart());
-            headLine.setForeground(Color.white);
-            headLine.setHorizontalTextPosition(SwingConstants.LEFT);
-            list.add(headLine);
+            String[][] data = new String[songslist.size()][5];
 
-            addSongInfoToSongButton();
-            for(int i = 0; i<songslist.size(); i++){
-                setButtonsProperties(songsButtons.get(i),700,40);
-                list.add(songsButtons.get(i));
-            }
+            for(int i = 0; i < songslist.size() ; i++)
+                    data[i] = songslist.get(i).getInfo();
+
+            String[] headLine = {"\uD83D\uDD24 TITLE",
+                    "\uD83C\uDFA4 ️ARTISTS","\uD83D\uDCBF ALBUM","\uD83D\uDCC6 YEAR","\uD83D\uDD52"};
+
+            songsTable = new JTable(data,headLine);
+
+            songsTable.setForeground(Color.white);
+            JTableHeader header = songsTable.getTableHeader();
+            header.setBackground(new Color(3,11,21));
+            header.setForeground(Color.WHITE);
+
+            songsTable.setShowGrid(false);
+            ((DefaultTableCellRenderer)songsTable.getTableHeader().getDefaultRenderer())
+                    .setHorizontalAlignment(JLabel.LEFT);
+
+            songsTable.setFont(new Font("", Font.PLAIN, 12));
+            songsTable.setRowHeight(25);
+            UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+            songsTable.setPreferredSize(new Dimension(100,200));
+            songsTable.setBackground(new Color(3,11,21));
+
+            list.add(new JScrollPane(songsTable),BorderLayout.CENTER);
 
         }
 
         public void createPlayingSongPanel(Song s){
-            liveSong.setLayout(new FlowLayout());
+            liveSong.setLayout(new BorderLayout());
             liveSong.setVisible(true);
             liveSong.setBackground(new Color(3,11,21));
             JLabel artworkSong = new JLabel();
@@ -66,8 +86,8 @@ public class SongsDisplay extends JPanel {
             artworkSong.setText("<html><p>&emsp;<font size = \"20\">"+s.getTitle()+
                     "</font><p>&emsp;"+s.getArtists()+"<br>&emsp;"+s.getLastTimePlayed()+"</html>");
 
-            liveSong.add(artworkSong);
-            liveSong.add(playBt);
+            liveSong.add(artworkSong,BorderLayout.WEST);
+            liveSong.add(playBt,BorderLayout.EAST);
         }
 
         public void sortSongByTime(){
@@ -88,11 +108,12 @@ public class SongsDisplay extends JPanel {
     public  void setLableProperties(JLabel label){
         label.setOpaque(true);
         label.setBackground(new Color(3, 11, 21 ));
-        label.setPreferredSize(new Dimension(900,110));
+        label.setPreferredSize(new Dimension(600,110));
         label.setFont(new Font("Brush Script MT", Font.PLAIN, 14));
         label.setForeground(Color.WHITE);
     }
-    
+
+
     public ImageIcon getImage(String path,int w, int h){
         ImageIcon imIcon = new ImageIcon(path);
         Image newimg = imIcon.getImage().getScaledInstance( w, h,  java.awt.Image.SCALE_SMOOTH ) ;
@@ -108,20 +129,10 @@ public class SongsDisplay extends JPanel {
     public void addSongInfoToSongButton(){
         for(int i = 0; i<songslist.size(); i++){
             songsButtons.add(new JButton());
-            songsButtons.get(i).setText(songslist.get(i).getInfo());
+     //       songsButtons.get(i).setText(songslist.get(i).getInfo());
         }
     }
 
-    public String setHeadLinePart(){
-            String[] s = {" \uD83C\uDF41 ARTWOKE","\uD83D\uDD24 TITLE",
-                    "\uD83C\uDFA4 ️ARTISTS","\uD83D\uDCBF ALBUM","\uD83D\uDCC6 YEAR","\uD83D\uDD52"};
-            String bt = "&emsp;";
-            for(int i = 0; i<8;i++)
-                 bt = bt + "&emsp;";
-            String ss = "<html>&emsp;&emsp;"+s[1]+bt+bt+s[2]
-                    +"&emsp;&emsp;&emsp;"+bt+s[3]+"&emsp;&emsp;"+bt+s[4]+bt+s[5]+"</html>";
-            return ss;
-    }
 
 
 }

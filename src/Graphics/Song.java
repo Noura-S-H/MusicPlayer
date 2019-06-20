@@ -99,25 +99,31 @@ public class Song {
         artwork = new ImageIcon(path);
     }
 
-    public String getInfo(){
+    public String[] getInfo(){
 
-        String ti = title.toString() ,ar = artists,al = album,ye = year;
 
-        for(int i = 0; i <= 30-title.length(); i++)
-            ti = ti + "&emsp;";
-        for(int i = 0; i <= 38-album.length(); i= i+4)
-            al = al + "&emsp;";
-        for(int i = 0; i <= 38-artists.length(); i= i+4)
-            ar = ar + "&emsp;";
-        for(int i = 0; i <= 40-year.length(); i= i+4)
-            ye = ye + "&emsp;";
-
-        String bigTab = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-
-        info = "<html><pre>&emsp\u2B9E  "+ title +"!"+"</pre></html>";
-  //      info = "<html>&emsp;\u2B9E  "+ ti + ar + al + ye +lastTimePlayed+"</html>";
+        String [] info = { title, artists, album, year, lastTimePlayed};
         return info;
     }
+
+
+    public String findString(String str){
+        System.out.println(str);
+        int i;
+        String space = "&emsp;";
+        char[] c = str.toCharArray();
+        for(int k = 0 ;k <c.length; k++)
+            if((int)c[k] == '\0' )
+                c[k] = '*';
+        for( i = c.length-1 ; i>=0 ;i--)
+            if( (c[i] != '*') )
+                break;
+
+        str = str.substring(0,i+1);
+
+        return str;
+    }
+
 
     public ImageIcon getArtwork() {
         return artwork;
