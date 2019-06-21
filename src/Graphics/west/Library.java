@@ -7,13 +7,14 @@ public class Library extends JPanel {
 
 
     private final String[] name = {" Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
-    private JButton buttons[] = new JButton[5];
 
     public Library() {
         super();
         this.setLayout(new GridLayout(6, 1));
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
+
+         JButton buttons[] = new JButton[5];
 
         JLabel label = new JLabel("  \uD83C\uDFA7  Libray");
         setLableProperties(label);
@@ -24,6 +25,9 @@ public class Library extends JPanel {
             setButtonsProperties(buttons[i]);
             add(buttons[i]);
         }
+
+        buttons[0].addActionListener(new AddToLibrary(buttons[0]));
+
     }
 
 
