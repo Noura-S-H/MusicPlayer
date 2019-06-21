@@ -99,15 +99,22 @@ public class Song {
         artwork = new ImageIcon(path);
     }
 
-    public Object[] getInfo(){
+    public Object[] getInfo(String str){
 
         String ti = " > " + findString(title);
         String ar = findString(artists);
         String al = findString(album);
         String ye = findString(year);
 
-        Object [] info = {"✓", ti, ar, al, ye, lastTimePlayed};
-        return info;
+        Object [] ALinfo = {"✓", ti, ar, al, ye, lastTimePlayed};
+        Object [] SVinfo = {"✓",artwork,ti,ar,al,ye,lastTimePlayed};
+
+        if(str.equals("AL"))
+            return ALinfo;
+        else if(str.equals("SV"))
+            return SVinfo;
+
+        return SVinfo;
     }
 
 

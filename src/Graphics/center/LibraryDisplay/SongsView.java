@@ -37,30 +37,36 @@ public class SongsView extends JPanel {
 
     public void createListPanel(){
 
+
         list.setLayout(new BorderLayout());
         list.setBackground(new Color(10, 11, 21));
         list.setMaximumSize(new Dimension(800,800));
         list.setVisible(true);
         //header and data of songList.
-        Object[][] data = new Object[songslist.size()][6];
+        Object[][] data = new Object[songslist.size()][7];
+
         for(int i = 0; i < songslist.size() ; i++) {
-            data[i] = songslist.get(i).getInfo();
+            data[i] = songslist.get(i).getInfo("SV");
         }
-        String[] headLine = {"   \uD83C\uDFBA ️" ," \uD83D\uDD24 TITLE",
+        String[] headLine = {"   \uD83C\uDFBA ️" ,""," \uD83D\uDD24 TITLE",
                 "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52"};
+
         //make table not editable.
         DefaultTableModel tableModel = new DefaultTableModel(data, headLine){
             @Override
             public boolean isCellEditable(int row, int column) {
                 // make read and editable cell fields except column 1,2,3,4
-                return column == 1 || column == 2 || column == 3 || column == 4 ? false : true;
+                return column == 1 || column == 2 || column == 3 || column == 4 || column == 5 ? false : true;
             }
+
         };
         songsTable = new JTable(tableModel);
 
         songsTable.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
         songsTable.getColumnModel().getColumn(0).setCellEditor(
                 new ButtonEditor(new JCheckBox()));
+        songsTable.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
+
 
         setTableProperties(songsTable);
         list.add(new JScrollPane(songsTable),BorderLayout.CENTER);
@@ -68,61 +74,38 @@ public class SongsView extends JPanel {
     }
 
 
-    public void setButtonsProperties(JButton button,int w,int h){
-
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setBackground(new Color(3, 11, 21));
-        button.setOpaque(true);
-        button.setPreferredSize(new Dimension(w,h));
-        //     button.setFont(new Font("Brush Script MT", Font.PLAIN, 15));
-        button.setHorizontalAlignment(SwingConstants.LEFT);
-        button.setForeground(Color.white);
-    }
-
-    public  void setLableProperties(JLabel label){
-        label.setOpaque(true);
-        label.setBackground(new Color(3, 11, 21 ));
-        label.setPreferredSize(new Dimension(600,110));
-        label.setFont(new Font("Brush Script MT", Font.PLAIN, 14));
-        label.setForeground(Color.WHITE);
-    }
-
     public void setTableProperties(JTable tb){
 
         JTableHeader header = tb.getTableHeader();
         header.setBackground(new Color(3,11,21));
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Sherif", Font.BOLD, 12));
-        header.setPreferredSize(new Dimension(100,25));
+        header.setPreferredSize(new Dimension(100,30));
         UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
         tb.setShowGrid(false);
         ((DefaultTableCellRenderer)tb.getTableHeader().getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.LEFT);
-        tb.setRowHeight(25);
+        tb.setRowHeight(30);
         tb.setPreferredSize(new Dimension(100,800));
         tb.setForeground(Color.white);
         tb.setBackground(new Color(3,11,21));
         tb.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
         //tb.setEnabled(false);
-        for(int i = 0; i < 5; i++ ){
+
+        for(int i = 0; i < 7; i++ ){
             TableColumn column = tb.getColumnModel().getColumn(i);
 
             if(i == 0)
                 column.setPreferredWidth(25);
-            else if (i == 1)
+            else if(i == 1)
+                column.setPreferredWidth(25);
+            else if (i == 2)
                 column.setPreferredWidth(250);//sport column is bigger
-            else if(i == 2 || i == 3 )
+            else if(i == 3 || i == 4 )
                 column.setPreferredWidth(150);
             else
                 column.setPreferredWidth(50);
         }
-    }
-
-    public ImageIcon getImage(String path,int w, int h){
-        ImageIcon imIcon = new ImageIcon(path);
-        Image newimg = imIcon.getImage().getScaledInstance( w, h,  java.awt.Image.SCALE_SMOOTH ) ;
-        imIcon = new ImageIcon( newimg );
-        return imIcon;
     }
 
     public void addsong(String path){
@@ -134,5 +117,18 @@ public class SongsView extends JPanel {
     public void sortSongByTime(){
     }
 
+
 }
 
+class ImageRenderer extends DefaultTableCellRenderer {
+    JLabel lbl = new JLabel();
+    public Component getTableCellRendererComponent(
+            JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+        ImageIcon icon = (ImageIcon)value;
+        lbl.setIcon(new ImageIcon(icon.getImage()
+                .getScaledInstance(30,30,java.awt.Image.SCALE_SMOOTH)));
+
+        return lbl;
+    }
+}

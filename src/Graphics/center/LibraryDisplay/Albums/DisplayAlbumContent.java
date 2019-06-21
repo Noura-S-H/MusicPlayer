@@ -48,7 +48,7 @@ public class DisplayAlbumContent extends JPanel {
             //header and data of songList.
             Object[][] data = new Object[songslist.size()][6];
             for(int i = 0; i < songslist.size() ; i++) {
-                data[i] = songslist.get(i).getInfo();
+                data[i] = songslist.get(i).getInfo("AL");
             }
             String[] headLine = {"   \uD83C\uDFBA ️" ," \uD83D\uDD24 TITLE",
                     "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52"};
