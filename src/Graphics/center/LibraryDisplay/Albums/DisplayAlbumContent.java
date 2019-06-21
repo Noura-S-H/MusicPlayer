@@ -26,12 +26,12 @@ public class DisplayAlbumContent extends JPanel {
             this.setBackground(new Color(3,11,21));
             this.setVisible(true);
 
-            addsong("src\\Graphics\\icons\\songTest\\www.mp3");
-            addsong("src\\Graphics\\icons\\songTest\\qqq.mp3");
-            addsong("src\\Graphics\\icons\\songTest\\rrr.mp3");
-            addsong("src\\Graphics\\icons\\songTest\\yyy.mp3");
-            addsong("src\\Graphics\\icons\\songTest\\eee.mp3");
-            addsong("src\\Graphics\\icons\\songTest\\ttt.mp3");
+            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\www.mp3");
+            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\qqq.mp3");
+            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\rrr.mp3");
+            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\yyy.mp3");
+            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\eee.mp3");
+            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\ttt.mp3");
 
             createListPanel();
             createLiveSongPanel(songslist.get(0));

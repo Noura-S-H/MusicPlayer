@@ -15,9 +15,8 @@ import java.util.ArrayList;
 public class SongsView extends JPanel {
 
     private ArrayList<Song> songslist = new ArrayList<Song>();
-    private JTable table;
-
     private JPanel list = new JPanel();
+    private JTable table;
 
     public SongsView(String pathsFile){
         super();
@@ -104,6 +103,7 @@ public class SongsView extends JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader(new File(pt)))) {
             String line;
             while ((line = br.readLine()) != null) {
+                songslist.add(new Song(line));
                 System.out.println(line);
             }
         } catch (FileNotFoundException e) {

@@ -1,3 +1,6 @@
-C:\Users\hashemi\Desktop\Jpotify\src\Graphics\icons\songTest\ttt.mp3
-C:\Users\hashemi\Desktop\Jpotify\src\Graphics\icons\songTest\www.mp3
-C:\Users\hashemi\Desktop\Jpotify\src\Graphics\icons\songTest\yyy.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Graphics\center\LibraryDisplay\songTest\eee.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Graphics\center\LibraryDisplay\songTest\qqq.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Graphics\center\LibraryDisplay\songTest\rrr.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Graphics\center\LibraryDisplay\songTest\ttt.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Graphics\center\LibraryDisplay\songTest\www.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Graphics\center\LibraryDisplay\songTest\yyy.mp3
