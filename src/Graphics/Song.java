@@ -25,7 +25,6 @@ public class Song {
     private String lastTimePlayed;
 
     public Song(String path){
-        setDifultArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\artwork\\12.jpg");
 
         try {
 
@@ -35,6 +34,12 @@ public class Song {
                 FileInputStream file = new FileInputStream(song);
                 setID3v1Info(last128(file));
                 file.close();
+                //find artwork
+                ID3v2 id3 = mp3File.getId3v2Tag();
+                byte[] ic = id3.getAlbumImage();
+                artwork = new ImageIcon(ic);
+                if(artwork.equals(null))
+                    setDifultArtwork("src\\Graphics\\icons\\artwork\\12.jpg");
             }
             else if(mp3File.hasId3v2Tag()){
                 setID3v2Info(mp3File);
@@ -65,7 +70,7 @@ public class Song {
             this.album = id3.substring(63, 93);
             this.year = id3.substring(93, 97);
         } else{
-            String WARRNING_WINDOWS_ICON = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\warrning.png";
+            String WARRNING_WINDOWS_ICON = "C:src\\Graphics\\icons\\warrning.png";
             JFrame error = new JFrame("ERROR");
             error.setLayout(new BorderLayout());
             error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,13 +92,6 @@ public class Song {
         artwork = new ImageIcon(ic);
     }
 
-    public void print(){
-        System.out.println(title);
-        System.out.println(artists);
-        System.out.println(album);
-        System.out.println(year);
-        System.out.println(artwork);
-    }
 
     public void setDifultArtwork(String path){
         artwork = new ImageIcon(path);
@@ -167,8 +165,8 @@ public class Song {
         return song.getPath();
     }
     /*public static void main(String[] args){
-        Song s = new Song("C:\\Users\\hashemi\\Desktop\\rrr.mp3");
-        s.print();
+        Song s = new Song("src\\Graphics\\icons\\songTest\\ttt.mp3");
+
     }*/
 }
 
