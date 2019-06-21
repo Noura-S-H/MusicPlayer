@@ -3,19 +3,19 @@ package Graphics.center.LibraryDisplay.Albums;
 import Graphics.Song;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DisplayAlbumContent extends JPanel {
-        private ArrayList<Song> songslist = new ArrayList<Song>();
 
+        private ArrayList<Song> songslist = new ArrayList<Song>();
         private JTable songsTable;
 
-        JPanel list = new JPanel();
-        JPanel liveSong = new JPanel();
+        private JPanel list = new JPanel();
+        private JPanel liveSong = new JPanel();
 
         public DisplayAlbumContent(){
             super();
@@ -43,15 +43,21 @@ public class DisplayAlbumContent extends JPanel {
             list.setMaximumSize(new Dimension(800,800));
             list.setVisible(true);
 
-            String[][] data = new String[songslist.size()][5];
-            for(int i = 0; i < songslist.size() ; i++)
-                    data[i] = songslist.get(i).getInfo();
+            Object[][] data = new Object[songslist.size()][6];
+            for(int i = 0; i < songslist.size() ; i++) {
+                data[i] = songslist.get(i).getInfo();
+            }
 
-            String[] headLine = {"   \uD83D\uDD24 TITLE",
+            String[] headLine = {" ✔️ ✓✔☑Button" ,"   \uD83D\uDD24 TITLE",
                     "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52"};
 
             songsTable = new JTable(data,headLine);
-            setTableProperties(songsTable);
+
+            songsTable.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
+            songsTable.getColumnModel().getColumn(0).setCellEditor(
+                    new ButtonEditor(new JCheckBox()));
+
+            //setTableProperties(songsTable);
             list.add(new JScrollPane(songsTable),BorderLayout.CENTER);
 
         }
@@ -76,6 +82,10 @@ public class DisplayAlbumContent extends JPanel {
             liveSong.add(playBt,BorderLayout.EAST);
         }
 
+        public void createSongButtonSelector(JPanel btSelector){
+
+
+        }
 
 
         public void setButtonsProperties(JButton button,int w,int h){
@@ -117,7 +127,7 @@ public class DisplayAlbumContent extends JPanel {
             for(int i = 0; i < 5; i++ ){
                 column = tb.getColumnModel().getColumn(i);
                 if (i == 0)
-                    column.setPreferredWidth(250); //sport column is bigger
+                    column.setPreferredWidth(250);//sport column is bigger
                 else if(i == 1 || i ==2 )
                     column.setPreferredWidth(150);
                 else
@@ -141,4 +151,78 @@ public class DisplayAlbumContent extends JPanel {
         public void sortSongByTime(){
         }
 
+}
+
+class ButtonRenderer extends JButton implements TableCellRenderer {
+
+    public ButtonRenderer() {
+        setOpaque(true);
+    }
+
+    public Component getTableCellRendererComponent(JTable table, Object value,
+                                                   boolean isSelected, boolean hasFocus, int row, int column) {
+       /* if (isSelected) {
+            setForeground(table.getSelectionForeground());
+            setBackground(table.getSelectionBackground());
+        } else {
+            setForeground(table.getForeground());
+            setBackground(UIManager.getColor("Button.background"));
+        }*/
+        setText((value == null) ? "" : value.toString());
+        return this;
+    }
+}
+
+class ButtonEditor extends DefaultCellEditor {
+    protected JButton button;
+
+    private String label;
+
+    private boolean isPushed;
+
+    public ButtonEditor(JCheckBox checkBox) {
+        super(checkBox);
+        button = new JButton();
+        button.setOpaque(true);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fireEditingStopped();
+            }
+        });
+    }
+
+    public Component getTableCellEditorComponent(JTable table, Object value,
+                                                 boolean isSelected, int row, int column) {
+        /*if (isSelected) {
+            button.setForeground(table.getSelectionForeground());
+            button.setBackground(table.getSelectionBackground());
+        } else {
+            button.setForeground(table.getForeground());
+            button.setBackground(table.getBackground());
+        }*/
+        label = (value == null) ? "" : value.toString();
+        button.setText(label);
+        isPushed = true;
+        return button;
+    }
+
+    public Object getCellEditorValue() {
+        if (isPushed) {
+            //
+            //
+            JOptionPane.showMessageDialog(button, label + ": Ouch!");
+            // System.out.println(label + ": Ouch!");
+        }
+        isPushed = false;
+        return new String(label);
+    }
+
+    public boolean stopCellEditing() {
+        isPushed = false;
+        return super.stopCellEditing();
+    }
+
+    protected void fireEditingStopped() {
+        super.fireEditingStopped();
+    }
 }
