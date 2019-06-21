@@ -42,22 +42,28 @@ public class DisplayAlbumContent extends JPanel {
             list.setBackground(new Color(10, 11, 21));
             list.setMaximumSize(new Dimension(800,800));
             list.setVisible(true);
-
+            //header and data of songList.
             Object[][] data = new Object[songslist.size()][6];
             for(int i = 0; i < songslist.size() ; i++) {
                 data[i] = songslist.get(i).getInfo();
             }
-
-            String[] headLine = {" ✔️ ✓✔☑Button" ,"   \uD83D\uDD24 TITLE",
+            String[] headLine = {"   \uD83C\uDFBA ️" ," \uD83D\uDD24 TITLE",
                     "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52"};
-
-            songsTable = new JTable(data,headLine);
+            //make table not editable.
+            DefaultTableModel tableModel = new DefaultTableModel(data, headLine){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    // make read and editable cell fields except column 1,2,3,4
+                    return column == 1 || column == 2 || column == 3 || column == 4 ? false : true;
+                }
+            };
+            songsTable = new JTable(tableModel);
 
             songsTable.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
             songsTable.getColumnModel().getColumn(0).setCellEditor(
                     new ButtonEditor(new JCheckBox()));
 
-            //setTableProperties(songsTable);
+            setTableProperties(songsTable);
             list.add(new JScrollPane(songsTable),BorderLayout.CENTER);
 
         }
@@ -80,11 +86,6 @@ public class DisplayAlbumContent extends JPanel {
 
             liveSong.add(artworkSong,BorderLayout.WEST);
             liveSong.add(playBt,BorderLayout.EAST);
-        }
-
-        public void createSongButtonSelector(JPanel btSelector){
-
-
         }
 
 
@@ -113,22 +114,25 @@ public class DisplayAlbumContent extends JPanel {
             header.setBackground(new Color(3,11,21));
             header.setForeground(Color.WHITE);
             header.setFont(new Font("Sherif", Font.BOLD, 12));
+            header.setPreferredSize(new Dimension(100,25));
             UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
             tb.setShowGrid(false);
             ((DefaultTableCellRenderer)tb.getTableHeader().getDefaultRenderer())
                     .setHorizontalAlignment(JLabel.LEFT);
             tb.setRowHeight(25);
-            tb.setEnabled(false);
+            tb.setPreferredSize(new Dimension(100,800));
             tb.setForeground(Color.white);
             tb.setBackground(new Color(3,11,21));
             tb.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-            songsTable.setPreferredSize(new Dimension(100,800));
-            TableColumn column = null;
+            //tb.setEnabled(false);
             for(int i = 0; i < 5; i++ ){
-                column = tb.getColumnModel().getColumn(i);
-                if (i == 0)
+                TableColumn column = tb.getColumnModel().getColumn(i);
+
+                if(i == 0)
+                    column.setPreferredWidth(25);
+                else if (i == 1)
                     column.setPreferredWidth(250);//sport column is bigger
-                else if(i == 1 || i ==2 )
+                else if(i == 2 || i == 3 )
                     column.setPreferredWidth(150);
                 else
                     column.setPreferredWidth(50);
@@ -152,32 +156,32 @@ public class DisplayAlbumContent extends JPanel {
         }
 
 }
-
+/* class ButtonReaderer for add Button to JTable
+   class ButtonEditor for action listener and changes after clicking
+ */
 class ButtonRenderer extends JButton implements TableCellRenderer {
 
     public ButtonRenderer() {
         setOpaque(true);
     }
-
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
-       /* if (isSelected) {
-            setForeground(table.getSelectionForeground());
-            setBackground(table.getSelectionBackground());
-        } else {
-            setForeground(table.getForeground());
-            setBackground(UIManager.getColor("Button.background"));
-        }*/
+        setBackground(new Color(3,11,21));
+        setBorder(BorderFactory.createEmptyBorder());
+        setForeground(Color.white);
+        setEnabled(true);
+        if (isSelected)
+            setBackground(new Color(21, 141, 32));
+
         setText((value == null) ? "" : value.toString());
         return this;
     }
 }
 
+// class for
 class ButtonEditor extends DefaultCellEditor {
     protected JButton button;
-
     private String label;
-
     private boolean isPushed;
 
     public ButtonEditor(JCheckBox checkBox) {
@@ -193,26 +197,16 @@ class ButtonEditor extends DefaultCellEditor {
 
     public Component getTableCellEditorComponent(JTable table, Object value,
                                                  boolean isSelected, int row, int column) {
-        /*if (isSelected) {
-            button.setForeground(table.getSelectionForeground());
-            button.setBackground(table.getSelectionBackground());
-        } else {
-            button.setForeground(table.getForeground());
-            button.setBackground(table.getBackground());
-        }*/
         label = (value == null) ? "" : value.toString();
         button.setText(label);
         isPushed = true;
         return button;
     }
 
+    //show message when button clicked
     public Object getCellEditorValue() {
-        if (isPushed) {
-            //
-            //
-            JOptionPane.showMessageDialog(button, label + ": Ouch!");
-            // System.out.println(label + ": Ouch!");
-        }
+        if (isPushed)
+            JOptionPane.showMessageDialog(button, label + ": Nothing happend!");
         isPushed = false;
         return new String(label);
     }

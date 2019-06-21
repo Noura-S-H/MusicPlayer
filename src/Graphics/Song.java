@@ -106,7 +106,7 @@ public class Song {
         String al = findString(album);
         String ye = findString(year);
 
-        Object [] info = {"g", ti, ar, al, ye, lastTimePlayed};
+        Object [] info = {"✓", ti, ar, al, ye, lastTimePlayed};
         return info;
     }
 

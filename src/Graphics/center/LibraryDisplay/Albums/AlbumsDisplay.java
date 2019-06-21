@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AlbumsDisplay extends JPanel{
 
 
-        private ArrayList<Album> albums= new ArrayList<Album>();
+      //  private ArrayList<Album> albums= new ArrayList<Album>();
         private ArrayList<JButton>  albutton = new ArrayList<JButton>();
 
         JPanel right = new JPanel(new FlowLayout());
