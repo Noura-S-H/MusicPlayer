@@ -1,12 +1,15 @@
 package Graphics.center.LibraryDisplay.Albums;
 
 import Graphics.Song;
+import Graphics.center.LibraryDisplay.ButtonEditor;
+import Graphics.center.LibraryDisplay.ButtonRenderer;
 
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DisplayAlbumContent extends JPanel {
@@ -23,12 +26,12 @@ public class DisplayAlbumContent extends JPanel {
             this.setBackground(new Color(3,11,21));
             this.setVisible(true);
 
-            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\www.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\qqq.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\rrr.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\yyy.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\eee.mp3");
-            addsong("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\songTest\\ttt.mp3");
+            addsong("src\\Graphics\\icons\\songTest\\www.mp3");
+            addsong("src\\Graphics\\icons\\songTest\\qqq.mp3");
+            addsong("src\\Graphics\\icons\\songTest\\rrr.mp3");
+            addsong("src\\Graphics\\icons\\songTest\\yyy.mp3");
+            addsong("src\\Graphics\\icons\\songTest\\eee.mp3");
+            addsong("src\\Graphics\\icons\\songTest\\ttt.mp3");
 
             createListPanel();
             createLiveSongPanel(songslist.get(0));
@@ -156,67 +159,4 @@ public class DisplayAlbumContent extends JPanel {
         }
 
 }
-/* class ButtonReaderer for add Button to JTable
-   class ButtonEditor for action listener and changes after clicking
- */
-class ButtonRenderer extends JButton implements TableCellRenderer {
 
-    public ButtonRenderer() {
-        setOpaque(true);
-    }
-    public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
-        setBackground(new Color(3,11,21));
-        setBorder(BorderFactory.createEmptyBorder());
-        setForeground(Color.white);
-        setEnabled(true);
-        if (isSelected)
-            setBackground(new Color(21, 141, 32));
-
-        setText((value == null) ? "" : value.toString());
-        return this;
-    }
-}
-
-// class for
-class ButtonEditor extends DefaultCellEditor {
-    protected JButton button;
-    private String label;
-    private boolean isPushed;
-
-    public ButtonEditor(JCheckBox checkBox) {
-        super(checkBox);
-        button = new JButton();
-        button.setOpaque(true);
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fireEditingStopped();
-            }
-        });
-    }
-
-    public Component getTableCellEditorComponent(JTable table, Object value,
-                                                 boolean isSelected, int row, int column) {
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        isPushed = true;
-        return button;
-    }
-
-    //show message when button clicked
-    public Object getCellEditorValue() {
-        if (isPushed)
-            JOptionPane.showMessageDialog(button, label + ": Nothing happend!");
-        isPushed = false;
-        return new String(label);
-    }
-
-    public boolean stopCellEditing() {
-        isPushed = false;
-        return super.stopCellEditing();
-    }
-
-    protected void fireEditingStopped() {
-        super.fireEditingStopped();
-    }
-}
