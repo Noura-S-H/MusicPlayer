@@ -8,7 +8,7 @@ import java.awt.*;
 public class Center extends JPanel {
 
     DisplayAlbumContent displayAlbumContent = new DisplayAlbumContent();
-    SongsView songsView = new SongsView();
+    SongsView songsView = new SongsView("src\\Graphics\\center\\LibraryDisplay\\Songs.txt");
     //AlbumsDisplay albumsDisplay = new AlbumsDisplay();
 
 
