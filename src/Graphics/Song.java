@@ -99,14 +99,14 @@ public class Song {
         artwork = new ImageIcon(path);
     }
 
-    public String[] getInfo(){
+    public Object[] getInfo(){
 
         String ti = " > " + findString(title);
         String ar = findString(artists);
         String al = findString(album);
         String ye = findString(year);
 
-        String [] info = { ti, ar, al, ye, lastTimePlayed};
+        Object [] info = {"g", ti, ar, al, ye, lastTimePlayed};
         return info;
     }
 
