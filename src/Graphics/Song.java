@@ -14,7 +14,7 @@ public class Song {
 
     private Mp3File mp3File;
 
-
+    private boolean favorite = false;
     private File song;
     private ImageIcon artwork;
     private String title;
@@ -164,6 +164,15 @@ public class Song {
     public String getSongPath(){
         return song.getPath();
     }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     /*public static void main(String[] args){
         Song s = new Song("src\\Graphics\\icons\\songTest\\ttt.mp3");
 
