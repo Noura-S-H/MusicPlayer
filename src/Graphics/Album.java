@@ -1,47 +1,41 @@
 package Graphics;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-public class Album {
+public class Album implements ActionListener {
 
+    private String albumName;
+    private ArrayList<Song> songs = new ArrayList<Song>();
 
-    private HashMap<String, List<String> > nameAlbum;
-    private List<String> songsPath;
+    private ActionEvent e;
+    private JButton button;
 
-    public Album(){
-        nameAlbum = new HashMap<>();
-         songsPath = new ArrayList<>();
+    public Album(String albumName) {
+        this.albumName = albumName;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        this.e = e;
+        if (e.getSource() == button) {
+
+        }
+
     }
 
 
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
 
     public void addSong(Song s){
-
-       for(String i : nameAlbum.keySet() ) {
-           if (i != null) {
-               if (s.getAlbum().equals(i)) {
-                   songsPath.add(s.getSongPath());
-                   nameAlbum.put(i, songsPath);
-               }
-
-           } else {
-                   songsPath.add(s.getSongPath());
-                   nameAlbum.put(i, songsPath);
-               }
-           }
-
-    }
-
-    public void removeSong(Song s){
-       for(List<String> i : nameAlbum.values()){
-           if(i != null){
-               if(i.equals(s.getSongPath())){
-                   i.remove(s.getSongPath());
-               }
-           }
-       }
+        songs.add(s);
     }
 
 

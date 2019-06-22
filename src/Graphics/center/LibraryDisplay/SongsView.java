@@ -26,7 +26,7 @@ public class SongsView extends JPanel implements ActionListener {
         super();
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(3,11,21));
-        this.setVisible(false);
+        this.setVisible(true);
 
         addToSongsListFromFile(pathsFile);
 
