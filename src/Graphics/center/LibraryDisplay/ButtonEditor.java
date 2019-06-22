@@ -31,8 +31,10 @@ public class ButtonEditor extends DefaultCellEditor {
 
     //show message when button clicked
     public Object getCellEditorValue() {
-        if (isPushed)
-            JOptionPane.showMessageDialog(button, label + ": Nothing happend!");
+        if (isPushed){
+
+        }
+          //  JOptionPane.showMessageDialog(button, label + ": Nothing happend!");
         isPushed = false;
         return new String(label);
     }

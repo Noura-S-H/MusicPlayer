@@ -19,6 +19,12 @@ public class Graphics extends JFrame {
     private final int X = 70, Y = 70;
     private final String WINDOWS_ICON = "src\\Graphics\\icons\\hhh.png";
 
+    East east;
+    West west;
+    North north;
+    South south;
+    Center center;
+
 
     public Graphics() {
 
@@ -37,11 +43,11 @@ public class Graphics extends JFrame {
         //PlayList playList = new PlayList();
         //Artwork artwork = new Artwork();
         //FriendActivity friendActivity  = new FriendActivity();
-        East east = new East();
-        North north = new North();
-        South south = new South();
-        West west = new West();
-        Center center = new Center();
+         east = new East();
+         north = new North();
+         south = new South();
+         west = new West();
+         center = new Center();
         //this.add(new JScrollPane(library), BorderLayout.WEST);
         this.add(new JScrollPane(west),BorderLayout.WEST);
         this.add(new JScrollPane(south),BorderLayout.SOUTH);
@@ -50,4 +56,23 @@ public class Graphics extends JFrame {
         this.add(center,BorderLayout.CENTER);
     }
 
+    public East getEast(){
+        return east;
+    }
+
+    public West getWest(){
+        return west;
+    }
+
+    public North getNorth(){
+        return north;
+    }
+
+    public South getSouth(){
+        return south;
+    }
+
+    public Center getCenter(){
+        return center;
+    }
 }
