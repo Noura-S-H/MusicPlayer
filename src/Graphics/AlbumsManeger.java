@@ -13,7 +13,7 @@ public class AlbumsManeger{
 
 
     public AlbumsManeger(){
-        addSongsFormSongsFile();
+        addToSongsFormSongsFile();
         findAlbumsName();
         createAlbums();
         setSongsToAlbums();
@@ -21,7 +21,7 @@ public class AlbumsManeger{
     }
 
 
-    public void addSongsFormSongsFile(){
+    public void addToSongsFormSongsFile(){
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(readThisFile));
@@ -41,11 +41,12 @@ public class AlbumsManeger{
         for(int i = 0; i < allSongs.size(); i++){
             Song temp = allSongs.get(i);
             for (int j = 0; j < albumsName.size(); j++){
-                if(temp.getAlbum().equals(albumsName.get(i)))
+                if(temp.getAlbum().equals(temp))
                     check = true;
             }
-            if(check == false)
+            if(check == false) {
                 albumsName.add(allSongs.get(i).getAlbum());
+            }
         }
     }
 
@@ -60,9 +61,9 @@ public class AlbumsManeger{
 
         for(int i = 0; i < albumsName.size(); i++){
             for (int j = 0; j < allSongs.size(); j++) {
-                if (albums.get(i).equals(allSongs.get(j).getAlbum()))
+                if (albums.get(i).getAlbumName().equals(allSongs.get(j).getAlbum())) {
                     albums.get(i).addSong(allSongs.get(j));
-
+                }
             }
         }
 
@@ -71,7 +72,10 @@ public class AlbumsManeger{
     public void createBackupAlbumsFile(){
         for (int i = 0; i<albums.size(); i++){
             boolean empty = false;
-            File f = new File(albums.get(i).getAlbumName());
+            String name =albums.get(i).getAlbumName().replaceAll("[ : , \t,\0 ]" , "_");
+            String nameFile = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Files\\"+name+".txt";
+            System.out.println(nameFile);
+            File f = new File(nameFile);
             ArrayList<Song> s = albums.get(i).getSongs();
             if(f.length() == 0)
                 empty = true;
@@ -79,15 +83,18 @@ public class AlbumsManeger{
                 if (!f.exists())
                     f.createNewFile();
 
-                PrintWriter file = new PrintWriter(new FileWriter(f,true));
+                PrintWriter file = new PrintWriter(new FileWriter(f));
                 if(empty == false)
                     file.println();
 
                 for(int j = 0; j < s.size() ;j++) {
-                    if(i == s.size()-1)
+                    if(i == s.size()-1) {
                         file.print(s.get(j).getSongPath());
-                    else
+                    }
+                    else {
+                        System.out.println(s.get(j).getSongPath());
                         file.println(s.get(j).getSongPath());
+                    }
                 }
                 file.close();
 
@@ -97,6 +104,10 @@ public class AlbumsManeger{
         }
 
 
+    }
+
+    public static void main(String[] args){
+        AlbumsManeger am = new AlbumsManeger();
     }
 
 
