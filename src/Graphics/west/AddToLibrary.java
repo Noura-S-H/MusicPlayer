@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 public class AddToLibrary extends Component implements ActionListener {
@@ -36,8 +36,30 @@ public class AddToLibrary extends Component implements ActionListener {
             }catch(Exception ex) {
                 System.out.println(ex.toString());
 
-                }
             }
         }
     }
+
+
+    /*public void addSongstoLibrary(String pt){
+
+        PrintWriter f0 = null;
+        try {
+            f0 = new PrintWriter(new FileWriter("output.txt"));
+            for(int i = 0; i < filePath.size() ;i++) {
+                f0.println(filePath.get());
+            }
+            f0.close();
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+
+
+    }*/
+
+
+
+}
 

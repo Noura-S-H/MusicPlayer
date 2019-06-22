@@ -1,4 +1,4 @@
-﻿C:\Users\hashemi\Desktop\Jpotify\src\Files\songTest\qqq.mp3
+C:\Users\hashemi\Desktop\Jpotify\src\Files\songTest\qqq.mp3
 C:\Users\hashemi\Desktop\Jpotify\src\Files\songTest\www.mp3
 C:\Users\hashemi\Desktop\Jpotify\src\Files\songTest\yyy.mp3
 C:\Users\hashemi\Desktop\Jpotify\src\Files\songTest\eee.mp3

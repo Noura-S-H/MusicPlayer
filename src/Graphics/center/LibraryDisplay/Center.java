@@ -6,7 +6,7 @@ import java.awt.*;
 public class Center extends JPanel {
 
     //DisplayAlbumContent displayAlbumContent = new DisplayAlbumContent();
-    SongsView songsView = new SongsView("src\\Graphics\\center\\LibraryDisplay\\Songs.txt");
+    SongsView songsView = new SongsView("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Files\\Songs.txt");
     //AlbumsDisplay albumsDisplay = new AlbumsDisplay();
 
 

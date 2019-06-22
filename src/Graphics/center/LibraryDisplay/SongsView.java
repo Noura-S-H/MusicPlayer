@@ -68,6 +68,7 @@ public class SongsView extends JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader(new File(pt)))) {
             String line;
             while ((line = br.readLine()) != null) {
+                Song s = new Song(line);
                 songslist.add(new Song(line));
                 System.out.println(line);
             }

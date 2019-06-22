@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Left extends JPanel {
 
-    Song s = new Song("src\\Graphics\\center\\LibraryDisplay\\songTest\\ttt.mp3");
+    Song s = new Song("src\\Files\\songTest\\ttt.mp3");
     SongInfo artwork = new SongInfo(s);
     public Left(){
         super();
