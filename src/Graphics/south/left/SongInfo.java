@@ -11,7 +11,7 @@ public class SongInfo extends JPanel {
     private AddProperties pro = new AddProperties();
     private JLabel artworkLable,songInformation;
     private  boolean favorites = false;
-    private String songName ,singersNames,artwork = "iii.jpg";
+    private String songName = "name" ,singersNames = "name";
     private Song music;
 
 
@@ -23,11 +23,11 @@ public class SongInfo extends JPanel {
         this.songName = music.getTitle();
         this.singersNames = music.getArtists();
 
-        artworkLable = new JLabel(pro.getImageSong(music.getArtwork()));
-        pro.setLabelProperties(artworkLable,150,100,"",12,SwingConstants.LEFT);
+        artworkLable = new JLabel(pro.getImageSong(music.getArtwork(),130,100));
+        pro.setLabelProperties(artworkLable,150,100,"",12,SwingConstants.CENTER);
 
         songInformation = new JLabel(labelSongInfo(songName,singersNames));
-        pro.setLabelProperties(songInformation,150,50,"Brush Script MT",14,SwingConstants.LEFT);
+        pro.setLabelProperties(songInformation,150,50,"Trebuchet MS",12,SwingConstants.LEFT);
 
         this.add(artworkLable,BorderLayout.CENTER);
         this.add(songInformation,BorderLayout.SOUTH);

@@ -21,14 +21,14 @@ public class Play extends JPanel {
         this.setVisible(true);
 
         for(int i = 0; i < playButtons.length ; i++){
-            playButtons[i] = new JButton(pro.getImageArtwork(buttonIcons[i],25,25));
-            pro.setButtonProperties(playButtons[i],30,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
+            playButtons[i] = new JButton(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\"+buttonIcons[i],25,25));
+            pro.setButtonProperties(playButtons[i],30,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
             this.add(playButtons[i]);
         }
         //playerBar.setPreferredSize(new Dimension(300,20));
         this.add(playerBar);
 
-        favorites = new JButton(pro.getImageArtwork("3.png",25,25));
+        favorites = new JButton(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\3.png",25,25));
         pro.setButtonProperties(favorites,30,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
         this.add(favorites);
 

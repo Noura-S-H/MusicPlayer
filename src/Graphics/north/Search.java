@@ -19,7 +19,7 @@ public class Search extends JPanel {
         searchIcon = new JLabel();
 
 
-        setJTaxtFieldProperties(searchBar);
+        pro.setJTaxtFieldProperties(searchBar,true,true);
         pro.setImageIcon(searchIcon,"src\\Graphics\\icons\\wicon\\search.png",20,20);
         pro.setLabelProperties(searchIcon,20,20,"",12,SwingConstants.LEFT);
         pro.setLabelProperties(emptySpace,140,20,"",12,SwingConstants.LEFT);
@@ -28,13 +28,6 @@ public class Search extends JPanel {
         this.add(searchIcon);
         this.add(new JScrollPane(searchBar));
 
-    }
-
-
-    public void setJTaxtFieldProperties(JTextArea textField){
-        textField.setEditable(true);
-        textField.setLineWrap(true);
-        textField.setBackground(Color.LIGHT_GRAY);
     }
 
 

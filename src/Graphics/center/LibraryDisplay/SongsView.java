@@ -1,19 +1,17 @@
 package Graphics.center.LibraryDisplay;
 
 
+import Graphics.AddProperties;
 import Graphics.Song;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
 public class SongsView extends JPanel {
-
+    private AddProperties pro = new AddProperties();
     private ArrayList<Song> songslist = new ArrayList<Song>();
     private JPanel list = new JPanel();
     private JTable table;
@@ -59,44 +57,11 @@ public class SongsView extends JPanel {
                 new ButtonEditor(new JCheckBox()));
         table.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
 
-        setTableProperties(table);
+        pro.setTableProperties(table,100,35,100,800,35,7);
         list.add(new JScrollPane(table),BorderLayout.CENTER);
 
     }
 
-
-    public void setTableProperties(JTable tb){
-
-        JTableHeader header = tb.getTableHeader();
-        header.setBackground(new Color(3,11,21));
-        header.setForeground(Color.WHITE);
-        header.setFont(new Font("Sherif", Font.BOLD, 12));
-        header.setPreferredSize(new Dimension(100,35));
-        UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
-        tb.setShowGrid(false);
-        tb.setRowHeight(35);
-        tb.setPreferredSize(new Dimension(100,800));
-        tb.setForeground(Color.white);
-        tb.setBackground(new Color(3,11,21));
-        tb.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-        ((DefaultTableCellRenderer)tb.getTableHeader().getDefaultRenderer())
-                .setHorizontalAlignment(JLabel.LEFT);
-        //tb.setEnabled(false);
-        for(int i = 0; i < 7; i++ ){
-            TableColumn column = tb.getColumnModel().getColumn(i);
-            if(i == 0)
-                column.setPreferredWidth(25);
-            else if(i == 1)
-                column.setPreferredWidth(30);
-            else if (i == 2)
-                column.setPreferredWidth(250);//sport column is bigger
-            else if(i == 3 || i == 4 )
-                column.setPreferredWidth(150);
-            else
-                column.setPreferredWidth(50);
-
-        }
-    }
 
     public void addToSongsListFromFile(String pt){
 

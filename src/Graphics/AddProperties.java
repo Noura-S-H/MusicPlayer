@@ -1,6 +1,10 @@
 package Graphics;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class AddProperties{
@@ -38,9 +42,9 @@ public class AddProperties{
         return icon;
     }
 
-    public ImageIcon getImageSong(ImageIcon icon) {
+    public ImageIcon getImageSong(ImageIcon icon,int width, int height) {
         ImageIcon imIcon = new ImageIcon(icon.getImage()
-                .getScaledInstance(130, 100, java.awt.Image.SCALE_SMOOTH));
+                .getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH));
         return imIcon;
     }
 
@@ -50,8 +54,75 @@ public class AddProperties{
         lab.setIcon(new ImageIcon( newimage ));
     }
 
-    public void getImage(){
+    public void setTableProperties(JTable tb,int widthHeader,int heightHeader ,int widthCell,int heightCell,int rowHeight,int columnsNum){
+        JTableHeader header = tb.getTableHeader();
+        header.setBackground(color);
+        header.setForeground(Color.WHITE);
+        header.setFont(new Font("Sherif", Font.BOLD, 12));
+        header.setPreferredSize(new Dimension(widthHeader,heightHeader));
+        UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+        tb.setShowGrid(false);
+        ((DefaultTableCellRenderer)tb.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.LEFT);
+        tb.setRowHeight(rowHeight);
+        tb.setPreferredSize(new Dimension(widthCell,heightCell));
+        tb.setForeground(Color.white);
+        tb.setBackground(color);
+        tb.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+        for(int i = 0; i < columnsNum; i++ ){
+            TableColumn column = tb.getColumnModel().getColumn(i);
+            if(columnsNum <= 5) {
+                if (i == 0)
+                    column.setPreferredWidth(25);
+                else if (i == 1)
+                    column.setPreferredWidth(250);//sport column is bigger
+                else if (i == 2 || i == 3)
+                    column.setPreferredWidth(150);
+                else
+                    column.setPreferredWidth(50);
+            }else if( columnsNum > 5 && columnsNum <= 7){
+                if(i == 0)
+                    column.setPreferredWidth(25);
+                else if(i == 1)
+                    column.setPreferredWidth(30);
+                else if (i == 2)
+                    column.setPreferredWidth(250);//sport column is bigger
+                else if(i == 3 || i == 4 )
+                    column.setPreferredWidth(150);
+                else
+                    column.setPreferredWidth(50);
+            }
 
+
+        }
     }
 
+    public void setJTaxtFieldProperties(JTextArea textField,boolean editable,boolean lineWrap){
+        textField.setEditable(editable);
+        textField.setLineWrap(lineWrap);
+        textField.setBackground(Color.LIGHT_GRAY);
+    }
+
+    public void setJComboBoxProperties(JComboBox combo,int width,int height){
+        combo.setBackground(color);
+        combo.setForeground(Color.white);
+        combo.setPreferredSize(new Dimension(width,height));
+        for (int i = 0; i < combo.getComponentCount(); i++) {
+            if (combo.getComponent(i) instanceof JComponent) {
+                ((JComponent) combo.getComponent(i)).setBorder(new EmptyBorder(0, -10, 0, 0));
+
+            }
+        }
+        //profileInfo.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+    }
+
+
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }

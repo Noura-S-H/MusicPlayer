@@ -12,7 +12,8 @@ public class Nothing extends JPanel {
         this.setLayout(new BorderLayout());
         this.setVisible(true);
 
-        artwork = new JLabel("artwork");
+        artwork = new JLabel();
+        pro.setColor(Color.white);
         pro.setLabelProperties(artwork,200,100,"",12,SwingConstants.LEFT);
         this.add(artwork,BorderLayout.SOUTH);
     }
