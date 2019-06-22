@@ -27,7 +27,6 @@ public class Song {
     public Song(String path){
 
         try {
-
             mp3File = new Mp3File(path);
             if(mp3File.hasId3v1Tag()) {
                 song = new File(path);
