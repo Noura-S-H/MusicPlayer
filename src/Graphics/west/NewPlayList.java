@@ -1,10 +1,11 @@
 package Graphics.west;
-
+import Graphics.AddProperties;
 import javax.swing.*;
 import java.awt.*;
 
 public class NewPlayList extends JPanel {
 
+    private AddProperties pro = new AddProperties();
     JButton button;
 
     public NewPlayList() {
@@ -14,16 +15,7 @@ public class NewPlayList extends JPanel {
         this.setVisible(true);
 
         button = new JButton("➕ New playList ");
-        setButtonsProperties(button);
+        pro.setButtonProperties(button,150,30,JButton.TOP,JButton.CENTER,SwingConstants.CENTER);
         this.add(button, BorderLayout.CENTER);
-    }
-
-    public void setButtonsProperties(JButton button){
-        button.setVerticalTextPosition(JButton.TOP);
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setHorizontalTextPosition(JButton.CENTER);
-        button.setPreferredSize(new Dimension(150,30));
-        button.setForeground(Color.white);
-        button.setBackground(new Color(3, 11, 21 ));
     }
 }

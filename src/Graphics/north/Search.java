@@ -1,11 +1,11 @@
 package Graphics.north;
-
+import Graphics.AddProperties;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Search extends JPanel {
 
+    private AddProperties pro = new AddProperties();
     private JLabel emptySpace = new JLabel();
     private final JLabel searchIcon;
     private JTextArea searchBar;
@@ -20,9 +20,9 @@ public class Search extends JPanel {
 
 
         setJTaxtFieldProperties(searchBar);
-        setIconLabel(searchIcon);
-        setLableProperties(searchIcon,20,20);
-        setLableProperties(emptySpace,140,20);
+        pro.setImageIcon(searchIcon,"src\\Graphics\\icons\\wicon\\search.png",20,20);
+        pro.setLabelProperties(searchIcon,20,20,"",12,SwingConstants.LEFT);
+        pro.setLabelProperties(emptySpace,140,20,"",12,SwingConstants.LEFT);
 
         this.add(emptySpace);
         this.add(searchIcon);
@@ -30,19 +30,6 @@ public class Search extends JPanel {
 
     }
 
-    public void setLableProperties(JLabel label,int w,int h){
-        label.setPreferredSize(new Dimension(w,h));
-        label.setOpaque(true);
-        label.setBackground(new Color(3, 11, 21 ));
-        label.setForeground(Color.WHITE);
-
-    }
-
-    public void setIconLabel(JLabel label){
-        ImageIcon icon = new ImageIcon("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\wicon\\search.png");
-        Image newimg = icon.getImage().getScaledInstance( 20, 20,  java.awt.Image.SCALE_SMOOTH ) ;
-        label.setIcon(new ImageIcon( newimg ));
-    }
 
     public void setJTaxtFieldProperties(JTextArea textField){
         textField.setEditable(true);

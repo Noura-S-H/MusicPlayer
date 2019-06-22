@@ -1,10 +1,10 @@
 package Graphics.south.center;
-
+import Graphics.AddProperties;
 import javax.swing.*;
 import java.awt.*;
 
 public class Nothing extends JPanel {
-
+    private AddProperties pro = new AddProperties();
     JLabel artwork;
 
     public Nothing(){
@@ -13,17 +13,9 @@ public class Nothing extends JPanel {
         this.setVisible(true);
 
         artwork = new JLabel("artwork");
-        setLableProperties(artwork,200,100);
+        pro.setLabelProperties(artwork,200,100,"",12,SwingConstants.LEFT);
         this.add(artwork,BorderLayout.SOUTH);
     }
-
-    public  void setLableProperties(JLabel label,int width,int heiqth){
-        label.setOpaque(true);
-        label.setBackground(Color.WHITE);
-        label.setPreferredSize(new Dimension(width,heiqth));
-        label.setForeground(Color.WHITE);
-    }
-
 
 
 }

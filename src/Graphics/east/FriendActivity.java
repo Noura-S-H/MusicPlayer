@@ -1,11 +1,11 @@
 package Graphics.east;
-
+import Graphics.AddProperties;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class FriendActivity extends JPanel {
 
+    private AddProperties pro = new AddProperties();
     DefaultListModel<Friend> friends = new DefaultListModel<Friend>();
     JList<Friend> friendList;
     private static final String LABEL_TEXT = "  \uD83D\uDC6C Friend Activity ";
@@ -17,7 +17,7 @@ public class FriendActivity extends JPanel {
         this.setVisible(true);
 
         JLabel friendActivity = new JLabel(LABEL_TEXT);
-        setLableProperties(friendActivity);
+        pro.setLabelProperties(friendActivity,150,30,"",12,SwingConstants.LEFT);
         this.add(friendActivity, BorderLayout.NORTH);
         friendList = new JList<Friend>(friends);
         this.add(friendList, BorderLayout.CENTER);
@@ -25,13 +25,6 @@ public class FriendActivity extends JPanel {
 
     }
 
-    public void setLableProperties(JLabel label){
-        label.setPreferredSize(new Dimension(150, 30));
-        label.setHorizontalAlignment(SwingConstants.LEFT);
-        label.setForeground(Color.white);
-        label.setOpaque(true);
-        label.setBackground(new Color(3, 11, 21));
-    }
 
     public void addNewFriend(Friend f){
         friendList.add(f);

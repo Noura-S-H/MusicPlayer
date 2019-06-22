@@ -1,13 +1,12 @@
 package Graphics.north;
-
+import Graphics.AddProperties;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 
 public class Profile extends JPanel {
 
+    private AddProperties pro = new AddProperties();
     private JLabel proIcon = new JLabel();
     private JLabel emptySpace = new JLabel();
     private String[] profile = {"Username","id"};
@@ -19,8 +18,8 @@ public class Profile extends JPanel {
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
 
-        setIconLabel(proIcon);
-        setLableProperties(emptySpace);
+        pro.setImageIcon(proIcon,"src\\Graphics\\icons\\wicon\\32.png",20,20);
+        pro.setLabelProperties(emptySpace,140,20,"",12,SwingConstants.LEFT);
         setJComboBoxProperties(profileInfo);
         this.add(proIcon);
         this.add(profileInfo);
@@ -38,19 +37,6 @@ public class Profile extends JPanel {
             }
         }
         //profileInfo.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-    }
-
-    public void setLableProperties(JLabel label){
-        label.setOpaque(true);
-        label.setPreferredSize(new Dimension(140,20));
-        label.setBackground(new Color(3, 11, 21 ));
-        label.setForeground(Color.WHITE);
-    }
-
-    public void setIconLabel(JLabel label){
-        ImageIcon icon = new ImageIcon("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\wicon\\32.png");
-        Image newimg = icon.getImage().getScaledInstance( 20, 20,  java.awt.Image.SCALE_SMOOTH ) ;
-        label.setIcon(new ImageIcon( newimg ));
     }
 
 

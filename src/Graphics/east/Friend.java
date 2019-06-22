@@ -1,11 +1,11 @@
 package Graphics.east;
+import Graphics.AddProperties;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Friend extends JPanel {
-
+    private AddProperties pro = new AddProperties();
     private JLabel friendInfo;
     private String username;
     private String info;
@@ -17,18 +17,8 @@ public class Friend extends JPanel {
         this.setVisible(true);
         this.username = username;
         friendInfo = new JLabel();
-        setLableProperties(friendInfo);
+        pro.setLabelProperties(friendInfo,100,50,"",12,SwingConstants.LEFT);
         this.add(friendInfo);
     }
-
-    public  void setLableProperties(JLabel label){
-        label.setOpaque(true);
-        label.setBackground(new Color(3, 11, 21 ));
-        label.setPreferredSize(new Dimension(100,50));
-        label.setForeground(Color.WHITE);
-    }
-
-
-
 
 }

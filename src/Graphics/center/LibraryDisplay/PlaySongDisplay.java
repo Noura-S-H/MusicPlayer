@@ -1,4 +1,4 @@
-package Graphics.center;
+package Graphics.center.LibraryDisplay;
 
 public class PlaySongDisplay {
 }

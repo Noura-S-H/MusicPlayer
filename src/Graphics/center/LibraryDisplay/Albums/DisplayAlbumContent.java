@@ -1,5 +1,6 @@
 package Graphics.center.LibraryDisplay.Albums;
 
+import Graphics.AddProperties;
 import Graphics.Song;
 import Graphics.center.LibraryDisplay.ButtonEditor;
 import Graphics.center.LibraryDisplay.ButtonRenderer;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class DisplayAlbumContent extends JPanel {
 
+        private AddProperties pro = new AddProperties();
         private ArrayList<Song> songslist = new ArrayList<Song>();
         private JTable songsTable;
 
@@ -78,9 +80,9 @@ public class DisplayAlbumContent extends JPanel {
 
             JLabel artworkSong = new JLabel();
             JButton playBt = new JButton("PLAY");
-            setLableProperties(artworkSong);
-            setButtonsProperties(playBt,100,100);
-            playBt.setIcon(getImage("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\MusicIcons\\ppp.png",50,50));
+            pro.setLabelProperties(artworkSong,600,110,"Brush Script MT",14,SwingConstants.LEFT);
+            pro.setButtonProperties(playBt,100,100,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
+            playBt.setIcon(pro.getImageArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\MusicIcons\\ppp.png",50,50));
 
             Image newimg = s.getArtwork().getImage().getScaledInstance( 100, 100,  java.awt.Image.SCALE_SMOOTH ) ;
             artworkSong.setIcon(new ImageIcon(newimg));
@@ -91,25 +93,6 @@ public class DisplayAlbumContent extends JPanel {
             liveSong.add(playBt,BorderLayout.EAST);
         }
 
-
-        public void setButtonsProperties(JButton button,int w,int h){
-
-            button.setBorder(BorderFactory.createEmptyBorder());
-            button.setBackground(new Color(3, 11, 21));
-            button.setOpaque(true);
-            button.setPreferredSize(new Dimension(w,h));
-     //     button.setFont(new Font("Brush Script MT", Font.PLAIN, 15));
-            button.setHorizontalAlignment(SwingConstants.LEFT);
-            button.setForeground(Color.white);
-        }
-
-        public  void setLableProperties(JLabel label){
-            label.setOpaque(true);
-            label.setBackground(new Color(3, 11, 21 ));
-            label.setPreferredSize(new Dimension(600,110));
-            label.setFont(new Font("Brush Script MT", Font.PLAIN, 14));
-            label.setForeground(Color.WHITE);
-        }
 
         public void setTableProperties(JTable tb){
 
@@ -140,13 +123,6 @@ public class DisplayAlbumContent extends JPanel {
                 else
                     column.setPreferredWidth(50);
             }
-        }
-
-        public ImageIcon getImage(String path,int w, int h){
-            ImageIcon imIcon = new ImageIcon(path);
-            Image newimg = imIcon.getImage().getScaledInstance( w, h,  java.awt.Image.SCALE_SMOOTH ) ;
-            imIcon = new ImageIcon( newimg );
-            return imIcon;
         }
 
         public void addsong(String path){
