@@ -25,13 +25,6 @@ public class DisplayAlbumContent extends JPanel {
             this.setBackground(new Color(3,11,21));
             this.setVisible(true);
 
-            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\www.mp3");
-            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\qqq.mp3");
-            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\rrr.mp3");
-            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\yyy.mp3");
-            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\eee.mp3");
-            addsong("src\\Graphics\\center\\LibraryDisplay\\songTest\\ttt.mp3");
-
             createListPanel();
             createLiveSongPanel(songslist.get(0));
             this.add(list,BorderLayout.CENTER);
@@ -79,7 +72,8 @@ public class DisplayAlbumContent extends JPanel {
             JButton playBt = new JButton("PLAY");
             pro.setLabelProperties(artworkSong,600,110,"Brush Script MT",14,SwingConstants.LEFT);
             pro.setButtonProperties(playBt,100,100,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
-            playBt.setIcon(pro.getImageArtwork("C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Graphics\\icons\\MusicIcons\\ppp.png",50,50));
+            playBt.setIcon(pro.getImageArtwork(
+                    "src\\Graphics\\icons\\MusicIcons\\ppp.png",50,50));
 
             Image newimg = s.getArtwork().getImage().getScaledInstance( 100, 100,  java.awt.Image.SCALE_SMOOTH ) ;
             artworkSong.setIcon(new ImageIcon(newimg));
@@ -89,7 +83,7 @@ public class DisplayAlbumContent extends JPanel {
             liveSong.add(artworkSong,BorderLayout.WEST);
             liveSong.add(playBt,BorderLayout.EAST);
         }
-        
+
 
         public void addsong(String path){
                 Song s = new Song(path);

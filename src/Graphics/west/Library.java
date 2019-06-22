@@ -1,9 +1,15 @@
 package Graphics.west;
+
 import Graphics.AddProperties;
+import Graphics.center.LibraryDisplay.SongsView;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Library extends JPanel {
+
+    private final String SONGSPATH = "src\\Files\\Songs.txt";
+    private final String FAVORITES = "src\\Files\\Favorites.txt";
 
     private AddProperties pro = new AddProperties();
     private final String[] name = {" Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
@@ -14,7 +20,7 @@ public class Library extends JPanel {
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
 
-         JButton buttons[] = new JButton[5];
+        JButton buttons[] = new JButton[5];
 
         JLabel label = new JLabel("  \uD83C\uDFA7  Libray");
         pro.setLabelProperties(label,150,30,"",12,SwingConstants.LEFT);
@@ -26,6 +32,9 @@ public class Library extends JPanel {
             add(buttons[i]);
         }
         buttons[0].addActionListener(new AddToLibrary(buttons[0]));
+        buttons[1].addActionListener(new SongsView(SONGSPATH));
+        buttons[2].addActionListener(new SongsView(FAVORITES));
+        //buttons[3]
 
     }
 

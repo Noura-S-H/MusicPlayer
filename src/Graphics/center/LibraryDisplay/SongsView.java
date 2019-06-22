@@ -7,10 +7,16 @@ import Graphics.Song;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-public class SongsView extends JPanel {
+public class SongsView extends JPanel implements ActionListener {
+
+    private ActionEvent e;
+    private String path;
+
     private AddProperties pro = new AddProperties();
     private ArrayList<Song> songslist = new ArrayList<Song>();
     private JPanel list = new JPanel();
@@ -20,7 +26,7 @@ public class SongsView extends JPanel {
         super();
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(3,11,21));
-        this.setVisible(true);
+        this.setVisible(false);
 
         addToSongsListFromFile(pathsFile);
 
@@ -68,9 +74,7 @@ public class SongsView extends JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader(new File(pt)))) {
             String line;
             while ((line = br.readLine()) != null) {
-                Song s = new Song(line);
                 songslist.add(new Song(line));
-                System.out.println(line);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -84,5 +88,10 @@ public class SongsView extends JPanel {
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      //  if(e.getSource() == path)
+
+    }
 }
 
