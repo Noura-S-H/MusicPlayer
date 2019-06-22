@@ -37,19 +37,29 @@ public class AddToLibrary extends Component implements ActionListener {
                 System.out.println(ex.toString());
 
             }
+            addSongstoLibrary("src\\Files\\output.txt");
         }
     }
 
 
-    /*public void addSongstoLibrary(String pt){
+    public void addSongstoLibrary(String pt){
 
-        PrintWriter f0 = null;
+        File f = new File(pt);
         try {
-            f0 = new PrintWriter(new FileWriter("output.txt"));
-            for(int i = 0; i < filePath.size() ;i++) {
-                f0.println(filePath.get());
+            if (!f.exists()) {
+                f.createNewFile();
             }
-            f0.close();
+            PrintWriter file = null;
+
+            file = new PrintWriter(new FileWriter(f));
+            for(int i = 0; i < filePath.size() ;i++) {
+                if(i == filePath.size()-1)
+                    file.print(filePath.get(i));
+                else
+                    file.println(filePath.get(i));
+            }
+            file.close();
+
 
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -57,7 +67,7 @@ public class AddToLibrary extends Component implements ActionListener {
 
 
 
-    }*/
+    }
 
 
 
