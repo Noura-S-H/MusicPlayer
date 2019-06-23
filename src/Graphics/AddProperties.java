@@ -31,6 +31,7 @@ public class AddProperties{
         butt.setHorizontalAlignment(horAlignment);
         butt.setBorder(BorderFactory.createEmptyBorder());
         butt.setPreferredSize(new Dimension(width,height));
+        butt.setFocusPainted(false);
         //butt.setIcon(getImageArtwork("src\\Graphics\\icons\\artwork\\18.jpg"));
         return butt;
     }
