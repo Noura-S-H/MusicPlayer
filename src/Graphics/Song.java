@@ -5,7 +5,6 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.io.IOException;
 public class Song {
 
     private Mp3File mp3File;
-
+    private Error error;
     private boolean favorite = false;
     private File song;
     private ImageIcon artwork;
@@ -70,15 +69,7 @@ public class Song {
             this.album = id3.substring(63, 93);
             this.year = id3.substring(93, 97);
         } else{
-            String WARRNING_WINDOWS_ICON = "C:src\\Graphics\\icons\\warrning.png";
-            JFrame error = new JFrame("ERROR");
-            error.setLayout(new BorderLayout());
-            error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            error.setSize(300, 100);
-            error.setLocation(100, 100);
-            error.setIconImage(Toolkit.getDefaultToolkit().getImage(WARRNING_WINDOWS_ICON));
-            error.add(new JLabel("   DOSE NOT CONTAIN IDV3 INFORMATION!"));
-            error.setVisible(true);
+           error =  new Error("   DOSE NOT CONTAIN IDV3 INFORMATION!");
         }
     }
 
