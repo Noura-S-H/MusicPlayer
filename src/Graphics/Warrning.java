@@ -40,7 +40,8 @@ public class Warrning extends JFrame{
         close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                dispose();
+               // System.exit(0);
             }
         });
 

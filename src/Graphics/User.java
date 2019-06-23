@@ -52,7 +52,7 @@ public class User extends JFrame {
                 System.out.println(k);
 
                 Graphics s = new Graphics(username.getText(),password.getText());
-                //System.exit(0);
+                dispose();
             }
         });
     }

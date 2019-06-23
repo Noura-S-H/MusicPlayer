@@ -78,9 +78,10 @@ public class NewPlayList extends JPanel {
                                 File[] files = fc.getSelectedFiles();
                                 for (int j = 0; j < files.length; j++) {
                                     paths.add(files[j].getAbsolutePath());
-                                    System.out.println(paths.get(j));
+
                                 }
                             }
+                            playlistNameFrame.dispose();
                         }catch(Exception ex) {
                             System.out.println(ex.toString());
 
