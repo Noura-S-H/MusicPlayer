@@ -37,21 +37,26 @@ public class AlbumsManeger{
 
     public void findAlbumsName(){
 
-        boolean check = false;
+        boolean exists = false;
         for(int i = 0; i < allSongs.size(); i++){
-            Song temp = allSongs.get(i);
+            String temp = allSongs.get(i).getAlbum();
+
             for (int j = 0; j < albumsName.size(); j++){
-                if(temp.getAlbum().equals(temp))
-                    check = true;
+                if(temp.replaceAll("[ : , \t, \0 ]" , "_")
+                         .equals(albumsName.get(j).replaceAll("[ : , \t, \0 ]" , "_"))) {
+                    exists = true;
+                }
             }
-            if(check == false) {
+            if(exists == false) {
                 albumsName.add(allSongs.get(i).getAlbum());
             }
+            exists = false;
         }
     }
 
 
     public void createAlbums(){
+        System.out.println();
         for(int i = 0; i<albumsName.size(); i++){
             albums.add(new Album(albumsName.get(i)));
         }
@@ -72,9 +77,9 @@ public class AlbumsManeger{
     public void createBackupAlbumsFile(){
         for (int i = 0; i<albums.size(); i++){
             boolean empty = false;
-            String name =albums.get(i).getAlbumName().replaceAll("[ : , \t,\0 ]" , "_");
-            String nameFile = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Files\\"+name+".txt";
-            System.out.println(nameFile);
+            String name =albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
+            String nameFile = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Files\\Albums\\" + name + ".txt";
+
             File f = new File(nameFile);
             ArrayList<Song> s = albums.get(i).getSongs();
             if(f.length() == 0)
@@ -88,13 +93,11 @@ public class AlbumsManeger{
                     file.println();
 
                 for(int j = 0; j < s.size() ;j++) {
-                    if(i == s.size()-1) {
+                    if(i == s.size()-1)
                         file.print(s.get(j).getSongPath());
-                    }
-                    else {
-                        System.out.println(s.get(j).getSongPath());
+                    else
                         file.println(s.get(j).getSongPath());
-                    }
+
                 }
                 file.close();
 
@@ -106,9 +109,13 @@ public class AlbumsManeger{
 
     }
 
-    public static void main(String[] args){
-        AlbumsManeger am = new AlbumsManeger();
+    public ArrayList<Album> getAlbums() {
+        return albums;
     }
+
+    /*public static void main(String[] args){
+        AlbumsManeger am = new AlbumsManeger();
+    }*/
 
 
 

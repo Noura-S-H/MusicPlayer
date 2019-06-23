@@ -1,50 +1,58 @@
 package Graphics.center.LibraryDisplay.Albums;
+
 import Graphics.AddProperties;
+import Graphics.Album;
+import Graphics.AlbumsManeger;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 
-
-
 public class AlbumsDisplay extends JPanel{
 
-        private AddProperties pro = new AddProperties();
-      //  private ArrayList<Album> albums= new ArrayList<Album>();
-        private ArrayList<JButton>  albutton = new ArrayList<JButton>();
+    private JPanel panel;
+    private AlbumsManeger am = new AlbumsManeger();
+    private AddProperties pro = new AddProperties();
+    private ArrayList<Album> albums = new ArrayList<Album>();
+    private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-        JPanel right = new JPanel(new FlowLayout());
-        JPanel left = new JPanel(new FlowLayout());
-        JPanel center = new JPanel(new FlowLayout());
+    public AlbumsDisplay(){
+        super();
+        albums = am.getAlbums();
+        this.setLayout(new GridLayout(2,albums.size()));
+        this.setBackground(new Color(3, 11, 21));
+        this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        public AlbumsDisplay(){
-            super();
 
-            this.setLayout(new GridLayout(2,4));
+        setAlbumsToButtons();
+        for (int i = 0; i < albums.size(); i++){
+            this.add(buttons.get(i));
+        }
+        this.setVisible(true);
+    }
 
-            albutton.add(new JButton());
-            albutton.add(new JButton());
-            albutton.add(new JButton());
-            albutton.add(new JButton());
+    public void setAlbumsToButtons(){
 
-            for( int i = 0; i<albutton.size(); i++) {
-                pro.setButtonProperties(albutton.get(i),50,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
-                albutton.get(i).setFont(new Font("Brush Script MT", Font.PLAIN, 25));
-                this.add(albutton.get(i));
-            }
-            this.setVisible(true);
 
+        for(int i = 0; i < albums.size(); i++ ){
+            Album temp = albums.get(i);
+
+            String name = temp.getAlbumName();
+            String artists = temp.getSongs().get(0).getArtists();
+            ImageIcon artwork = pro.getImageSong(temp.getSongs().get(0).getArtwork(),120,120);
+
+            buttons.add(new JButton("<html>&emsp;"+name+"<br>&emsp;"+artists+"</html>"));
+            pro.setButtonProperties(buttons.get(i),100,100,JButton.BOTTOM,JButton.CENTER,SwingConstants.CENTER);
+            buttons.get(i).setFont(new Font("Trebuchet MS", Font.BOLD, 10));
+            buttons.get(i).setIcon(artwork);
         }
 
-    private void Create(JButton name, JPanel panel) {
-        pro.setButtonProperties(name,50,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
-        name.setFont(new Font("Brush Script MT", Font.PLAIN, 25));
-        panel.setLayout(new GridLayout(2 ,1));
-        panel.setBackground(new Color(3, 11, 21));
-        panel.setPreferredSize(new Dimension(350  ,790));
-        panel.add(name);
-        panel.setVisible(true);
+
     }
+
+
+
+
 
 
 }
