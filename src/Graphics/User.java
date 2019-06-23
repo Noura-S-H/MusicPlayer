@@ -42,10 +42,16 @@ public class User extends JFrame {
         lab.add(id);
         this.add(lab,BorderLayout.CENTER);
         this.add(login,BorderLayout.SOUTH);
+
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Graphics s = new Graphics();
+                String ss = username.getText();
+                String k = id.getText();
+                System.out.println(ss);
+                System.out.println(k);
+                Graphics s = new Graphics(username.getText(),id.getText());
+                System.exit(0);
             }
         });
     }

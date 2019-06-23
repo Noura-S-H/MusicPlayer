@@ -1,7 +1,6 @@
 package Graphics.west;
 
 import Graphics.AddProperties;
-import Graphics.center.LibraryDisplay.SongsView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,8 +31,8 @@ public class Library extends JPanel {
             add(buttons[i]);
         }
         buttons[0].addActionListener(new AddToLibrary(buttons[0]));
-        buttons[1].addActionListener(new SongsView(SONGSPATH));
-        buttons[2].addActionListener(new SongsView(FAVORITES));
+     //   buttons[1].addActionListener(new SongsView(SONGSPATH));
+     //   buttons[2].addActionListener(new SongsView(FAVORITES));
         //buttons[3]
 
     }

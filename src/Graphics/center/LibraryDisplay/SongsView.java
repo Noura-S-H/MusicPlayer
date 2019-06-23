@@ -8,11 +8,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-public class SongsView extends JPanel implements ActionListener {
+public class SongsView extends JPanel {
 
     private ActionEvent e;
     private String path;
@@ -88,10 +87,5 @@ public class SongsView extends JPanel implements ActionListener {
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      //  if(e.getSource() == path)
-
-    }
 }
 

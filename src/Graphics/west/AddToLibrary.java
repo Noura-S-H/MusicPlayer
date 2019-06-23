@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AddToLibrary extends Component implements ActionListener {
 
@@ -38,7 +39,7 @@ public class AddToLibrary extends Component implements ActionListener {
                 System.out.println(ex.toString());
 
             }
-            addSongstoLibrary(path);
+           // addSongstoLibrary(path);
         }
     }
 
@@ -47,6 +48,18 @@ public class AddToLibrary extends Component implements ActionListener {
         boolean empty = false;
         File f = new File(pt);
         PrintWriter file = null;
+        Scanner scanner = null;
+
+        /*try {
+            scanner = new Scanner(f);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                filePath.add(line);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
 
         if(f.length() == 0)
             empty = true;
@@ -54,7 +67,7 @@ public class AddToLibrary extends Component implements ActionListener {
             if (!f.exists())
                 f.createNewFile();
 
-            file = new PrintWriter(new FileWriter(f,true));
+            file = new PrintWriter(new FileWriter(f));
             if(empty == false)
                 file.println();
 
