@@ -24,7 +24,7 @@ public class Warrning extends JFrame{
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300, 100);
-        this.setLocation(100, 100);
+        this.setLocation(210, 310);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(icon));
         this.add(new JLabel(warrning));
         this.setVisible(true);
