@@ -23,13 +23,15 @@ public class AlbumsDisplay extends JPanel{
         this.setBackground(new Color(3, 11, 21));
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-
         setAlbumsToButtons();
         for (int i = 0; i < albums.size(); i++){
             this.add(buttons.get(i));
         }
         this.setVisible(true);
     }
+
+
+
 
     public void setAlbumsToButtons(){
 

@@ -8,11 +8,11 @@ public class North extends JPanel {
 
     Search search = new Search();
     Profile profile ;
-    public North(String username,String id){
+    public North(String username,String password){
         super();
 
 
-        profile = new Profile(username,id);
+        profile = new Profile(username,password);
         this.setLayout(new BorderLayout());
         this.add(search, BorderLayout.WEST);
         this.add(profile,BorderLayout.EAST);

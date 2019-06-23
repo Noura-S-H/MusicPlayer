@@ -9,7 +9,7 @@ public class User extends JFrame {
 
     private AddProperties pro = new AddProperties();
     private JTextArea username;
-    private JTextArea id;
+    private JTextArea password;
     private JButton login;
 
     private final String WINDOWS_TITLE = "Jpotify";
@@ -29,17 +29,17 @@ public class User extends JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(WINDOWS_ICON)) ;
 
         username = new JTextArea();
-        username.setBounds(200,140,200,20);
-        id = new JTextArea();
-        id.setBounds(200,165,200,20);
+        username.setBounds(200,130,200,20);
+        password = new JTextArea();
+        password.setBounds(200,155,200,20);
 
-        JLabel lab = new JLabel(pro.getImageSong(new ImageIcon("src\\Graphics\\icons\\artwork\\kkkkp.jpg"),700,500));
+        JLabel lab = new JLabel(pro.getImageSong(new ImageIcon("src\\Graphics\\icons\\artwork\\TTTT.jpg"),700,500));
         login = new JButton("LOGIN");
         pro.setButtonProperties(login,700,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
 
 
         lab.add(username);
-        lab.add(id);
+        lab.add(password);
         this.add(lab,BorderLayout.CENTER);
         this.add(login,BorderLayout.SOUTH);
 
@@ -47,11 +47,12 @@ public class User extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ss = username.getText();
-                String k = id.getText();
+                String k = password.getText();
                 System.out.println(ss);
                 System.out.println(k);
-                Graphics s = new Graphics(username.getText(),id.getText());
-                System.exit(0);
+
+                Graphics s = new Graphics(username.getText(),password.getText());
+                //System.exit(0);
             }
         });
     }

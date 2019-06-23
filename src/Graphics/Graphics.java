@@ -26,7 +26,7 @@ public class Graphics extends JFrame {
     Center center;
 
 
-    public Graphics(String username,String id) {
+    public Graphics(String username,String password) {
 
         super();
         this.setTitle(WINDOWS_TITLE);
@@ -44,7 +44,7 @@ public class Graphics extends JFrame {
         //Artwork artwork = new Artwork();
         //FriendActivity friendActivity  = new FriendActivity();
          east = new East();
-         north = new North(username,id);
+         north = new North(username,password);
          south = new South();
          west = new West();
          center = new Center();
