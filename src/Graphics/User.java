@@ -57,8 +57,8 @@ public class User extends JFrame {
         });
     }
 
-    public static void main(String[] args){
-        User u = new User();
-    }
+    //public static void main(String[] args){
+    //    User u = new User();
+   // }
 
 }
