@@ -1,15 +1,22 @@
 package Graphics.west;
 
+import Graphics.center.LibraryDisplay.Center;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class West extends JPanel {
 
-    Library library = new Library();
-    PlayList playList = new PlayList();
-    NewPlayList newPlayList = new NewPlayList();
+    Library library ;
+    PlayList playList;
+    NewPlayList newPlayList;
 
-    public West(){
+    public West(Center view){
+
+        library = new Library(view);
+        playList = new PlayList();
+        newPlayList = new NewPlayList();
+
         this.setLayout(new BorderLayout());
         this.add(library,BorderLayout.NORTH);
         this.add(playList,BorderLayout.CENTER);

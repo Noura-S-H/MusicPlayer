@@ -41,9 +41,8 @@ public class Graphics extends JFrame {
          east = new East();
          north = new North(username,password);
          south = new South();
-         west = new West();
          center = new Center();
-
+         west = new West(center);
         this.add(new JScrollPane(west),BorderLayout.WEST);
         this.add(new JScrollPane(south),BorderLayout.SOUTH);
         this.add(new JScrollPane(north),BorderLayout.NORTH);
@@ -51,33 +50,6 @@ public class Graphics extends JFrame {
         this.add(center, BorderLayout.CENTER);
         this.setVisible(true);
 
-        JButton[] libraryButtons = west.getLibrary().getButtons();
-        alm.changeView(libraryButtons[0],center,"HOME",null);
-        alm.changeView(libraryButtons[2],center,"SONGSVIEW","src\\Files\\Songs.txt");
-        alm.changeView(libraryButtons[3],center,"ALBUMSVIEW",null);
-        alm.changeView(libraryButtons[4],center,"SONGSVIEW","src\\Files\\Favorites.txt");
-        /*west.getLibrary().getButtons()[0].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                center.getCardLayout().show(center.getPanel(),"HOME");
-            }
-        });
-
-        west.getLibrary().getButtons()[2].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                center.getCardLayout().show(center.getPanel(),"SONGSVIEW");
-            }
-        });
-
-        west.getLibrary().getButtons()[2].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                center.getCardLayout().show(center.getPanel(),"SONGSVIEW");
-            }
-        });*/
-
-//
 
 
     }
