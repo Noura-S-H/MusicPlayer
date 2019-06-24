@@ -13,11 +13,12 @@ public class ActionlistenerManeger {
     }
 
 
-    public void libraryButtons(JButton bt, Center views,String card,String filePath){
+    public void changeView(JButton bt, Center views,String card,String filePath){
         bt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                views.setPath(filePath);
+                if(filePath!=null)
+                    views.changePath(filePath);
                 views.getCardLayout().show(views.getPanel(),card);
 
             }

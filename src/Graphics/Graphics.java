@@ -52,10 +52,10 @@ public class Graphics extends JFrame {
         this.setVisible(true);
 
         JButton[] libraryButtons = west.getLibrary().getButtons();
-        alm.libraryButtons(libraryButtons[0],center,"HOME","");
-        alm.libraryButtons(libraryButtons[2],center,"SONGSVIEW","src\\Files\\Songs.txt");
-        alm.libraryButtons(libraryButtons[3],center,"ALBUMSVIEW","");
-        alm.libraryButtons(libraryButtons[4],center,"SONGSVIEW","src\\Files\\Favorites.txt");
+        alm.changeView(libraryButtons[0],center,"HOME",null);
+        alm.changeView(libraryButtons[2],center,"SONGSVIEW","src\\Files\\Songs.txt");
+        alm.changeView(libraryButtons[3],center,"ALBUMSVIEW",null);
+        alm.changeView(libraryButtons[4],center,"SONGSVIEW","src\\Files\\Favorites.txt");
         /*west.getLibrary().getButtons()[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

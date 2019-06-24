@@ -23,13 +23,13 @@ public class Center extends JPanel {
         this.setBackground(new Color(3, 11, 21));
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        songsView = new SongsView(path);
+
         albumsDisplay = new AlbumsDisplay();
         home = new Home();
 
         this.add(home.getPanel(),"HOME");
         this.add(new JScrollPane(albumsDisplay.getPanel()),"ALBUMSVIEW");
-        this.add(songsView.getPanel(),"SONGSVIEW");
+
 
         //this.add(displayAlbumContent,BorderLayout.CENTER);
 
@@ -55,7 +55,13 @@ public class Center extends JPanel {
         return home;
     }
 
-    public void setPath(String path) {
+    public void changePath(String path) {
         this.path = path;
+        songsView = new SongsView(path);
+        this.add(songsView.getPanel(),"SONGSVIEW");
+    }
+
+    public String getPath() {
+        return path;
     }
 }
