@@ -18,7 +18,7 @@ public class Library extends JPanel {
 
 
     private AddProperties pro = new AddProperties();
-    private final String[] name = {" Home"," Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
+    private final String[] name = {"\uD83C\uDFE0 Home"," Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
 
     public Library(Center view) {
         super();

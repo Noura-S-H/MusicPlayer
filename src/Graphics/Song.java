@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Song {
 
     private Mp3File mp3File;
-    private Error error;
+    private Warrning error;
     private boolean favorite = false;
     private File song;
     private ImageIcon artwork;
@@ -69,7 +69,7 @@ public class Song {
             this.album = id3.substring(63, 93);
             this.year = id3.substring(93, 97);
         } else{
-           error =  new Error("   DOSE NOT CONTAIN IDV3 INFORMATION!");
+           error =  new Warrning("   DOSE NOT CONTAIN IDV3 INFORMATION!",false);
         }
     }
 

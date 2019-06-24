@@ -41,7 +41,7 @@ public class Graphics extends JFrame {
          east = new East();
          north = new North(username,password);
          south = new South();
-         center = new Center();
+         center = new Center(south);
          west = new West(center);
         this.add(new JScrollPane(west),BorderLayout.WEST);
         this.add(new JScrollPane(south),BorderLayout.SOUTH);

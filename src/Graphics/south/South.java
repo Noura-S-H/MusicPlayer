@@ -6,7 +6,6 @@ import Graphics.south.left.Left;
 import Graphics.south.right.Right;
 
 import javax.swing.*;
-import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class South extends JPanel {
@@ -25,5 +24,12 @@ public class South extends JPanel {
         this.setVisible(true);
     }
 
+    public Left getLeft() {
+        return left;
+    }
+
+    public Center getCenter() {
+        return center;
+    }
 
 }

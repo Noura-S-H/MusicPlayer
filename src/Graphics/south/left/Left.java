@@ -5,13 +5,22 @@ import java.awt.*;
 
 public class Left extends JPanel {
 
-    Song s = new Song("src\\Files\\songTest\\ttt.mp3");
-    SongInfo artwork = new SongInfo(s);
+    Song song = new Song("src\\Files\\songTest\\eee.mp3");
+
+    Artwork artwork ;//= new Artwork(null);
+
     public Left(){
         super();
         this.setLayout(new BorderLayout());
-        this.add(artwork, BorderLayout.CENTER);
+        this.setBackground(new Color(3, 11, 21));
+        this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         this.setVisible(true);
+
+    }
+
+    public void changeSongArtwork(Song song){
+        this.song = song;
+        this.add(artwork, BorderLayout.CENTER);
     }
 
 }

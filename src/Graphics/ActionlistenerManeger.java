@@ -1,6 +1,7 @@
 package Graphics;
 
 import Graphics.center.LibraryDisplay.Center;
+import Graphics.south.South;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,12 @@ public class ActionlistenerManeger {
 
             }
         });
+    }
+
+    public void changeArtwork(Song song, South south){
+        south.getLeft().changeSongArtwork(song);
+    //    south.getCenter();
+
     }
 
     public void changeMusic(Song song){

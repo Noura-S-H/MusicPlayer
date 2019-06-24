@@ -3,6 +3,7 @@ package Graphics.center.LibraryDisplay;
 import Graphics.ActionlistenerManeger;
 import Graphics.AddProperties;
 import Graphics.Song;
+import Graphics.south.South;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +24,7 @@ public class SongsView extends JPanel {
     private JTable table;
 
 
-    public SongsView(String pathsFile){
+    public SongsView(String pathsFile, South south){
         super();
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(3,11,21));
@@ -31,11 +32,11 @@ public class SongsView extends JPanel {
 
         addToSongsListFromFile(pathsFile);
 
-        createListPanel();
+        createListPanel(south);
         this.add(list,BorderLayout.CENTER);
     }
 
-    public void createListPanel(){
+    public void createListPanel(South south){
 
         list.setLayout(new BorderLayout());
         list.setBackground(new Color(10, 11, 21));
@@ -64,9 +65,7 @@ public class SongsView extends JPanel {
                 if (e.getClickCount() == 1) {
                     JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
-                    int column = target.getSelectedColumn();
-                    System.out.println(row+ " "+ column);
-                    am.changeMusic(songslist.get(row));
+                    am.changeArtwork(songslist.get(row),south);
                 }
             }
         });
