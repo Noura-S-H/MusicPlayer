@@ -32,4 +32,7 @@ public class South extends JPanel {
         return center;
     }
 
+    public Right getRigth() {
+        return rigth;
+    }
 }

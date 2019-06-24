@@ -4,9 +4,18 @@ import Graphics.AddProperties;
 
 import Graphics.ActionlistenerManeger;
 import Graphics.center.LibraryDisplay.Center;
+import Logic.PlayMusic;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
+import static Logic.PlayMusic.insertMusic;
+
 
 public class Library extends JPanel {
 
@@ -14,8 +23,11 @@ public class Library extends JPanel {
     private final String SONGSPATH = "src\\Files\\Songs.txt";
     private final String FAVORITES = "src\\Files\\Favorites.txt";
     JButton buttons[] = new JButton[6];
-    String path = "kkkk";
+    String path = "DIFALT";
 
+    PlayMusic m = new PlayMusic();
+    private DefaultListModel dlm1;
+    private JList<String> musicsList = new JList<>();
 
     private AddProperties pro = new AddProperties();
     private final String[] name = {"\uD83C\uDFE0 Home"," Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
@@ -38,8 +50,14 @@ public class Library extends JPanel {
             add(buttons[i]);
         }
 
-       // buttons[0].addActionListener(new Center());
-        buttons[1].addActionListener(new AddToLibrary(buttons[1]));
+        buttons[1].addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                addDirecBtnActionPerformed(evt);
+            }
+        });
+
+
 
         alm.changeView(buttons[0],view,"HOME",null);
         alm.changeView(buttons[2],view,"SONGSVIEW","src\\Files\\Songs.txt");
@@ -48,6 +66,27 @@ public class Library extends JPanel {
 
     }
 
+    private void addDirecBtnActionPerformed(ActionEvent evt) {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Choose multiple songs to add");
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = chooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                File f = chooser.getSelectedFile();
+                File[] filesList = f.listFiles();
+                for (File file : filesList) {
+                    if (insertMusic(file.getName(), file.getAbsolutePath())) {
+                        System.out.println(file.getName());
+                        System.out.println(file.getAbsolutePath());
+                    }
+                }
+            } catch (IOException | ParseException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
 
 
 

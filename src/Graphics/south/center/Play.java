@@ -1,7 +1,11 @@
 package Graphics.south.center;
 import Graphics.AddProperties;
+import Logic.PlayMusic;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Play extends JPanel {
 
@@ -13,6 +17,8 @@ public class Play extends JPanel {
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
 
+    PlayMusic m = new PlayMusic();
+    private JList<String> musicsList = new JList<>();
 
     public Play(){
         super();
@@ -28,6 +34,29 @@ public class Play extends JPanel {
         //playerBar.setPreferredSize(new Dimension(300,20));
         this.add(playerBar);
 
+
+        playButtons[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+
+            }
+        });
+
+        playButtons[1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnPauseActionPerformed(evt);
+            }
+        });
+
+        playButtons[3].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        this.add(playerBar);
+
         favorites = new JButton(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\3.png",25,25));
         pro.setButtonProperties(favorites,30,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
         this.add(favorites);
@@ -37,4 +66,65 @@ public class Play extends JPanel {
     }
 
 
+    /**
+     * Starts executing the selected song
+     *
+     * @param evt
+     */
+    private void btnPlayActionPerformed(ActionEvent evt) {
+        /// System.out.println("play");
+        //new ChangeArtwork();
+
+        try {
+            if (m.getPaused() == false) {
+                if (m.getPlaying() == true) {
+                    m.stopMusic();
+                }
+                m.playMusic((String)"\uD83E\uDD40.mp3");
+                playButtons[0].setEnabled(true);
+                playButtons[3].setEnabled(true);
+
+            } else {
+                playButtons[2].setEnabled(true);
+                playButtons[2].setEnabled(true);
+                m.resumeMusic();
+                m.setPausedStatus(false);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    /**
+     * To completely execute the selected song
+     *
+     * @param evt
+     */
+
+
+    private void btnNextActionPerformed(ActionEvent evt) {
+        System.out.println("next");
+        int index = musicsList.getSelectedIndex();
+        try {
+            m.stopMusic();
+            musicsList.setSelectedIndex(index + 1);
+            m.playMusic((String) musicsList.getSelectedValue());
+            playButtons[0].setEnabled(true);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void btnPauseActionPerformed(ActionEvent evt) {
+        System.out.println("pause");
+
+        try {
+            m.pauseMusic();
+            m.setPausedStatus(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
