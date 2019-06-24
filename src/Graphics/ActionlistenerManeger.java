@@ -13,8 +13,8 @@ public class ActionlistenerManeger {
     }
 
 
-    public void changeView(JButton bt, Center views,String card,String filePath){
-        bt.addActionListener(new ActionListener() {
+    public void changeView(JButton list, Center views,String card,String filePath){
+        list.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(filePath!=null)
@@ -24,4 +24,7 @@ public class ActionlistenerManeger {
             }
         });
     }
+
+
+
 }

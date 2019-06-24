@@ -3,6 +3,9 @@ package Graphics.center.LibraryDisplay.Albums;
 import Graphics.AddProperties;
 import Graphics.Album;
 import Graphics.AlbumsManeger;
+import Graphics.ActionlistenerManeger;
+import Graphics.center.LibraryDisplay.Center;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,12 +13,13 @@ import java.util.ArrayList;
 
 public class AlbumsDisplay extends JPanel{
 
+    private ActionlistenerManeger alm = new ActionlistenerManeger();
     private AlbumsManeger am = new AlbumsManeger();
     private AddProperties pro = new AddProperties();
     private ArrayList<Album> albums = new ArrayList<Album>();
     private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-    public AlbumsDisplay(){
+    public AlbumsDisplay(JPanel center){
         super();
         albums = am.getAlbums();
         this.setLayout(new GridLayout(2,albums.size()));
@@ -26,6 +30,7 @@ public class AlbumsDisplay extends JPanel{
         for (int i = 0; i < albums.size(); i++){
             this.add(buttons.get(i));
         }
+        setButtonsActionListener(center);
         this.setVisible(true);
     }
 
@@ -33,7 +38,6 @@ public class AlbumsDisplay extends JPanel{
 
 
     public void setAlbumsToButtons(){
-
 
         for(int i = 0; i < albums.size(); i++ ){
             Album temp = albums.get(i);
@@ -48,6 +52,16 @@ public class AlbumsDisplay extends JPanel{
             buttons.get(i).setIcon(artwork);
         }
 
+
+    }
+
+    public void setButtonsActionListener(JPanel view) {
+        for(int i = 0 ; i < buttons.size(); i++){
+
+            String name = albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
+            String path = "src\\Files\\Albums\\" + name + ".txt";
+            alm.changeView(buttons.get(i), (Center) view,"ALBUMCONTENT",path);
+        }
 
     }
 

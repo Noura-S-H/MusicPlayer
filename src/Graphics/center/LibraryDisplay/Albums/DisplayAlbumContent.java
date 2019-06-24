@@ -8,7 +8,10 @@ import Graphics.center.LibraryDisplay.ButtonRenderer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DisplayAlbumContent extends JPanel {
 
@@ -19,12 +22,13 @@ public class DisplayAlbumContent extends JPanel {
         private JPanel list = new JPanel();
         private JPanel liveSong = new JPanel();
 
-        public DisplayAlbumContent(){
+        public DisplayAlbumContent(String albumPath){
             super();
             this.setLayout(new BorderLayout());
             this.setBackground(new Color(3,11,21));
             this.setVisible(true);
 
+            addSong(albumPath);
             createListPanel();
             createLiveSongPanel(songslist.get(0));
             this.add(list,BorderLayout.CENTER);
@@ -53,11 +57,9 @@ public class DisplayAlbumContent extends JPanel {
                 }
             };
             songsTable = new JTable(tableModel);
-
             songsTable.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
             songsTable.getColumnModel().getColumn(0).setCellEditor(
                     new ButtonEditor(new JCheckBox()));
-
             pro.setTableProperties(songsTable,100,25,100,800,25,5);
             list.add(new JScrollPane(songsTable),BorderLayout.CENTER);
 
@@ -70,8 +72,8 @@ public class DisplayAlbumContent extends JPanel {
 
             JLabel artworkSong = new JLabel();
             JButton playBt = new JButton("PLAY");
-            pro.setLabelProperties(artworkSong,600,110,"Brush Script MT",14,SwingConstants.LEFT);
-            pro.setButtonProperties(playBt,100,100,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
+            pro.setLabelProperties(artworkSong,600,110,"Brush Script MT",15,SwingConstants.LEFT);
+            pro.setButtonProperties(playBt,100,100,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
             playBt.setIcon(pro.getImageArtwork(
                     "src\\Graphics\\icons\\MusicIcons\\ppp.png",50,50));
 
@@ -85,9 +87,24 @@ public class DisplayAlbumContent extends JPanel {
         }
 
 
-        public void addsong(String path){
-                Song s = new Song(path);
-                songslist.add(s);
+        public void addSong(String filepath){
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(new File(filepath));
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    songslist.add(new Song(line));
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+        public JPanel getPanel(){
+            return this;
         }
 
 

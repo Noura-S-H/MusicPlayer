@@ -1,13 +1,14 @@
 package Graphics.center.LibraryDisplay;
 
 import Graphics.center.LibraryDisplay.Albums.AlbumsDisplay;
+import Graphics.center.LibraryDisplay.Albums.DisplayAlbumContent;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Center extends JPanel {
 
-    //DisplayAlbumContent displayAlbumContent = new DisplayAlbumContent();
+    DisplayAlbumContent displayAlbumContent;
     Home home;
     SongsView songsView ;
     AlbumsDisplay albumsDisplay;
@@ -23,15 +24,13 @@ public class Center extends JPanel {
         this.setBackground(new Color(3, 11, 21));
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-
-        albumsDisplay = new AlbumsDisplay();
         home = new Home();
+        albumsDisplay = new AlbumsDisplay(this);
+
 
         this.add(home.getPanel(),"HOME");
         this.add(new JScrollPane(albumsDisplay.getPanel()),"ALBUMSVIEW");
 
-
-        //this.add(displayAlbumContent,BorderLayout.CENTER);
 
         this.setVisible(true);
     }
@@ -39,6 +38,7 @@ public class Center extends JPanel {
     public JPanel getPanel(){
         return this;
     }
+
     public CardLayout getCardLayout() {
         return cardLayout;
     }
@@ -58,7 +58,10 @@ public class Center extends JPanel {
     public void changePath(String path) {
         this.path = path;
         songsView = new SongsView(path);
+        displayAlbumContent = new DisplayAlbumContent(path);
+
         this.add(songsView.getPanel(),"SONGSVIEW");
+        this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
     }
 
     public String getPath() {

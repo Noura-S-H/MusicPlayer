@@ -77,10 +77,10 @@ public class AlbumsManeger{
     public void createBackupAlbumsFile(){
         for (int i = 0; i<albums.size(); i++){
             boolean empty = false;
-            String name =albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
-            String nameFile = "C:\\Users\\hashemi\\Desktop\\Jpotify\\src\\Files\\Albums\\" + name + ".txt";
+            String name = albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
+            String path = "src\\Files\\Albums\\" + name + ".txt";
 
-            File f = new File(nameFile);
+            File f = new File(path);
             ArrayList<Song> s = albums.get(i).getSongs();
             if(f.length() == 0)
                 empty = true;
