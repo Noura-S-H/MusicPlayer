@@ -1,11 +1,12 @@
 package Graphics.center.LibraryDisplay;
-
+import Graphics.ActionlistenerManeger;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ButtonEditor extends DefaultCellEditor {
+    private ActionlistenerManeger am = new ActionlistenerManeger();
     protected JButton button;
     private String label;
     private boolean isPushed;
@@ -31,9 +32,7 @@ public class ButtonEditor extends DefaultCellEditor {
 
     //show message when button clicked
     public Object getCellEditorValue() {
-        if (isPushed){
-
-        }
+        if (isPushed){}
           //  JOptionPane.showMessageDialog(button, label + ": Nothing happend!");
         isPushed = false;
         return new String(label);

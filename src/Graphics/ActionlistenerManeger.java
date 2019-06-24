@@ -25,6 +25,11 @@ public class ActionlistenerManeger {
         });
     }
 
+    public void changeMusic(Song song){
+        System.out.println(song.getTitle());
+
+    }
+
 
 
 }

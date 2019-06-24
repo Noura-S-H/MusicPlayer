@@ -6,7 +6,7 @@ import Graphics.AddProperties;
 import javax.swing.*;
 import java.awt.*;
 
-public class SongInfo extends JPanel {
+public class Artwork extends JPanel {
 
     private AddProperties pro = new AddProperties();
     private JLabel artworkLable,songInformation;
@@ -15,7 +15,7 @@ public class SongInfo extends JPanel {
     private Song music;
 
 
-    public SongInfo(Song music){
+    public Artwork(Song music){
         super();
         this.setLayout(new BorderLayout());
         this.setVisible(true);

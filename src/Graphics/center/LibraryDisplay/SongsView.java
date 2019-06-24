@@ -1,26 +1,26 @@
 package Graphics.center.LibraryDisplay;
 
-
+import Graphics.ActionlistenerManeger;
 import Graphics.AddProperties;
 import Graphics.Song;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 
 public class SongsView extends JPanel {
 
-    private ActionEvent e;
+    private ActionlistenerManeger am = new ActionlistenerManeger();
     private String path;
 
     private AddProperties pro = new AddProperties();
     private ArrayList<Song> songslist = new ArrayList<Song>();
     private JPanel list = new JPanel();
     private JTable table;
-
 
 
     public SongsView(String pathsFile){
@@ -59,9 +59,20 @@ public class SongsView extends JPanel {
         };
         table = new JTable(tableModel);
 
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    JTable target = (JTable)e.getSource();
+                    int row = target.getSelectedRow();
+                    int column = target.getSelectedColumn();
+                    System.out.println(row+ " "+ column);
+                    am.changeMusic(songslist.get(row));
+                }
+            }
+        });
+
         table.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
-        table.getColumnModel().getColumn(0).setCellEditor(
-                new ButtonEditor(new JCheckBox()));
+        table.getColumnModel().getColumn(0).setCellEditor(new ButtonEditor(new JCheckBox()));
         table.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
 
         pro.setTableProperties(table,100,35,100,800,35,7);
