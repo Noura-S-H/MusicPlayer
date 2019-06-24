@@ -19,5 +19,15 @@ public class West extends JPanel {
         this.setVisible(true);
     }
 
+    public Library getLibrary() {
+        return library;
+    }
 
+    public NewPlayList getNewPlayList() {
+        return newPlayList;
+    }
+
+    public PlayList getPlayList() {
+        return playList;
+    }
 }

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class AlbumsDisplay extends JPanel{
 
-    private JPanel panel;
     private AlbumsManeger am = new AlbumsManeger();
     private AddProperties pro = new AddProperties();
     private ArrayList<Album> albums = new ArrayList<Album>();
@@ -52,9 +51,7 @@ public class AlbumsDisplay extends JPanel{
 
     }
 
-
-
-
-
-
+    public JPanel getPanel() {
+        return this;
+    }
 }

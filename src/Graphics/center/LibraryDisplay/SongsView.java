@@ -21,6 +21,8 @@ public class SongsView extends JPanel {
     private JPanel list = new JPanel();
     private JTable table;
 
+
+
     public SongsView(String pathsFile){
         super();
         this.setLayout(new BorderLayout());
@@ -84,6 +86,10 @@ public class SongsView extends JPanel {
     }
 
     public void sortSongByTime(){
+    }
+
+    public JPanel getPanel(){
+        return this;
     }
 
 

@@ -8,6 +8,8 @@ import Graphics.west.West;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 ;
 
@@ -34,26 +36,65 @@ public class Graphics extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(WIDTH, HEIGHT);
         this.setLocation(X, Y);
-        this.setVisible(true);
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(WINDOWS_ICON)) ;
-       // this.getContentPane().setBackground( new Color(3,11,21) );
 
-       // View view = new View();
-        //Search search = new Search();
-        //PlayList playList = new PlayList();
-        //Artwork artwork = new Artwork();
-        //FriendActivity friendActivity  = new FriendActivity();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(WINDOWS_ICON)) ;
+
          east = new East();
          north = new North(username,password);
          south = new South();
          west = new West();
          center = new Center();
-        //this.add(new JScrollPane(library), BorderLayout.WEST);
+
         this.add(new JScrollPane(west),BorderLayout.WEST);
         this.add(new JScrollPane(south),BorderLayout.SOUTH);
         this.add(new JScrollPane(north),BorderLayout.NORTH);
         this.add(new JScrollPane(east),BorderLayout.EAST);
-        this.add(center,BorderLayout.CENTER);
+        this.add(center, BorderLayout.CENTER);
+        this.setVisible(true);
+
+        west.getLibrary().getButtons()[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                center.getCardLayout().show(center.getPanel(),"HOME");
+            }
+        });
+
+        west.getLibrary().getButtons()[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                center.getCardLayout().show(center.getPanel(),"SONGSVIEW");
+            }
+        });
+
+        west.getLibrary().getButtons()[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                center.getCardLayout().show(center.getPanel(),"SONGSVIEW");
+            }
+        });
+
+//        west.getLibrary().getButtons()[3].addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                center.getCardLayout().show(center.getPanel(),"");
+//            }
+//        });
+//
+//        west.getLibrary().getButtons()[3].addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                center.getCardLayout().show(center.getPanel(),"");
+//            }
+//        });
+//
+//        west.getLibrary().getButtons()[3].addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                center.getCardLayout().show(center.getPanel(),"");
+//            }
+//        });
+
+
     }
 
     public East getEast(){

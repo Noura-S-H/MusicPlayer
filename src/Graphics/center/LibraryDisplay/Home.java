@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Home extends JPanel {
 
-    JTextArea message = new JTextArea();
+    JLabel message = new JLabel();
 
     public Home(){
         super();
@@ -14,11 +14,18 @@ public class Home extends JPanel {
         this.setBackground(new Color(3,11,21));
         this.setVisible(true);
 
-        message.setEditable(false);
+        message.setText("<html><h1>&emsp;Wellcom</h1></html>");
+        message.setVerticalTextPosition(JLabel.TOP);
+        message.setFont(new Font("Trebuchet MS",Font.PLAIN,14));
+        message.setForeground(Color.GRAY);
 
-        this.add(message,BorderLayout.CENTER);
+        this.add(message,BorderLayout.NORTH);
     }
 
+
+    public JPanel getPanel(){
+        return this;
+    }
 
 
 }
