@@ -8,8 +8,6 @@ import Graphics.west.West;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 ;
 
@@ -26,6 +24,7 @@ public class Graphics extends JFrame {
     North north;
     South south;
     Center center;
+    ActionlistenerManeger alm = new ActionlistenerManeger();
 
 
     public Graphics(String username,String password) {
@@ -52,7 +51,12 @@ public class Graphics extends JFrame {
         this.add(center, BorderLayout.CENTER);
         this.setVisible(true);
 
-        west.getLibrary().getButtons()[0].addActionListener(new ActionListener() {
+        JButton[] libraryButtons = west.getLibrary().getButtons();
+        alm.libraryButtons(libraryButtons[0],center,"HOME","");
+        alm.libraryButtons(libraryButtons[2],center,"SONGSVIEW","src\\Files\\Songs.txt");
+        alm.libraryButtons(libraryButtons[3],center,"ALBUMSVIEW","");
+        alm.libraryButtons(libraryButtons[4],center,"SONGSVIEW","src\\Files\\Favorites.txt");
+        /*west.getLibrary().getButtons()[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 center.getCardLayout().show(center.getPanel(),"HOME");
@@ -71,28 +75,9 @@ public class Graphics extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 center.getCardLayout().show(center.getPanel(),"SONGSVIEW");
             }
-        });
+        });*/
 
-//        west.getLibrary().getButtons()[3].addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                center.getCardLayout().show(center.getPanel(),"");
-//            }
-//        });
 //
-//        west.getLibrary().getButtons()[3].addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                center.getCardLayout().show(center.getPanel(),"");
-//            }
-//        });
-//
-//        west.getLibrary().getButtons()[3].addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                center.getCardLayout().show(center.getPanel(),"");
-//            }
-//        });
 
 
     }
