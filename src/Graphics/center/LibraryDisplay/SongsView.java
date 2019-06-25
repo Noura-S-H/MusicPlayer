@@ -4,6 +4,10 @@ import Graphics.ActionlistenerManeger;
 import Graphics.AddProperties;
 import Graphics.Song;
 import Graphics.south.South;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +24,7 @@ public class SongsView extends JPanel {
 
     private AddProperties pro = new AddProperties();
     private ArrayList<Song> songslist = new ArrayList<Song>();
+    //private ArrayList<String> Allpaths = new ArrayList<String>();
     private JPanel list = new JPanel();
     private JTable table;
 
@@ -30,7 +35,14 @@ public class SongsView extends JPanel {
         this.setBackground(new Color(3,11,21));
         this.setVisible(true);
 
-        addToSongsListFromFile(pathsFile);
+       // addToSongsListFromFile(pathsFile);
+        try {
+            setPathsToAllSongsPaths(pathsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         createListPanel(south);
         this.add(list,BorderLayout.CENTER);
@@ -86,7 +98,7 @@ public class SongsView extends JPanel {
     }
 
 
-    public void addToSongsListFromFile(String pt){
+    /*public void addToSongsListFromFile(String pt){
 
         try (BufferedReader br = new BufferedReader(new FileReader(new File(pt)))) {
             String line;
@@ -99,7 +111,43 @@ public class SongsView extends JPanel {
             e.printStackTrace();
         }
 
+    }*/
+
+
+
+
+    //read music for create list of all music exists in library
+    public static JSONArray readMusicJson(String p)
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray jarr = null;
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(p));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+            // System.out.println(e);
+        }
+        return jarr;
     }
+
+    public void setPathsToAllSongsPaths(String jsonpath)
+            throws IOException, FileNotFoundException, ParseException {
+        JSONArray jarr = readMusicJson(jsonpath);
+        JSONObject jobj;
+        if(jarr != null) {
+            for (int i = 0; i < jarr.size(); i++) {
+                jobj = (JSONObject) jarr.get(i);
+                String ss = String.valueOf(jobj.values());
+
+                songslist.add(new Song(ss.toString().substring(1, ss.toString().length() - 1)));
+
+            }
+        }
+
+    }
+
+
 
     public void sortSongByTime(){
     }

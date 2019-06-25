@@ -13,7 +13,7 @@ public class Center extends JPanel {
     Home home;
     SongsView songsView ;
     AlbumsDisplay albumsDisplay;
-    String path = "src\\Files\\Songs.txt";
+    String path = "src\\Files\\musics.json";
     South south;
 
     CardLayout cardLayout = new CardLayout();
@@ -39,10 +39,10 @@ public class Center extends JPanel {
     public void changePath(String path) {
         this.path = path;
         songsView = new SongsView(path,south);
-        displayAlbumContent = new DisplayAlbumContent(path);
+//        displayAlbumContent = new DisplayAlbumContent(path);
 
         this.add(songsView.getPanel(),"SONGSVIEW");
-        this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
+   //     this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
     }
 
     public String getPath() {

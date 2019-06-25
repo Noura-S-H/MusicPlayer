@@ -17,7 +17,6 @@ public class AlbumsManeger{
     ArrayList<Album> albums = new ArrayList<Album>();
     ArrayList<Song> allSongs = new ArrayList<Song>();
     ArrayList<String> allSongsPath = new ArrayList<String>();
-    String readThisFile = "src\\Files\\Songs.txt";
     private static final String ALBUMS_PATH = System.getProperty("user.dir") + "/src/Files/albums.json";
 
     public AlbumsManeger(){
@@ -27,8 +26,6 @@ public class AlbumsManeger{
             createAlbums();
             for(int i = 0; i < albums.size(); i++)
                 insertAlbums(albums.get(i).getAlbumName(),albums.get(i).getPaths());
-
-            System.out.println(getAlbums("Listen When Sad 5"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,9 +58,12 @@ public class AlbumsManeger{
             jobj = (JSONObject) jarr.get(i);
             String ss = String.valueOf(jobj.values());
             allSongsPath.add(ss.toString().substring(1, ss.toString().length() - 1));
+
         }
-        for(int i = 0; i < allSongsPath.size(); i++)
+        for(int i = 0; i < allSongsPath.size(); i++) {
             allSongs.add(new Song(allSongsPath.get(i)));
+
+        }
 
     }
 
@@ -79,7 +79,6 @@ public class AlbumsManeger{
             }
             if(exists == false) {
                 albumsName.add(allSongs.get(i).getAlbum());
-                System.out.println(albumsName.get(i));
             }
             exists = false;
         }
@@ -134,20 +133,17 @@ public class AlbumsManeger{
         JSONArray jarr = readAlbumsJson();
         JSONObject aux = new JSONObject();
         FileWriter writeFile;
-        int i = 0;
-       // if (jarr.isEmpty()) {
-            aux.put(albName, pathsOfalbumSongs);
-            jarr.add(aux);
-            writeFile = new FileWriter(ALBUMS_PATH);
-            JSONArray.writeJSONString(jarr, writeFile);
-            writeFile.close();
-            return true;
-        //}
-        //return false;
+
+        aux.put(albName, pathsOfalbumSongs);
+        jarr.add(aux);
+        writeFile = new FileWriter(ALBUMS_PATH);
+        JSONArray.writeJSONString(jarr, writeFile);
+        writeFile.close();
+        return true;
     }
 
 
-    public static ArrayList<String> getAlbums(String name)
+   /* public static ArrayList<String> getAlbums(String name)
             throws IOException, FileNotFoundException, ParseException {
         ArrayList<String> array;
         JSONArray jarr = readAlbumsJson();
@@ -162,7 +158,7 @@ public class AlbumsManeger{
             }
         }
         return null;
-    }
+    }*/
 
 
     public ArrayList<Album> getAlbums() {

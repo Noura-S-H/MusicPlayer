@@ -62,9 +62,9 @@ public class Library extends JPanel {
 
 
         alm.changeView(buttons[0],view,"HOME",null);
-        alm.changeView(buttons[2],view,"SONGSVIEW","src\\Files\\Songs.txt");
+        alm.changeView(buttons[2],view,"SONGSVIEW","src\\Files\\musics.json");
         alm.changeView(buttons[3],view,"ALBUMSVIEW",null);
-        alm.changeView(buttons[4],view,"SONGSVIEW","src\\Files\\Favorites.txt");
+        alm.changeView(buttons[4],view,"SONGSVIEW","src\\Files\\Favorites.json");
 
     }
 
