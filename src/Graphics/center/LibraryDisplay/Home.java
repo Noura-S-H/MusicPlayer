@@ -51,7 +51,7 @@ public class Home extends JPanel {
        // <h3 style="color:#FF0000";> Add to library -></h3>
                 lab.setText(wellcomMessage);
         lab.setFont(new Font("Trebuchet MS",Font.BOLD,12));
-        message.setForeground(Color.WHITE);
+        message.setForeground(new Color(255, 250, 205));
     }
 
 }

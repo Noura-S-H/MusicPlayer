@@ -69,7 +69,6 @@ public class SongsView extends JPanel {
                     int row = target.getSelectedRow();
                     am.changeArtwork(songslist.get(row),south);
                 }
-
             }
         });
 

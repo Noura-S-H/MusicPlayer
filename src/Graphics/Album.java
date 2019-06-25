@@ -9,6 +9,7 @@ public class Album implements ActionListener {
 
     private String albumName;
     private ArrayList<Song> songs = new ArrayList<Song>();
+    private ArrayList<String> path = new ArrayList<String>();
 
     private ActionEvent e;
     private JButton button;
@@ -25,6 +26,10 @@ public class Album implements ActionListener {
 
     }
 
+    public void addPath(String p){
+        path.add(p);
+    }
+
 
     public String getAlbumName() {
         return albumName;
@@ -38,5 +43,7 @@ public class Album implements ActionListener {
         songs.add(s);
     }
 
-
+    public ArrayList<String> getPaths() {
+        return path;
+    }
 }
