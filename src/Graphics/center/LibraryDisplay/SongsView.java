@@ -48,7 +48,7 @@ public class SongsView extends JPanel {
             data[i] = songslist.get(i).getInfo("SV");
         }
         String[] headLine = {"   \uD83C\uDFBA ️" ,""," \uD83D\uDD24 TITLE",
-                "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52"};
+                "  \uD83C\uDFA4 ️ARTISTS"," \uD83D\uDCBF ALBUM"," \uD83D\uDCC6 YEAR"," \uD83D\uDD52","\uD83D\uDDD1️"};
 
         //make table not editable.
         DefaultTableModel tableModel = new DefaultTableModel(data, headLine){
@@ -57,6 +57,8 @@ public class SongsView extends JPanel {
                 // make read and editable cell fields except column 1,2,3,4
                 return column == 1 || column == 2 || column == 3 || column == 4 || column == 5 ? false : true;
             }
+
+
         };
         table = new JTable(tableModel);
 
@@ -67,11 +69,16 @@ public class SongsView extends JPanel {
                     int row = target.getSelectedRow();
                     am.changeArtwork(songslist.get(row),south);
                 }
+
             }
         });
 
         table.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
         table.getColumnModel().getColumn(0).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+        table.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer());
+        table.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(new JCheckBox()));
+
         table.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
 
         pro.setTableProperties(table,100,35,100,800,35,7);

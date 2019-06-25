@@ -19,9 +19,12 @@ public class ButtonRenderer extends JButton implements TableCellRenderer {
         setBorder(BorderFactory.createEmptyBorder());
         setForeground(Color.white);
         setEnabled(true);
-        if (isSelected)
-            setBackground(new Color(21, 141, 32));
-
+        if (isSelected) {
+            if(column == 7)
+                setBackground(new Color(10, 91, 112));
+            else
+                setBackground(new Color(21, 141, 32));
+        }
         setText((value == null) ? "" : value.toString());
         return this;
     }

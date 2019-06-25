@@ -30,7 +30,7 @@ public class Library extends JPanel {
     private JList<String> musicsList = new JList<>();
 
     private AddProperties pro = new AddProperties();
-    private final String[] name = {"\uD83C\uDFE0 Home"," Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
+    private final String[] name = {" Home"," Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
 
     public Library(Center view) {
         super();
@@ -45,14 +45,16 @@ public class Library extends JPanel {
         this.add(label);
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = new JButton("       \uD83C\uDFB5 " + name[i]);
+            if(i == 0)
+                buttons[i] = new JButton("       \uD83C\uDFE0 " + name[i]);
+            else
+                buttons[i] = new JButton("       \uD83C\uDFB5 " + name[i]);
             pro.setButtonProperties(buttons[i],150,30,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
             add(buttons[i]);
         }
 
         buttons[1].addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
                 addDirecBtnActionPerformed(evt);
             }
         });
