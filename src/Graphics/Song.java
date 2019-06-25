@@ -95,8 +95,8 @@ public class Song {
         String al = findString(album);
         String ye = findString(year);
 
-        Object [] ALinfo = {"✓", ti, ar, al, ye, lastTimePlayed};
-        Object [] SVinfo = {"✓",artwork,ti,ar,al,ye,lastTimePlayed};
+        Object [] ALinfo = {"✓", ti, ar, al, ye, lastTimePlayed,"\uD83D\uDDF4 "};
+        Object [] SVinfo = {"✓",artwork,ti,ar,al,ye,lastTimePlayed,"\uD83D\uDDF4 "};
 
         if(str.equals("AL"))
             return ALinfo;

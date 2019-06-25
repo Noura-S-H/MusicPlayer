@@ -74,24 +74,24 @@ public class AddProperties{
             TableColumn column = tb.getColumnModel().getColumn(i);
             if(columnsNum <= 5) {
                 if (i == 0)
-                    column.setPreferredWidth(25);
+                    column.setPreferredWidth(70);
                 else if (i == 1)
                     column.setPreferredWidth(250);//sport column is bigger
-                else if (i == 2 || i == 3)
-                    column.setPreferredWidth(150);
+                else if (i == 2 || i == 3 || i == 4 || i == 5)
+                    column.setPreferredWidth(120);
                 else
-                    column.setPreferredWidth(50);
+                    column.setPreferredWidth(25);
             }else if( columnsNum > 5 && columnsNum <= 7){
                 if(i == 0)
-                    column.setPreferredWidth(25);
+                    column.setPreferredWidth(70);
                 else if(i == 1)
                     column.setPreferredWidth(30);
                 else if (i == 2)
                     column.setPreferredWidth(250);//sport column is bigger
-                else if(i == 3 || i == 4 )
-                    column.setPreferredWidth(150);
+                else if(i == 3 || i == 4 || i == 5 || i == 6)
+                    column.setPreferredWidth(120);
                 else
-                    column.setPreferredWidth(50);
+                    column.setPreferredWidth(25);
             }
 
 

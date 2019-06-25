@@ -1,39 +1,73 @@
 package Graphics;
 
-import java.io.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Set;
 
 public class AlbumsManeger{
 
     ArrayList<String> albumsName = new ArrayList<String>();
     ArrayList<Album> albums = new ArrayList<Album>();
     ArrayList<Song> allSongs = new ArrayList<Song>();
+    ArrayList<String> allSongsPath = new ArrayList<String>();
     String readThisFile = "src\\Files\\Songs.txt";
 
 
     public AlbumsManeger(){
-        addToSongsFormSongsFile();
-        findAlbumsName();
-        createAlbums();
-        setSongsToAlbums();
-        createBackupAlbumsFile();
-    }
-
-
-    public void addToSongsFormSongsFile(){
-        Scanner scanner = null;
         try {
-            scanner = new Scanner(new File(readThisFile));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                allSongs.add(new Song(line));
-            }
-
-        } catch (FileNotFoundException e) {
+            getAllSongsPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+        // addToSongsListFormSongsFile();
+       // insertAlbum(albumsName.get(0),);
+        //findAlbumsName();
+        //createAlbums();
+        //setSongsToAlbums();
+        //createBackupAlbumsFile();
     }
+    public static JSONArray readMusicJson()
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+
+        JSONArray jarr = null;
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(System.getProperty("user.dir") + "/src/Files/musics.json"));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+           // System.out.println(e);
+        }
+        return jarr;
+    }
+
+    public void getAllSongsPath()
+            throws IOException, FileNotFoundException, ParseException {
+        JSONArray jarr = readMusicJson();
+        JSONObject jobj;
+        ArrayList<String> musicslist = new ArrayList<>();
+        for (int i = 0; i < jarr.size(); i++) {
+            jobj = (JSONObject) jarr.get(i);
+            Set<String> s = jobj.keySet();
+            musicslist.add(s.toString().substring(1, s.toString().length() - 1));
+        }
+         allSongsPath = musicslist;
+        for(int i = 0; i < allSongsPath.size(); i++)
+            allSongs.add(new Song(allSongsPath.get(i)));
+
+    }
+
+
 
     public void findAlbumsName(){
 
@@ -66,7 +100,9 @@ public class AlbumsManeger{
 
         for(int i = 0; i < albumsName.size(); i++){
             for (int j = 0; j < allSongs.size(); j++) {
-                if (albums.get(i).getAlbumName().equals(allSongs.get(j).getAlbum())) {
+                String albumName = albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
+                String songAlbumName = allSongs.get(i).getAlbum().replaceAll("[ : , \t, \0 ]" , "_");
+                if (albumName.equals(songAlbumName)) {
                     albums.get(i).addSong(allSongs.get(j));
                 }
             }
@@ -74,48 +110,50 @@ public class AlbumsManeger{
 
     }
 
-    public void createBackupAlbumsFile(){
-        for (int i = 0; i<albums.size(); i++){
-            boolean empty = false;
-            String name = albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
-            String path = "src\\Files\\Albums\\" + name + ".txt";
+    public static JSONArray readAlbumJson()
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
 
-            File f = new File(path);
-            ArrayList<Song> s = albums.get(i).getSongs();
-            if(f.length() == 0)
-                empty = true;
-            try {
-                if (!f.exists())
-                    f.createNewFile();
+        JSONArray jarr = null;
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(System.getProperty("user.dir") + "/src/Files/albums.json"));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+            // System.out.println(e);
+        }
+        return jarr;
+    }
 
-                PrintWriter file = new PrintWriter(new FileWriter(f));
-                if(empty == false)
-                    file.println();
-
-                for(int j = 0; j < s.size() ;j++) {
-                    if(i == s.size()-1)
-                        file.print(s.get(j).getSongPath());
-                    else
-                        file.println(s.get(j).getSongPath());
-
-                }
-                file.close();
-
-            } catch (IOException e1) {
-                e1.printStackTrace();
+    public static boolean createAlbum(String alName, ArrayList<String> songslist)
+            throws IOException, FileNotFoundException, ParseException {
+        JSONArray jarr = readAlbumJson();
+        JSONObject aux = new JSONObject();
+        FileWriter writeFile;
+        int i = 0;
+        if (!jarr.isEmpty()) {
+            for (i = 0; i < jarr.size(); i++) {
+                JSONObject jobj = (JSONObject) jarr.get(i);
             }
         }
-
-
+        aux.put(alName, songslist);
+        jarr.add(aux);
+        writeFile = new FileWriter(System.getProperty("user.dir") + "/src/Files/albums.json");
+        JSONArray.writeJSONString(jarr, writeFile);
+        writeFile.close();
+        return true;
     }
+
+
 
     public ArrayList<Album> getAlbums() {
         return albums;
     }
 
-    /*public static void main(String[] args){
+    public static void main(String[] args){
         AlbumsManeger am = new AlbumsManeger();
-    }*/
+
+    }
 
 
 

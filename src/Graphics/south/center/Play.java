@@ -117,6 +117,8 @@ public class Play extends JPanel {
             e.printStackTrace();
         }
     }
+
+
     private void btnPauseActionPerformed(ActionEvent evt) {
         System.out.println("pause");
 
@@ -127,4 +129,6 @@ public class Play extends JPanel {
             System.out.println(ex.getMessage());
         }
     }
+
+
 }
