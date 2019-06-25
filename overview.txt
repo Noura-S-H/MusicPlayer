@@ -1,0 +1,28 @@
+Hello,
+And wellcome to the Jpotify.
+Thanks for choosing Jpotify. Jpotify provides personalized services with social and interactive features for streaming music and other content as well as other products and services that maybe developed from time to time.
+By signing up or other wise using ny of these Jpotify services, including all associated features and functionalities.
+
+Help
+
+Click on Add to library -> You can choose a folder of your songs to add your songs
+
+Click on Song -> You can see and play songs which you added
+
+Click on Albums -> You can see and choose the albums that created by their names
+
+Click on Favorites -> You can see all your favorites songs that you give a heart to them
+ 
+Click on Shared playlist -> you can share the songs that you wants your friends seen
+
+Click on New playlist -> You can create the playlist with your favorite name and songs
+
+Friend activity -> shows that your friends who have the Jpotify and you add them to your friend's list
+
+ENJOY :)
+
+Manufacturers :
+
+Arefeh Kompani saeid
+
+Houra Sadat Hashemi
