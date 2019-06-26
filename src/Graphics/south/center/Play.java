@@ -1,27 +1,34 @@
 package Graphics.south.center;
 import Graphics.AddProperties;
+
+import Graphics.ActionlistenerManeger;
+import Graphics.center.LibraryDisplay.SongsView;
 import Logic.PlayMusic;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import static Logic.PlayMusic.deleteMusic;
 
 public class Play extends JPanel {
 
     private AddProperties pro = new AddProperties();
-    private JButton[] playButtons = new JButton[5];
-    private String[] buttonIcons = {"23.png","7.png","21.png","18.png","29.png"};
-    //private String[] ic = {"list.png","backk.png","play.png","nextt.png","search.png"};
+    private ActionlistenerManeger alm = new ActionlistenerManeger();
+    private JButton[] playButtons = new JButton[6];
+    private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","34.png"};
     private RunningTime playerBar = new RunningTime(0,300);
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
-
     PlayMusic m = new PlayMusic();
     private JList<String> musicsList = new JList<>();
-
+    private String nameOfSong;
     public Play(){
         super();
+        this.nameOfSong = nameOfSong;
         this.setLayout(new FlowLayout());
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
@@ -31,21 +38,30 @@ public class Play extends JPanel {
             pro.setButtonProperties(playButtons[i],30,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
             this.add(playButtons[i]);
         }
-        //playerBar.setPreferredSize(new Dimension(300,20));
-        this.add(playerBar);
 
-
-        playButtons[2].addActionListener(new ActionListener() {
-            @Override
+        playButtons[5].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                btnPlayActionPerformed(evt);
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
+        playButtons[0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
             }
         });
 
         playButtons[1].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnPauseActionPerformed(evt);
+            }
+        });
+
+        playButtons[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+
             }
         });
 
@@ -65,7 +81,6 @@ public class Play extends JPanel {
 
     }
 
-
     /**
      * Starts executing the selected song
      *
@@ -80,7 +95,8 @@ public class Play extends JPanel {
                 if (m.getPlaying() == true) {
                     m.stopMusic();
                 }
-                m.playMusic((String)"\uD83E\uDD40.mp3");
+                System.out.println(alm.getSongName());
+                m.playMusic((String) alm.getSongName());
                 playButtons[0].setEnabled(true);
                 playButtons[3].setEnabled(true);
 
@@ -109,7 +125,7 @@ public class Play extends JPanel {
         try {
             m.stopMusic();
             musicsList.setSelectedIndex(index + 1);
-            m.playMusic((String) musicsList.getSelectedValue());
+            m.playMusic((String) alm.getNextSongName());
             playButtons[0].setEnabled(true);
 
 
@@ -118,7 +134,20 @@ public class Play extends JPanel {
         }
     }
 
+    private void btnPreviousActionPerformed(ActionEvent evt){
+        System.out.println("next");
+        //int index = musicsList.getSelectedIndex();
+        try {
+            m.stopMusic();
+            // musicsList.setSelectedIndex(index - 1);
+            m.playMusic((String) alm.getPreviousSongName());
+            playButtons[0].setEnabled(true);
 
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void btnPauseActionPerformed(ActionEvent evt) {
         System.out.println("pause");
 
@@ -129,6 +158,20 @@ public class Play extends JPanel {
             System.out.println(ex.getMessage());
         }
     }
+    /**
+     * Deletes from the system the selected music
+     *
+     * @param evt
+     */
+    private void deleteBtnActionPerformed(ActionEvent evt) {
 
+        try {
+            deleteMusic("Ahmad-Solo-Mimiram-@Otaghe8Bot.mp3");
 
+        } catch (IOException | ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
+
+
