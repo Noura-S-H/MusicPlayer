@@ -10,20 +10,20 @@ public class Artwork extends JPanel {
 
     private AddProperties pro = new AddProperties();
     private JLabel artworkLable,songInformation;
-    private String songName = "SONG NAME",singersNames = "ARTISTS";
-    private Song music;
-    private ImageIcon artwork = new ImageIcon("src\\Graphics\\icons\\artwork\\12.jpg");
+    private static String songName ,singersNames ;
+    private static Song music;
+    private static ImageIcon artwork ;
 
 
-    public Artwork(Song music){
+    public Artwork(String name , String artist , ImageIcon art){
         super();
         this.setLayout(new BorderLayout());
         this.setVisible(true);
 
         this.music = music;
-        this.songName = music.getTitle();
-        this.singersNames = music.getArtists();
-        this.artwork = music.getArtwork();
+        this.songName = name;
+        this.singersNames = artist;
+        this.artwork = art;
 
 
         artworkLable = new JLabel(pro.getImageSong(artwork,130,100));

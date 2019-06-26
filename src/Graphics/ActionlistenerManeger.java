@@ -2,12 +2,22 @@ package Graphics;
 
 import Graphics.center.LibraryDisplay.Center;
 import Graphics.south.South;
+import org.json.simple.parser.ParseException;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
+
 
 public class ActionlistenerManeger {
+    private static String name;
+    private static String path;
+    private static String nextName;
+    private static String previousName;
+    private static Song song ;
 
     public ActionlistenerManeger(){
 
@@ -41,11 +51,26 @@ public class ActionlistenerManeger {
     }
 
 
+    public void SetSong(Song song,Song nextSong,Song previousSong,int row) {
+     if(row!=7) {
+         name = song.getJsonFileName();
+         path = song.getSongPath();
+         nextName = nextSong.getJsonFileName();
+         previousName = previousSong.getJsonFileName();
+     }else{
+//         try {
+//             //deleteMusic(song.getJsonFileName());
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         } catch (ParseException e) {
+//             e.printStackTrace();
+//         }
+     }
+    }
 
-    public void changeArtwork(Song song, South south){
+    public void ChangeArtwork(Song s , South south){
+        this.song = s;
         south.getLeft().changeSongArtwork(song);
-    //    south.getCenter();
-
     }
 
     public void changeMusic(Song song){
@@ -53,6 +78,24 @@ public class ActionlistenerManeger {
 
     }
 
+    public String getSongName(){
+        return  name;
+    }
+
+    public String getNextSongName(){
+        return nextName;
+    }
+
+    public  String getPreviousSongName(){
+        return previousName;
+    }
+
+    public String getSongPath(){
+        return path;
+    }
+
+    }
 
 
-}
+
+

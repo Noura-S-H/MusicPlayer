@@ -1,27 +1,42 @@
 package Graphics.south.center;
 import Graphics.AddProperties;
+
+import Graphics.ActionlistenerManeger;
+import Graphics.center.LibraryDisplay.SongsView;
 import Logic.PlayMusic;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 public class Play extends JPanel {
 
     private AddProperties pro = new AddProperties();
-    private JButton[] playButtons = new JButton[5];
-    private String[] buttonIcons = {"23.png","7.png","21.png","18.png","29.png"};
-    //private String[] ic = {"list.png","backk.png","play.png","nextt.png","search.png"};
+    private ActionlistenerManeger alm = new ActionlistenerManeger();
+    private JButton[] playButtons = new JButton[6];
+    private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","34.png"};
     private RunningTime playerBar = new RunningTime(0,300);
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
-
+    private static final String FAVORITES_PATH = System.getProperty("user.dir") + "/src/Files/Favorite.json";
     PlayMusic m = new PlayMusic();
     private JList<String> musicsList = new JList<>();
+    private String nameOfSong;
 
     public Play(){
         super();
+        this.nameOfSong = nameOfSong;
         this.setLayout(new FlowLayout());
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
@@ -31,21 +46,30 @@ public class Play extends JPanel {
             pro.setButtonProperties(playButtons[i],30,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
             this.add(playButtons[i]);
         }
-        //playerBar.setPreferredSize(new Dimension(300,20));
-        this.add(playerBar);
 
-
-        playButtons[2].addActionListener(new ActionListener() {
-            @Override
+        playButtons[5].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                btnPlayActionPerformed(evt);
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
+        playButtons[0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
             }
         });
 
         playButtons[1].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnPauseActionPerformed(evt);
+            }
+        });
+
+        playButtons[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+
             }
         });
 
@@ -61,10 +85,21 @@ public class Play extends JPanel {
         pro.setButtonProperties(favorites,30,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
         this.add(favorites);
 
+        favorites.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    insertMusicToFavorites(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         this.add(playSetting);
 
     }
-
 
     /**
      * Starts executing the selected song
@@ -80,7 +115,8 @@ public class Play extends JPanel {
                 if (m.getPlaying() == true) {
                     m.stopMusic();
                 }
-                m.playMusic((String)"\uD83E\uDD40.mp3");
+                //System.out.println(alm.getSongName());
+                m.playMusic((String) alm.getSongName());
                 playButtons[0].setEnabled(true);
                 playButtons[3].setEnabled(true);
 
@@ -109,7 +145,7 @@ public class Play extends JPanel {
         try {
             m.stopMusic();
             musicsList.setSelectedIndex(index + 1);
-            m.playMusic((String) musicsList.getSelectedValue());
+            m.playMusic((String) alm.getNextSongName());
             playButtons[0].setEnabled(true);
 
 
@@ -118,7 +154,20 @@ public class Play extends JPanel {
         }
     }
 
+    private void btnPreviousActionPerformed(ActionEvent evt){
+        System.out.println("next");
+        //int index = musicsList.getSelectedIndex();
+        try {
+            m.stopMusic();
+            // musicsList.setSelectedIndex(index - 1);
+            m.playMusic((String) alm.getPreviousSongName());
+            playButtons[0].setEnabled(true);
 
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void btnPauseActionPerformed(ActionEvent evt) {
         System.out.println("pause");
 
@@ -129,6 +178,83 @@ public class Play extends JPanel {
             System.out.println(ex.getMessage());
         }
     }
+    /**
+     * Deletes from the system the selected music
+     *
+     * @param evt
+     */
+    private void deleteBtnActionPerformed(ActionEvent evt) {
+
+        try {
+            m.deleteMusic(alm.getSongName());
+
+        } catch (IOException | ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
 
+    public static JSONArray readFavoritesJson()
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray jarr = null;
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(FAVORITES_PATH));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+            System.out.println(e);
+        }
+        return jarr;
+    }
+
+    public boolean insertMusicToFavorites(ActionEvent evt)
+            throws IOException, FileNotFoundException, ParseException {
+        String music = alm.getSongName();
+        String  path = alm.getSongPath();
+        JSONArray jarr = readFavoritesJson();
+        JSONObject aux = new JSONObject();
+        FileWriter writeFile;
+        System.out.println(jarr.isEmpty());
+        if (!jarr.isEmpty()) {
+            for (int i = 0; i < jarr.size(); i++) {
+                JSONObject jobj = (JSONObject) jarr.get(i);
+                if (jobj.containsKey(music)) {
+                    deleteFromFavorite(music);
+                    return false;
+                }
+            }
+        }
+        aux.put(music, path);
+        jarr.add(aux);
+        writeFile = new FileWriter(FAVORITES_PATH);
+        JSONArray.writeJSONString(jarr, writeFile);
+        writeFile.close();
+    return true;
+    }
+
+    public static void deleteFromFavorite(String musicname)
+            throws IOException, FileNotFoundException, ParseException {
+        JSONArray jsonArray;
+        jsonArray = readFavoritesJson();
+        FileWriter writeFile;
+        if (!jsonArray.isEmpty()) {
+            for (int i = 0; i < jsonArray.size(); i++) {
+                //copy jsonarray's JSONObject value
+                JSONObject obj = (JSONObject) jsonArray.get(i);
+
+                if (obj.containsKey(musicname)) {
+                    //update the array of songs
+                    jsonArray.remove(i);
+                    break;
+                }
+            }
+            //update by writing to json
+            writeFile = new FileWriter(FAVORITES_PATH);
+            JSONArray.writeJSONString(jsonArray, writeFile);
+            writeFile.close();
+        }
+    }
 }
+
+

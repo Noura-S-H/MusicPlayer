@@ -62,8 +62,6 @@ public class User extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ss = username.getText();
                 String k = password.getText();
-                System.out.println(ss);
-                System.out.println(k);
 
                 Graphics s = new Graphics(username.getText(),password.getText());
                 //new Graphics(ss , k);

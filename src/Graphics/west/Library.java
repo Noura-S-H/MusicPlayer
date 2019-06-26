@@ -54,9 +54,9 @@ public class Library extends JPanel {
         buttons[1].addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(addDirecBtnActionPerformed(evt)) {
-                    view.changePath("src\\Files\\musics.json");
-                    view.changeCentralView();
+                    alm.changeView(buttons[3],view,"ALBUMSVIEW",null);
                 }
+                addDirecBtnActionPerformed(evt);
             }
         });
 
@@ -78,6 +78,7 @@ public class Library extends JPanel {
             for (File file : files) {
                 if (insertMusic(file.getName(), file.getAbsolutePath())) {
                     return true;
+
                 }
             }
         } catch (IOException | ParseException ex) {
