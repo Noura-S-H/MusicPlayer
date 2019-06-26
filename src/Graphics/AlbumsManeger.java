@@ -20,9 +20,6 @@ public class AlbumsManeger{
     ArrayList<String> albumsName = new ArrayList<String>();
     ArrayList<Album> albums = new ArrayList<Album>();
 
-
-    //HashMap<String,String> name_path_HM = new HashMap<String, String>();
-
     private static final String ALBUMS_PATH = System.getProperty("user.dir") + "/src/Files/albums.json";
 
     public AlbumsManeger(){
@@ -30,9 +27,11 @@ public class AlbumsManeger{
 
             findAlbumsName();
             createAlbums();
+            JSONArray jarr = new JSONArray();
             for(int i = 0; i < albums.size(); i++)
-                insertAlbums(albums.get(i).getAlbumName(),albums.get(i).getPaths());
+                insertAlbums(albums.get(i).getAlbumName(),albums.get(i).getPaths(),jarr);
 
+            System.out.println(jarr);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -86,28 +85,14 @@ public class AlbumsManeger{
      * @throws IOException
      * @throws ParseException
      */
-    public static JSONArray readAlbumsJson()
-            throws FileNotFoundException, IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray jarr = null;
-        Object obj;
-        try {
-            obj = parser.parse(new FileReader(ALBUMS_PATH));
-            jarr = (JSONArray) obj;
-        } catch (IOException | NullPointerException | ParseException e) {
-            System.out.println(e);
-        }
-        return jarr;
-    }
 
 
-    public static boolean insertAlbums(String albName, ArrayList<String> pathsOfalbumSongs)
+    public static boolean insertAlbums(String albName, ArrayList<String> pathsOfalbumSongs,JSONArray jarr)
             throws IOException, FileNotFoundException, ParseException {
 
-        JSONArray jarr = readAlbumsJson();
+
         JSONObject aux = new JSONObject();
         FileWriter writeFile;
-
         aux.put(albName, pathsOfalbumSongs);
         jarr.add(aux);
         writeFile = new FileWriter(ALBUMS_PATH);
@@ -117,6 +102,22 @@ public class AlbumsManeger{
     }
 
 
+    public static JSONArray readMusicJson(String path)
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray jarr = null;
+        Object obj = null;
+        try {
+            obj = parser.parse(new FileReader(path));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+            // System.out.println(e);
+        }
+        return jarr;
+    }
+
+    public static void deleteMusic(String musicName){
+    }
    /* public static ArrayList<String> getAlbums(String name)
             throws IOException, FileNotFoundException, ParseException {
         ArrayList<String> array;

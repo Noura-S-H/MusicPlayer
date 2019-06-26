@@ -32,7 +32,6 @@ public class Song {
             mp3File = new Mp3File(path);
             if(mp3File.hasId3v1Tag()) {
                 song = new File(path);
-                System.out.println(song);
                 FileInputStream file = new FileInputStream(song);
                 setID3v1Info(last128(file));
                 file.close();
@@ -183,10 +182,10 @@ public class Song {
         return jsonFileName;
     }
 
-    public static void main(String[] args){
-        Song s = new Song("src\\Files\\songTest\\ttt.mp3");
-
-    }
+//    public static void main(String[] args){
+//        Song s = new Song("src\\Files\\songTest\\ttt.mp3");
+//
+//    }
 }
 
 
