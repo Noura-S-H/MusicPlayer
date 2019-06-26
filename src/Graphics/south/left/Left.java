@@ -2,12 +2,13 @@ package Graphics.south.left;
 
 import Graphics.Song;
 
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Left extends JPanel {
 
-    Song song = new Song("src\\Files\\songTest\\eee.mp3");
+    //Song song = new Song("src\\Files\\songTest\\eee.mp3");
 
     Artwork artwork ;//= new Artwork(null);
 
@@ -21,8 +22,9 @@ public class Left extends JPanel {
     }
 
     public void changeSongArtwork(Song song){
-        this.song = song;
-        this.add(artwork, BorderLayout.CENTER);
+        //this.song = song;
+        artwork = new Artwork(song.getTitle() , song.getArtists() , song.getArtwork());
+        this.add(artwork.getPanel(), BorderLayout.CENTER);
     }
 
 }
