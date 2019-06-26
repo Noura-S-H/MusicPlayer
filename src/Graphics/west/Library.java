@@ -68,7 +68,27 @@ public class Library extends JPanel {
 
     }
 
+
     private void addDirecBtnActionPerformed(ActionEvent evt) {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        chooser.showOpenDialog(this);
+
+        try {
+            File[] files = chooser.getSelectedFiles();
+            for (File file : files) {
+                if (insertMusic(file.getName(), file.getAbsolutePath())) {
+                    System.out.println(file.getName());
+                    System.out.println(file.getAbsolutePath());
+                }
+            }
+        } catch (IOException | ParseException ex) {
+            System.out.println(ex);
+        }
+
+    }
+
+   /* private void addDirecBtnActionPerformed(ActionEvent evt) {
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Choose multiple songs to add");
         chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -88,7 +108,7 @@ public class Library extends JPanel {
                 System.out.println(ex);
             }
         }
-    }
+    }*/
 
 
 

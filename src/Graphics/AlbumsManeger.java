@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AlbumsManeger{
 
@@ -56,6 +57,10 @@ public class AlbumsManeger{
         JSONObject jobj;
         for (int i = 0; i < jarr.size(); i++) {
             jobj = (JSONObject) jarr.get(i);
+
+            Set<String> s = jobj.keySet();
+            String songName = s.toString().substring(1, s.toString().length() - 1);
+
             String ss = String.valueOf(jobj.values());
             allSongsPath.add(ss.toString().substring(1, ss.toString().length() - 1));
 

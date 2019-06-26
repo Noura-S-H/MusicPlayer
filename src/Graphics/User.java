@@ -9,7 +9,9 @@ public class User extends JFrame {
 
     private AddProperties pro = new AddProperties();
     private JTextArea username;
-    private JTextArea password;
+    private JPasswordField password;
+    private JLabel name ;
+    private JLabel pass;
     private JButton login;
 
     private final String WINDOWS_TITLE = "Jpotify";
@@ -28,18 +30,30 @@ public class User extends JFrame {
         this.setVisible(true);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(WINDOWS_ICON)) ;
 
+        name = new JLabel("USERNAME :");
+        name.setFont(new Font("Calibri" , Font.BOLD , 20));
+        name.setBounds(110 , 131 , 120 , 30);
         username = new JTextArea();
-        username.setBounds(200,130,200,20);
-        password = new JTextArea();
-        password.setBounds(200,155,200,20);
+        username.setFont(new Font("Serif" , Font.CENTER_BASELINE , 16));
+        username.setBounds(241,131,150,20);
 
-        JLabel lab = new JLabel(pro.getImageSong(new ImageIcon("src\\Graphics\\icons\\artwork\\TTTT.jpg"),700,500));
+        pass = new JLabel("PASSWORD :");
+        pass.setFont(new Font("Calibri" , Font.BOLD , 20));
+        pass.setBounds(110 , 175, 120 , 30);
+        password = new JPasswordField();
+        password.setBounds(241,175,150,20);
+
+        JLabel lab = new JLabel(pro.getImageSong(new ImageIcon("src\\Graphics\\icons\\artwork\\kkkk.jpg"),700,500));
         login = new JButton("LOGIN");
         pro.setButtonProperties(login,700,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
 
 
+        lab.add(name);
+        lab.add(pass);
+
         lab.add(username);
         lab.add(password);
+
         this.add(lab,BorderLayout.CENTER);
         this.add(login,BorderLayout.SOUTH);
 
@@ -52,13 +66,11 @@ public class User extends JFrame {
                 System.out.println(k);
 
                 Graphics s = new Graphics(username.getText(),password.getText());
+                //new Graphics(ss , k);
                 dispose();
             }
         });
     }
 
-    //public static void main(String[] args){
-    //    User u = new User();
-   // }
 
 }
