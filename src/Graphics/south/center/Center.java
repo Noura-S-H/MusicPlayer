@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class Center extends JPanel {
 
+
     Play play = new Play();
     Nothing nothing = new Nothing();
 

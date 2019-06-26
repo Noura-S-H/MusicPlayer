@@ -43,7 +43,7 @@ public class Center extends JPanel {
 
     public void changeCentralAlbumListView(Album album){
         this.tempAlbum = album;
-        displayAlbumContent = new DisplayAlbumContent(album);
+        displayAlbumContent = new DisplayAlbumContent(album,south);
         this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
     }
 

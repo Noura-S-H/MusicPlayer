@@ -1,17 +1,23 @@
 package Graphics.center.LibraryDisplay.Albums;
 
+import Graphics.ActionlistenerManeger;
 import Graphics.AddProperties;
 import Graphics.Song;
 import Graphics.center.LibraryDisplay.ButtonEditor;
 import Graphics.center.LibraryDisplay.ButtonRenderer;
 import Graphics.Album;
+import Graphics.south.South;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class DisplayAlbumContent extends JPanel {
 
+        private ActionlistenerManeger am = new ActionlistenerManeger();
         private AddProperties pro = new AddProperties();
         private ArrayList<Song> songslist = new ArrayList<Song>();
         private JTable songsTable;
@@ -19,7 +25,7 @@ public class DisplayAlbumContent extends JPanel {
         private JPanel list = new JPanel();
         private JPanel liveSong = new JPanel();
 
-        public DisplayAlbumContent(Album thisAlbumChoosed){
+        public DisplayAlbumContent(Album thisAlbumChoosed, South south){
             super();
             this.setLayout(new BorderLayout());
             this.setBackground(new Color(3,11,21));
@@ -27,13 +33,13 @@ public class DisplayAlbumContent extends JPanel {
 
             songslist = thisAlbumChoosed.getSongs();
 
-            createListPanel();
+            createListPanel(south);
             createLiveSongPanel(songslist.get(0));
             this.add(list,BorderLayout.CENTER);
             this.add(liveSong,BorderLayout.NORTH);
         }
 
-        public void createListPanel(){
+        public void createListPanel(South south){
 
             list.setLayout(new BorderLayout());
             list.setBackground(new Color(10, 11, 21));
@@ -54,12 +60,27 @@ public class DisplayAlbumContent extends JPanel {
                     return column == 1 || column == 2 || column == 3 || column == 4 ? false : true;
                 }
             };
+
             songsTable = new JTable(tableModel);
+            songsTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 1) {
+                        JTable target = (JTable)e.getSource();
+                        int row = target.getSelectedRow();
+                        am.ChangeArtwork(songslist.get(row) , south);
+                     //   am.SetSong(songslist.get(row),songslist.get(row+1),songslist.get(row-1),row);
+
+                    }
+                }
+            });
+
+
             songsTable.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
             songsTable.getColumnModel().getColumn(0).setCellEditor(
                     new ButtonEditor(new JCheckBox()));
             pro.setTableProperties(songsTable,100,25,100,800,25,5);
             list.add(new JScrollPane(songsTable),BorderLayout.CENTER);
+
 
         }
 

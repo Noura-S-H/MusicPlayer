@@ -1,5 +1,5 @@
 package Graphics.south.left;
-
+import Graphics.SongsManeger;
 import Graphics.Song;
 
 
@@ -8,23 +8,40 @@ import java.awt.*;
 
 public class Left extends JPanel {
 
-    //Song song = new Song("src\\Files\\songTest\\eee.mp3");
+    Artwork artwork = new Artwork("SONG NAME","ARTISTS",
+            new ImageIcon("src\\Graphics\\icons\\artwork\\7.jpg"));
+    Song song;
 
-    Artwork artwork ;//= new Artwork(null);
+    CardLayout cardArtworkLayout = new CardLayout();
+    SongsManeger sm = new SongsManeger("src\\Files\\musics.json");
+
+
 
     public Left(){
         super();
-        this.setLayout(new BorderLayout());
+        this.setLayout(cardArtworkLayout);
         this.setBackground(new Color(3, 11, 21));
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         this.setVisible(true);
-
+        this.add(artwork.getPanel(),"ARTWORK");
     }
 
-    public void changeSongArtwork(Song song){
-        //this.song = song;
-        artwork = new Artwork(song.getTitle() , song.getArtists() , song.getArtwork());
-        this.add(artwork.getPanel(), BorderLayout.CENTER);
+
+    public void changeArtwork(Song s){
+        artwork = new Artwork(s.getTitle(),s.getArtists(),s.getArtwork());
+        this.add(artwork.getPanel(),"ARTWORK");
     }
 
+
+    public JPanel getPanel(){
+        return this;
+    }
+
+    public CardLayout getCardArtworkLayout() {
+        return cardArtworkLayout;
+    }
+
+    public void setSong(Song song) {
+        this.song = song;
+    }
 }

@@ -69,8 +69,9 @@ public class ActionlistenerManeger {
     }
 
     public void ChangeArtwork(Song s , South south){
-        this.song = s;
-        south.getLeft().changeSongArtwork(song);
+        south.getLeft().changeArtwork(s);
+        System.out.println(s.getTitle());
+        south.getLeft().getCardArtworkLayout().show(south.getLeft().getPanel(),"ARTWORK");
     }
 
     public void changeMusic(Song song){
