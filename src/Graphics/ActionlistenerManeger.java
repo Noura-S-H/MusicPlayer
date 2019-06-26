@@ -20,6 +20,7 @@ public class ActionlistenerManeger {
             public void actionPerformed(ActionEvent e) {
                 if(filePath!=null)
                     views.changePath(filePath);
+                views.changeCentralView();
                 views.getCardLayout().show(views.getPanel(),card);
 
             }

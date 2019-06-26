@@ -55,7 +55,10 @@ public class Library extends JPanel {
 
         buttons[1].addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDirecBtnActionPerformed(evt);
+                if(addDirecBtnActionPerformed(evt)) {
+               //     view.changePath("src\\Files\\musics.json");
+               //     view.changeCentralView();
+                }
             }
         });
 
@@ -69,7 +72,7 @@ public class Library extends JPanel {
     }
 
 
-    private void addDirecBtnActionPerformed(ActionEvent evt) {
+    private boolean addDirecBtnActionPerformed(ActionEvent evt) {
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(true);
         chooser.showOpenDialog(this);
@@ -78,14 +81,16 @@ public class Library extends JPanel {
             File[] files = chooser.getSelectedFiles();
             for (File file : files) {
                 if (insertMusic(file.getName(), file.getAbsolutePath())) {
-                    System.out.println(file.getName());
-                    System.out.println(file.getAbsolutePath());
+                   // System.out.println(file.getName());
+                  //  System.out.println(file.getAbsolutePath());
+                    System.out.println("fdfs");
+                    return true;
                 }
             }
         } catch (IOException | ParseException ex) {
             System.out.println(ex);
         }
-
+        return false;
     }
 
    /* private void addDirecBtnActionPerformed(ActionEvent evt) {

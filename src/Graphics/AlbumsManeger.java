@@ -2,20 +2,16 @@ package Graphics;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AlbumsManeger{
 
-    SongsManeger sm = new SongsManeger(System.getProperty("user.dir") + "/src/Files/musics.json");
-    HashMap<String,String> HM = sm.getName_path_HM();
+    SongsManeger sm;
 
     ArrayList<String> albumsName = new ArrayList<String>();
     ArrayList<Album> albums = new ArrayList<Album>();
@@ -24,14 +20,13 @@ public class AlbumsManeger{
 
     public AlbumsManeger(){
         try {
-
+             sm = new SongsManeger(System.getProperty("user.dir") + "/src/Files/musics.json");
             findAlbumsName();
             createAlbums();
             JSONArray jarr = new JSONArray();
             for(int i = 0; i < albums.size(); i++)
                 insertAlbums(albums.get(i).getAlbumName(),albums.get(i).getPaths(),jarr);
 
-            System.out.println(jarr);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -78,18 +73,15 @@ public class AlbumsManeger{
     }
 
     /**
-     * read the JSON file containing the playlists
+     * write in jsonfile per album with its musics
      *
-     * @return Existing playlist JSONArray object
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ParseException
      */
 
-
     public static boolean insertAlbums(String albName, ArrayList<String> pathsOfalbumSongs,JSONArray jarr)
             throws IOException, FileNotFoundException, ParseException {
-
 
         JSONObject aux = new JSONObject();
         FileWriter writeFile;
@@ -101,23 +93,6 @@ public class AlbumsManeger{
         return true;
     }
 
-
-    public static JSONArray readMusicJson(String path)
-            throws FileNotFoundException, IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray jarr = null;
-        Object obj = null;
-        try {
-            obj = parser.parse(new FileReader(path));
-            jarr = (JSONArray) obj;
-        } catch (IOException | NullPointerException | ParseException e) {
-            // System.out.println(e);
-        }
-        return jarr;
-    }
-
-    public static void deleteMusic(String musicName){
-    }
    /* public static ArrayList<String> getAlbums(String name)
             throws IOException, FileNotFoundException, ParseException {
         ArrayList<String> array;

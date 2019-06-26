@@ -28,21 +28,27 @@ public class Center extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         home = new Home();
-        albumsDisplay = new AlbumsDisplay(this);
+      //  albumsDisplay = new AlbumsDisplay(this);
 
         this.add(home.getPanel(),"HOME");
-        this.add(new JScrollPane(albumsDisplay.getPanel()),"ALBUMSVIEW");
+
 
         this.setVisible(true);
     }
 
     public void changePath(String path) {
         this.path = path;
-        songsView = new SongsView(path,south);
+
 //        displayAlbumContent = new DisplayAlbumContent(path);
 
-        this.add(songsView.getPanel(),"SONGSVIEW");
      //   this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
+    }
+
+    public void changeCentralView(){
+        songsView = new SongsView(path,south);
+        albumsDisplay = new AlbumsDisplay(this);
+        this.add(new JScrollPane(albumsDisplay.getPanel()),"ALBUMSVIEW");
+        this.add(songsView.getPanel(),"SONGSVIEW");
     }
 
     public String getPath() {
