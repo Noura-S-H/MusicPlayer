@@ -1,9 +1,9 @@
 package Graphics.center.LibraryDisplay.Albums;
 
+import Graphics.ActionlistenerManeger;
 import Graphics.AddProperties;
 import Graphics.Album;
 import Graphics.AlbumsManeger;
-import Graphics.ActionlistenerManeger;
 import Graphics.center.LibraryDisplay.Center;
 
 import javax.swing.*;
@@ -19,6 +19,8 @@ public class AlbumsDisplay extends JPanel{
     private ArrayList<Album> albums = new ArrayList<Album>();
     private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
+    private Album thisAlbumChoosed;
+
     public AlbumsDisplay(JPanel center){
         super();
         albums = am.getAlbums();
@@ -33,8 +35,6 @@ public class AlbumsDisplay extends JPanel{
         setButtonsActionListener(center);
         this.setVisible(true);
     }
-
-
 
 
     public void setAlbumsToButtons(){
@@ -57,12 +57,16 @@ public class AlbumsDisplay extends JPanel{
 
     public void setButtonsActionListener(JPanel view) {
         for(int i = 0 ; i < buttons.size(); i++){
-
-            String name = albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
-            String path = "src\\Files\\Albums\\" + name + ".txt";
-            alm.changeView(buttons.get(i), (Center) view,"ALBUMCONTENT",path);
+            alm.changeViewInAlbumDisplay(buttons.get(i),(Center) view,"ALBUMCONTENT",albums.get(i));
         }
+    }
 
+    public Album getThisAlbumChoosed() {
+        return thisAlbumChoosed;
+    }
+
+    public ArrayList<Album> getAlbums(){
+        return albums;
     }
 
     public JPanel getPanel() {

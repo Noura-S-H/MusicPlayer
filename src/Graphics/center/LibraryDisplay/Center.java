@@ -1,9 +1,8 @@
 package Graphics.center.LibraryDisplay;
-
 import Graphics.center.LibraryDisplay.Albums.AlbumsDisplay;
 import Graphics.center.LibraryDisplay.Albums.DisplayAlbumContent;
 import Graphics.south.South;
-
+import Graphics.Album;
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,9 +14,9 @@ public class Center extends JPanel {
     AlbumsDisplay albumsDisplay;
     String path = "src\\Files\\musics.json";
     South south;
+    Album album;
 
     CardLayout cardLayout = new CardLayout();
-   // JPanel cardPanel = new JPanel(cardLayout);
 
     public Center(South south){
         super();
@@ -28,27 +27,33 @@ public class Center extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         home = new Home();
-      //  albumsDisplay = new AlbumsDisplay(this);
+        albumsDisplay = new AlbumsDisplay(this);
 
         this.add(home.getPanel(),"HOME");
-
-
         this.setVisible(true);
-    }
-
-    public void changePath(String path) {
-        this.path = path;
-
-//        displayAlbumContent = new DisplayAlbumContent(path);
-
-     //   this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
     }
 
     public void changeCentralView(){
         songsView = new SongsView(path,south);
         albumsDisplay = new AlbumsDisplay(this);
+
+
+
         this.add(new JScrollPane(albumsDisplay.getPanel()),"ALBUMSVIEW");
         this.add(songsView.getPanel(),"SONGSVIEW");
+
+    }
+
+    public void changeCentralAlbumListView(Album album){
+        this.album = album;
+        displayAlbumContent = new DisplayAlbumContent(album);
+        this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
+
+    }
+
+
+    public void changePath(String path) {
+        this.path = path;
     }
 
     public String getPath() {

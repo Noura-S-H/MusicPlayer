@@ -13,6 +13,17 @@ public class ActionlistenerManeger {
 
     }
 
+    public void changeViewInAlbumDisplay(JButton list, Center views,String card,Album album){
+        list.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(album!=null)
+                    views.changeCentralAlbumListView(album);
+                views.getCardLayout().show(views.getPanel(),card);
+
+            }
+        });
+    }
 
     public void changeView(JButton list, Center views,String card,String filePath){
         list.addActionListener(new ActionListener() {
@@ -20,12 +31,16 @@ public class ActionlistenerManeger {
             public void actionPerformed(ActionEvent e) {
                 if(filePath!=null)
                     views.changePath(filePath);
+//                if(album!=null)
+//                    views.changeAlbum(album);
                 views.changeCentralView();
                 views.getCardLayout().show(views.getPanel(),card);
 
             }
         });
     }
+
+
 
     public void changeArtwork(Song song, South south){
         south.getLeft().changeSongArtwork(song);

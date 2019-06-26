@@ -4,14 +4,11 @@ import Graphics.AddProperties;
 import Graphics.Song;
 import Graphics.center.LibraryDisplay.ButtonEditor;
 import Graphics.center.LibraryDisplay.ButtonRenderer;
-
+import Graphics.Album;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DisplayAlbumContent extends JPanel {
 
@@ -22,13 +19,14 @@ public class DisplayAlbumContent extends JPanel {
         private JPanel list = new JPanel();
         private JPanel liveSong = new JPanel();
 
-        public DisplayAlbumContent(String albumPath){
+        public DisplayAlbumContent(Album thisAlbumChoosed){
             super();
             this.setLayout(new BorderLayout());
             this.setBackground(new Color(3,11,21));
             this.setVisible(true);
 
-            addSong(albumPath);
+            songslist = thisAlbumChoosed.getSongs();
+
             createListPanel();
             createLiveSongPanel(songslist.get(0));
             this.add(list,BorderLayout.CENTER);
@@ -87,18 +85,8 @@ public class DisplayAlbumContent extends JPanel {
         }
 
 
-        public void addSong(String filepath){
-            Scanner scanner = null;
-            try {
-                scanner = new Scanner(new File(filepath));
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    songslist.add(new Song(line));
-                }
+        public void addSong(){
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
         }
 
 

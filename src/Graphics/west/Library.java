@@ -93,28 +93,6 @@ public class Library extends JPanel {
         return false;
     }
 
-   /* private void addDirecBtnActionPerformed(ActionEvent evt) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Choose multiple songs to add");
-        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int result = chooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            try {
-                File f = chooser.getSelectedFile();
-                File[] filesList = f.listFiles();
-                for (File file : filesList) {
-                    if (insertMusic(file.getName(), file.getAbsolutePath())) {
-                        System.out.println(file.getName());
-                        System.out.println(file.getAbsolutePath());
-                    }
-                }
-            } catch (IOException | ParseException ex) {
-                System.out.println(ex);
-            }
-        }
-    }*/
-
 
 
     public JButton[] getButtons(){
