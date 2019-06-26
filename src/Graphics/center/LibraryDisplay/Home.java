@@ -51,9 +51,9 @@ public class Home extends JPanel {
         String enjoy = "<html>  ENJOY! :))</html>";
 //\uD83C\uDF70
         String manufacturers =
-                "<html><h4>&emsp;&emsp;  Manufacturers :" +
-                "<br>&emsp;&emsp;  Arefeh K.S" +
-                "<br>&emsp;&emsp;  Houra S.H</h4> </html>";
+                "<html><h4>&emsp;&emsp;&emsp;Manufacturers :" +
+                "<br>&emsp;&emsp;&emsp;Arefeh K.S" +
+                "<br>&emsp;&emsp;&emsp;Houra S.H</h4> </html>";
 
        // <h3 style="color:#FF0000";> Add to library -></h3>
 

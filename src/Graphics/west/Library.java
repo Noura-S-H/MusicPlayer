@@ -20,9 +20,7 @@ import static Logic.PlayMusic.insertMusic;
 public class Library extends JPanel {
 
     ActionlistenerManeger alm = new ActionlistenerManeger();
-    private final String SONGSPATH = "src\\Files\\Songs.txt";
-    private final String FAVORITES = "src\\Files\\Favorites.txt";
-    JButton buttons[] = new JButton[6];
+    JButton buttons[];
     String path = "DIFALT";
 
     PlayMusic m = new PlayMusic();
@@ -56,13 +54,11 @@ public class Library extends JPanel {
         buttons[1].addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(addDirecBtnActionPerformed(evt)) {
-               //     view.changePath("src\\Files\\musics.json");
-               //     view.changeCentralView();
+                    view.changePath("src\\Files\\musics.json");
+                    view.changeCentralView();
                 }
             }
         });
-
-
 
         alm.changeView(buttons[0],view,"HOME",null);
         alm.changeView(buttons[2],view,"SONGSVIEW","src\\Files\\musics.json");
@@ -81,9 +77,6 @@ public class Library extends JPanel {
             File[] files = chooser.getSelectedFiles();
             for (File file : files) {
                 if (insertMusic(file.getName(), file.getAbsolutePath())) {
-                   // System.out.println(file.getName());
-                  //  System.out.println(file.getAbsolutePath());
-                    System.out.println("fdfs");
                     return true;
                 }
             }
