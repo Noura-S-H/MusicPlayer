@@ -35,7 +35,7 @@ public class SongsManeger{
             throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray jarr = null;
-        Object obj;
+        Object obj = null;
         try {
             obj = parser.parse(new FileReader(path));
             jarr = (JSONArray) obj;
@@ -84,5 +84,9 @@ public class SongsManeger{
 
     public ArrayList<Song> getMusics() {
         return musics;
+    }
+
+    public static void main(String[] args){
+        SongsManeger s = new SongsManeger(System.getProperty("user.dir") + "/src/Files/musics.json");
     }
 }

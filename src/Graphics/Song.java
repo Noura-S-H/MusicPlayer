@@ -22,14 +22,17 @@ public class Song {
     private String year;
     private String info;
     private String lastTimePlayed;
+    private String jsonFileName;
 
     public Song(String path){
 
         try {
+           setJsonFileName(path);
 
             mp3File = new Mp3File(path);
             if(mp3File.hasId3v1Tag()) {
                 song = new File(path);
+                System.out.println(song);
                 FileInputStream file = new FileInputStream(song);
                 setID3v1Info(last128(file));
                 file.close();
@@ -87,6 +90,7 @@ public class Song {
     public void setDifultArtwork(String path){
         artwork = new ImageIcon(path);
     }
+
 
     public Object[] getInfo(String str){
 
@@ -164,10 +168,25 @@ public class Song {
         this.favorite = favorite;
     }
 
-    /*public static void main(String[] args){
-        Song s = new Song("src\\Graphics\\icons\\songTest\\ttt.mp3");
+    public void setJsonFileName(String path){
+        char[] p = path.toCharArray();
 
-    }*/
+        int i ;
+        for( i = p.length-1 ; i>=0 ;i--){
+            if(p[i] == '\\')
+                break;
+        }
+        jsonFileName = path.substring(i+1,p.length);
+    }
+
+    public String getJsonFileName() {
+        return jsonFileName;
+    }
+
+    public static void main(String[] args){
+        Song s = new Song("src\\Files\\songTest\\ttt.mp3");
+
+    }
 }
 
 
