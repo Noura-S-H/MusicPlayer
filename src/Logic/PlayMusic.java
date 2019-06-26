@@ -186,9 +186,9 @@ public class PlayMusic {
             }
         }
         aux.put(music, path);
-        System.out.println(aux);
+        //System.out.println(aux);
         jarr.add(aux);
-        System.out.println(jarr);
+        //System.out.println(jarr);
         writeFile = new FileWriter(MUSICS_PATH);
         JSONArray.writeJSONString(jarr, writeFile);
         writeFile.close();
@@ -203,7 +203,7 @@ public class PlayMusic {
      * @throws FileNotFoundException
      * @throws ParseException
      */
-    public static void deleteMusic(String musicname)
+    public void deleteMusic(String musicname)
             throws IOException, FileNotFoundException, ParseException {
         JSONArray jsonArray;
         jsonArray = readMusicJson();
@@ -215,6 +215,11 @@ public class PlayMusic {
 
                 if (obj.containsKey(musicname)) {
                     //update the array of songs
+                    try {
+                        stopMusic();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     jsonArray.remove(i);
                     break;
                 }
@@ -254,6 +259,7 @@ public class PlayMusic {
      * @throws Exception
      */
     public void playMusic(String music) throws Exception {
+        System.out.println(music+"yes");
         if (playing == false) {
 
             try {
@@ -263,8 +269,8 @@ public class PlayMusic {
                     JSONObject jobj = (JSONObject) jarr.get(i);
                     if (jobj.containsKey(music)) {
                         way = jobj.get(music).toString();
-                        Song s = new Song(way);
-                        new Artwork(s);
+//                        Song s = new Song(way);
+//                        new Artwork(s);
                         System.out.println("get");
                     }
                 }

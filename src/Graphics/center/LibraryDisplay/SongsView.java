@@ -27,6 +27,7 @@ public class SongsView extends JPanel {
     //private ArrayList<String> Allpaths = new ArrayList<String>();
     private JPanel list = new JPanel();
     private JTable table;
+    private int row;
 
 
     public SongsView(String pathsFile, South south){
@@ -35,7 +36,6 @@ public class SongsView extends JPanel {
         this.setBackground(new Color(3,11,21));
         this.setVisible(true);
 
-       // addToSongsListFromFile(pathsFile);
         try {
             setPathsToAllSongsPaths(pathsFile);
         } catch (IOException e) {
@@ -78,8 +78,10 @@ public class SongsView extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     JTable target = (JTable)e.getSource();
-                    int row = target.getSelectedRow();
-                    am.changeArtwork(songslist.get(row),south);
+                     row = target.getSelectedRow();
+                     am.ChangeArtwork(songslist.get(row) , south);
+                    am.SetSong(songslist.get(row),songslist.get(row+1),songslist.get(row-1),row);
+
                 }
             }
         });
@@ -96,24 +98,6 @@ public class SongsView extends JPanel {
         list.add(new JScrollPane(table),BorderLayout.CENTER);
 
     }
-
-
-    /*public void addToSongsListFromFile(String pt){
-
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(pt)))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                songslist.add(new Song(line));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
-
-
 
 
     //read music for create list of all music exists in library
@@ -145,6 +129,11 @@ public class SongsView extends JPanel {
             }
         }
 
+    }
+
+    public String getNameOfSong(){
+
+        return songslist.get(row).getTitle();
     }
 
 

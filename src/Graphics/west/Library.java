@@ -56,6 +56,7 @@ public class Library extends JPanel {
         buttons[1].addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addDirecBtnActionPerformed(evt);
+                alm.changeView(buttons[3],view,"ALBUMSVIEW",null);
             }
         });
 
@@ -70,24 +71,21 @@ public class Library extends JPanel {
 
     private void addDirecBtnActionPerformed(ActionEvent evt) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Choose multiple songs to add");
-        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int result = chooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            try {
-                File f = chooser.getSelectedFile();
-                File[] filesList = f.listFiles();
-                for (File file : filesList) {
-                    if (insertMusic(file.getName(), file.getAbsolutePath())) {
-                        System.out.println(file.getName());
-                        System.out.println(file.getAbsolutePath());
-                    }
+        chooser.setMultiSelectionEnabled(true);
+        chooser.showOpenDialog(this);
+
+        try {
+            File[] files = chooser.getSelectedFiles();
+            for (File file : files) {
+                if (insertMusic(file.getName(), file.getAbsolutePath())) {
+                    System.out.println(file.getName());
+                    System.out.println(file.getAbsolutePath());
                 }
-            } catch (IOException | ParseException ex) {
-                System.out.println(ex);
             }
+        } catch (IOException | ParseException ex) {
+            System.out.println(ex);
         }
+
     }
 
 

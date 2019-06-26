@@ -31,36 +31,39 @@ public class SongsManager{
     }
 
 
-    public static JSONArray readMusicJson(String path)
+    public static JSONArray readMusicJson()
             throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray jarr = null;
         Object obj;
         try {
-            obj = parser.parse(new FileReader(path));
+            obj = parser.parse(new FileReader("E:\\MusicPlayer\\src\\Files\\musics.json"));
             jarr = (JSONArray) obj;
         } catch (IOException | NullPointerException | ParseException e) {
-            // System.out.println(e);
+             System.out.println(e);
         }
         return jarr;
     }
 
     public void setSongsPathsToHM(String filePath)
             throws IOException, FileNotFoundException, ParseException {
-        JSONArray jarr = readMusicJson(filePath);
-        JSONObject jobj;
-        for (int i = 0; i < jarr.size(); i++) {
-            jobj = (JSONObject) jarr.get(i);
+        //System.out.println("by");
+        JSONArray jarr = readMusicJson();
+        //System.out.println(jarr);
+        if(jarr!=null) {
+            for (int i = 0; i < jarr.size(); i++) {
+                //System.out.println("hi");
+                JSONObject jobj = (JSONObject) jarr.get(i);
 
-            Set<String> s = jobj.keySet();
-            String songName = s.toString().substring(1, s.toString().length() - 1);
+                Set<String> s = jobj.keySet();
+                String songName = s.toString().substring(1, s.toString().length() - 1);
 
-            String ss = String.valueOf(jobj.values());
-            String songPath = ss.toString().substring(1, ss.toString().length() - 1);
+                String ss = String.valueOf(jobj.values());
+                String songPath = ss.toString().substring(1, ss.toString().length() - 1);
 
-            name_path_HM.put(songName,songPath);
+                name_path_HM.put(songName, songPath);
+            }
         }
-
     }
 
     public String filePathWithName(String musicName){
@@ -86,8 +89,8 @@ public class SongsManager{
         return musics;
     }
 
-    public static void  main(String args[]){
-        SongsManager song = new SongsManager("/src/Files/musics.json");
-        System.out.println(song.getName_path_HM());
-    }
+//    public static void  main(String args[]){
+//        SongsManager song = new SongsManager("/src/Files/musics.json");
+//        System.out.println(song.getName_path_HM());
+//    }
 }

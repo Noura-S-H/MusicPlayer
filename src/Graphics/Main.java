@@ -2,6 +2,7 @@ package Graphics;
 
 public class Main {
     public static void main(String[] args){
-        new Graphics("KK","III");
+       new User();
+        //new Graphics("arefe" , "123");
     }
 }
