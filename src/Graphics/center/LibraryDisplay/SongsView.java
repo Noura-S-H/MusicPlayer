@@ -67,7 +67,7 @@ public class SongsView extends JPanel {
             @Override
             public boolean isCellEditable(int row, int column) {
                 // make read and editable cell fields except column 1,2,3,4
-                return column == 1 || column == 2 || column == 3 || column == 4 || column == 5 ? false : true;
+                return column == 1 || column == 2 || column == 3 || column == 4 || column == 5 || column == 6? false : true;
             }
 
 
@@ -80,7 +80,7 @@ public class SongsView extends JPanel {
                     JTable target = (JTable)e.getSource();
                      row = target.getSelectedRow();
                      am.ChangeArtwork(songslist.get(row) , south);
-                     //am.SetSong(songslist.get(row),songslist.get(row+1),songslist.get(row-1),row);
+                     am.SetSong(songslist.get(row),songslist.get(row+1),songslist.get(row-1),row);
 
                 }
             }

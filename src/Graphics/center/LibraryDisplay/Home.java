@@ -50,9 +50,9 @@ public class Home extends JPanel {
         String enjoy = "<html>  ENJOY! :))</html>";
 //\uD83C\uDF70
         String manufacturers =
-                "<html><h4>&emsp;&emsp;&emsp;Manufacturers :" +
-                "<br>&emsp;&emsp;&emsp;Arefeh K.S" +
-                "<br>&emsp;&emsp;&emsp;Houra S.H</h4> </html>";
+                "<html><p><h4>&emsp;&emsp;&emsp;Manufacturers :" +
+                "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;>  Arefeh Kompani.Sayid" +
+                "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;>  Houra Sadat.Hashemi</h4> </html></p>";
 
 
 
@@ -67,7 +67,8 @@ public class Home extends JPanel {
 
         message1.setForeground(new Color(255, 250, 205));
         message2.setForeground(new Color(255,250,205));
-        message3.setForeground(new Color(143, 188, 139));
+        message3.setForeground(new Color(255,250,205));
+        //message3.setForeground(new Color(143, 188, 139));
     }
 
 }
