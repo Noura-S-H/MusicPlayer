@@ -14,10 +14,14 @@ import java.util.Set;
 
 public class AlbumsManeger{
 
+
     ArrayList<String> albumsName = new ArrayList<String>();
     ArrayList<Album> albums = new ArrayList<Album>();
     ArrayList<Song> allSongs = new ArrayList<Song>();
     ArrayList<String> allSongsPath = new ArrayList<String>();
+
+    //HashMap<String,String> name_path_HM = new HashMap<String, String>();
+
     private static final String ALBUMS_PATH = System.getProperty("user.dir") + "/src/Files/albums.json";
 
     public AlbumsManeger(){
@@ -35,6 +39,8 @@ public class AlbumsManeger{
         }
 
     }
+
+
 
     //read music for create list of all music exists in library
     public static JSONArray readMusicJson()
@@ -60,9 +66,10 @@ public class AlbumsManeger{
 
             Set<String> s = jobj.keySet();
             String songName = s.toString().substring(1, s.toString().length() - 1);
-
             String ss = String.valueOf(jobj.values());
-            allSongsPath.add(ss.toString().substring(1, ss.toString().length() - 1));
+            String songPath = ss.toString().substring(1, ss.toString().length() - 1);
+
+             allSongsPath.add(songPath);
 
         }
         for(int i = 0; i < allSongsPath.size(); i++) {
