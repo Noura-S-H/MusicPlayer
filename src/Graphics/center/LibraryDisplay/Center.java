@@ -42,7 +42,7 @@ public class Center extends JPanel {
 //        displayAlbumContent = new DisplayAlbumContent(path);
 
         this.add(songsView.getPanel(),"SONGSVIEW");
-   //     this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
+     //   this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
     }
 
     public String getPath() {

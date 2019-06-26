@@ -10,15 +10,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.HashMap;
 
 public class AlbumsManeger{
 
+    SongsManeger sm = new SongsManeger(System.getProperty("user.dir") + "/src/Files/musics.json");
+    HashMap<String,String> HM = sm.getName_path_HM();
 
     ArrayList<String> albumsName = new ArrayList<String>();
     ArrayList<Album> albums = new ArrayList<Album>();
-    ArrayList<Song> allSongs = new ArrayList<Song>();
-    ArrayList<String> allSongsPath = new ArrayList<String>();
+
 
     //HashMap<String,String> name_path_HM = new HashMap<String, String>();
 
@@ -26,7 +27,7 @@ public class AlbumsManeger{
 
     public AlbumsManeger(){
         try {
-            setPathsToAllSongsPaths();
+
             findAlbumsName();
             createAlbums();
             for(int i = 0; i < albums.size(); i++)
@@ -41,56 +42,18 @@ public class AlbumsManeger{
     }
 
 
-
-    //read music for create list of all music exists in library
-    public static JSONArray readMusicJson()
-            throws FileNotFoundException, IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray jarr = null;
-        Object obj;
-        try {
-            obj = parser.parse(new FileReader(System.getProperty("user.dir") + "/src/Files/musics.json"));
-            jarr = (JSONArray) obj;
-        } catch (IOException | NullPointerException | ParseException e) {
-           // System.out.println(e);
-        }
-        return jarr;
-    }
-
-    public void setPathsToAllSongsPaths()
-            throws IOException, FileNotFoundException, ParseException {
-        JSONArray jarr = readMusicJson();
-        JSONObject jobj;
-        for (int i = 0; i < jarr.size(); i++) {
-            jobj = (JSONObject) jarr.get(i);
-
-            Set<String> s = jobj.keySet();
-            String songName = s.toString().substring(1, s.toString().length() - 1);
-            String ss = String.valueOf(jobj.values());
-            String songPath = ss.toString().substring(1, ss.toString().length() - 1);
-
-             allSongsPath.add(songPath);
-
-        }
-        for(int i = 0; i < allSongsPath.size(); i++) {
-            allSongs.add(new Song(allSongsPath.get(i)));
-
-        }
-
-    }
-
     public void findAlbumsName(){
 
         boolean exists = false;
-        for(int i = 0; i < allSongs.size(); i++){
-            String temp = allSongs.get(i).getAlbum();
+        for(int i = 0; i < sm.getMusics().size(); i++){
+            String temp = sm.getMusics().get(i).getAlbum();
             for (int j = 0; j < albumsName.size(); j++){
                 if(temp.replaceAll("[ : , \t, \0 ]" , "_")
                          .equals(albumsName.get(j).replaceAll("[ : , \t, \0 ]" , "_")))
                     exists = true;
             }
             if(exists == false) {
-                albumsName.add(allSongs.get(i).getAlbum());
+                albumsName.add(sm.getMusics().get(i).getAlbum());
             }
             exists = false;
         }
@@ -102,19 +65,18 @@ public class AlbumsManeger{
             albums.add(new Album(albumsName.get(i)));
         }
         for(int i = 0; i < albumsName.size(); i++){
-            for (int j = 0; j < allSongs.size(); j++) {
+            for (int j = 0; j < sm.getMusics().size(); j++) {
                 String albumName = albums.get(i).getAlbumName().replaceAll("[ : , \t, \0 ]" , "_");
-                String songAlbumName = allSongs.get(j).getAlbum().replaceAll("[ : , \t, \0 ]" , "_");
+                String songAlbumName = sm.getMusics().get(j).getAlbum().replaceAll("[ : , \t, \0 ]" , "_");
 
                 if (albumName.equals(songAlbumName)) {
-                    albums.get(i).addSong(allSongs.get(j));
-                    albums.get(i).addPath(allSongs.get(j).getSongPath());
+                    albums.get(i).addSong(sm.getMusics().get(j));
+                    albums.get(i).addPath(sm.getMusics().get(j).getSongPath());
                 }
             }
         }
 
     }
-
 
     /**
      * read the JSON file containing the playlists
@@ -177,7 +139,7 @@ public class AlbumsManeger{
         return albums;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         AlbumsManeger am = new AlbumsManeger();
 
     }

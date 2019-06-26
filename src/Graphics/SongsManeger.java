@@ -8,26 +8,36 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 public class SongsManeger{
 
     HashMap<String,String> name_path_HM = new HashMap<String, String>();
+    ArrayList<Song> musics = new ArrayList<Song>();
 
     String musicJsonFile;
     public SongsManeger(String musicJsonFile){
         this.musicJsonFile = musicJsonFile;
+        try {
+            setSongsPathsToHM(musicJsonFile);
+            createSongsFromMusicsPaths();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    public static JSONArray readMusicJson()
+    public static JSONArray readMusicJson(String path)
             throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray jarr = null;
         Object obj;
         try {
-            obj = parser.parse(new FileReader(System.getProperty("user.dir") + "/src/Files/musics.json"));
+            obj = parser.parse(new FileReader(path));
             jarr = (JSONArray) obj;
         } catch (IOException | NullPointerException | ParseException e) {
             // System.out.println(e);
@@ -35,9 +45,9 @@ public class SongsManeger{
         return jarr;
     }
 
-    public void setPathsToAllSongsPaths()
+    public void setSongsPathsToHM(String filePath)
             throws IOException, FileNotFoundException, ParseException {
-        JSONArray jarr = readMusicJson();
+        JSONArray jarr = readMusicJson(filePath);
         JSONObject jobj;
         for (int i = 0; i < jarr.size(); i++) {
             jobj = (JSONObject) jarr.get(i);
@@ -51,8 +61,16 @@ public class SongsManeger{
             name_path_HM.put(songName,songPath);
         }
 
-        for (String name : name_path_HM.keySet()){
-            System.out.println(name + " "+ name_path_HM.get(name));
+    }
+
+    public String filePathWithName(String musicName){
+        String path = name_path_HM.get(musicName);
+        return path;
+    }
+
+    public void createSongsFromMusicsPaths(){
+        for(String name : name_path_HM.keySet()) {
+            musics.add(new Song(name_path_HM.get(name)));
         }
     }
 
@@ -64,20 +82,7 @@ public class SongsManeger{
         return name_path_HM;
     }
 
-    public String filePathWithName(String musicName){
-        String path = name_path_HM.get(musicName);
-        return path;
+    public ArrayList<Song> getMusics() {
+        return musics;
     }
-
-    /*public static  void main(String[] args){
-        SongsManeger sm = new SongsManeger(System.getProperty("user.dir") + "/src/Files/musics.json");
-        try {
-            sm.setPathsToAllSongsPaths();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }*/
-
 }
