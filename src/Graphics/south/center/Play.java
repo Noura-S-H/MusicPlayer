@@ -4,15 +4,21 @@ import Graphics.AddProperties;
 import Graphics.ActionlistenerManeger;
 import Graphics.center.LibraryDisplay.SongsView;
 import Logic.PlayMusic;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
-import static Logic.PlayMusic.deleteMusic;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 public class Play extends JPanel {
 
@@ -23,9 +29,11 @@ public class Play extends JPanel {
     private RunningTime playerBar = new RunningTime(0,300);
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
+    private static final String FAVORITES_PATH = System.getProperty("user.dir") + "/src/Files/Favorite.json";
     PlayMusic m = new PlayMusic();
     private JList<String> musicsList = new JList<>();
     private String nameOfSong;
+
     public Play(){
         super();
         this.nameOfSong = nameOfSong;
@@ -77,6 +85,18 @@ public class Play extends JPanel {
         pro.setButtonProperties(favorites,30,50,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
         this.add(favorites);
 
+        favorites.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    insertMusicToFavorites(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         this.add(playSetting);
 
     }
@@ -95,7 +115,7 @@ public class Play extends JPanel {
                 if (m.getPlaying() == true) {
                     m.stopMusic();
                 }
-                System.out.println(alm.getSongName());
+                //System.out.println(alm.getSongName());
                 m.playMusic((String) alm.getSongName());
                 playButtons[0].setEnabled(true);
                 playButtons[3].setEnabled(true);
@@ -166,10 +186,73 @@ public class Play extends JPanel {
     private void deleteBtnActionPerformed(ActionEvent evt) {
 
         try {
-            deleteMusic("Ahmad-Solo-Mimiram-@Otaghe8Bot.mp3");
+            m.deleteMusic(alm.getSongName());
 
         } catch (IOException | ParseException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+
+    public static JSONArray readFavoritesJson()
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray jarr = null;
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(FAVORITES_PATH));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+            System.out.println(e);
+        }
+        return jarr;
+    }
+
+    public boolean insertMusicToFavorites(ActionEvent evt)
+            throws IOException, FileNotFoundException, ParseException {
+        String music = alm.getSongName();
+        String  path = alm.getSongPath();
+        JSONArray jarr = readFavoritesJson();
+        JSONObject aux = new JSONObject();
+        FileWriter writeFile;
+        System.out.println(jarr.isEmpty());
+        if (!jarr.isEmpty()) {
+            for (int i = 0; i < jarr.size(); i++) {
+                JSONObject jobj = (JSONObject) jarr.get(i);
+                if (jobj.containsKey(music)) {
+                    deleteFromFavorite(music);
+                    return false;
+                }
+            }
+        }
+        aux.put(music, path);
+        jarr.add(aux);
+        writeFile = new FileWriter(FAVORITES_PATH);
+        JSONArray.writeJSONString(jarr, writeFile);
+        writeFile.close();
+    return true;
+    }
+
+    public static void deleteFromFavorite(String musicname)
+            throws IOException, FileNotFoundException, ParseException {
+        JSONArray jsonArray;
+        jsonArray = readFavoritesJson();
+        FileWriter writeFile;
+        if (!jsonArray.isEmpty()) {
+            for (int i = 0; i < jsonArray.size(); i++) {
+                //copy jsonarray's JSONObject value
+                JSONObject obj = (JSONObject) jsonArray.get(i);
+
+                if (obj.containsKey(musicname)) {
+                    //update the array of songs
+                    jsonArray.remove(i);
+                    break;
+                }
+            }
+            //update by writing to json
+            writeFile = new FileWriter(FAVORITES_PATH);
+            JSONArray.writeJSONString(jsonArray, writeFile);
+            writeFile.close();
         }
     }
 }
