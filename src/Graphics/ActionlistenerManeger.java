@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class ActionlistenerManeger {
 
+
     private static ArrayList<Song> thisList;
     private PlayMusic playMusic = new PlayMusic();
     private static int songRow = 0;
@@ -78,6 +79,7 @@ public class ActionlistenerManeger {
         System.out.println(s.getTitle());
         south.getLeft().getCardArtworkLayout().show(south.getLeft().getPanel(),"ARTWORK");
     }
+
 
     public void changeMusic(Song song){
         System.out.println(song.getTitle());

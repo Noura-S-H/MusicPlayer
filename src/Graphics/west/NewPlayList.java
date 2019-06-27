@@ -1,29 +1,37 @@
 package Graphics.west;
 import Graphics.AddProperties;
 import Graphics.Warrning;
-import Graphics.Album;
-
+import Graphics.PlayListManager;
+import Graphics.ActionlistenerManeger;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import Graphics.SongsManeger;
+import Graphics.Playlist;
+import Graphics.south.center.Play;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class NewPlayList extends JPanel {
 
-    private ArrayList<Album> playlists = new ArrayList<Album>();
+    private PlayListManager pm ;
+    private SongsManeger sm = new SongsManeger("src\\Files\\musics.json");
+    private Playlist list ;
+    ArrayList<String> paths = new ArrayList<String>();
     private AddProperties pro = new AddProperties();
     JButton buttonNewPlaylist;
 
-    private Warrning warrning;
     private final String WINDOWS_TITLE = "NEW PLAYLIST ";
-    private final int WIDTH = 500, HEIGHT = 150;
-    private final int X = 200, Y = 300;
     private final String WINDOWS_ICON = "src\\Graphics\\icons\\wicon\\plus.png";
+    private static final String PLAYLISTS_PATH = System.getProperty("user.dir") + "/src/Files/Playlists/";
 
     public NewPlayList() {
         super();
@@ -34,6 +42,7 @@ public class NewPlayList extends JPanel {
         buttonNewPlaylist = new JButton("➕ New playList ");
         pro.setButtonProperties(buttonNewPlaylist,150,30,JButton.TOP,JButton.CENTER,SwingConstants.CENTER);
         this.add(buttonNewPlaylist, BorderLayout.CENTER);
+
         buttonNewPlaylist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,83 +50,161 @@ public class NewPlayList extends JPanel {
                 playlistNameFrame.setTitle(WINDOWS_TITLE);
                 playlistNameFrame.setLayout(new BorderLayout());
                 playlistNameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                playlistNameFrame.setSize(WIDTH, HEIGHT);
-                playlistNameFrame.setLocation(X, Y);
+                playlistNameFrame.setSize(300, 300);
+                playlistNameFrame.setLocation(200, 100);
                 playlistNameFrame.setVisible(true);
                 playlistNameFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(WINDOWS_ICON));
-                playlistNameFrame.setBackground(new Color(3,11,21));
+
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.setPreferredSize(new Dimension(300,500));
 
                 JLabel lab1 = new JLabel("<html>&emsp;\uD83C\uDFBA PLAYLIST NAME : </html>");
-                pro.setLabelProperties(lab1,400,150,"Trebuchet MS",14,SwingConstants.LEFT);
+                pro.setLabelProperties(lab1,100,50,"Trebuchet MS",12,SwingConstants.LEFT);
                 JTextArea name = new JTextArea();
                 lab1.add(name);
-                name.setBounds(150,33,200,20);
-                JButton add = new JButton(" ➕ ADD SONGS");
+                name.setBounds(150,13,100,20);
                 JButton con  = new JButton(" ✔️ CONFIRM ");
-
-                pro.setButtonProperties(add,100,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
-                pro.setButtonProperties(con,500,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
-                add.setBackground(new Color(23, 32, 42));
+                pro.setButtonProperties(con,100,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
                 con.setBackground(new Color(21, 141, 32));
 
-                playlistNameFrame.add(lab1,BorderLayout.CENTER);
-                playlistNameFrame.add(add,BorderLayout.EAST);
-                playlistNameFrame.add(con,BorderLayout.SOUTH);
-                ArrayList<String> paths = new ArrayList<String>();
+                JPanel butt = new JPanel(new GridLayout(sm.getMusics().size(),1));
+                JButton[] bt = new JButton[sm.getMusics().size()];
 
-                add.addActionListener(new ActionListener() {
+                for(int i = 0; i < bt.length; i++) {
+                    bt[i] =  new JButton(sm.getMusics().get(i).getJsonFileName());
+                    bt[i].setBackground(new Color(28, 40, 51));
+                    bt[i].setForeground(Color.white);
+                    butt.add(bt[i]);
+                }
+                panel.add(lab1,BorderLayout.NORTH);
+                panel.add(new JScrollPane(butt),BorderLayout.CENTER);
+                panel.add(con,BorderLayout.SOUTH);
+                playlistNameFrame.add(panel,BorderLayout.CENTER);
 
-                    //actionlistener for add songs to playlist
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
 
-                    }
-                });
-                //actionlistener for created file from new playlist and make album from that
+                for(int i = 0; i < bt.length; i++){
+                    int finalI = i;
+                    bt[i].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            paths.add(sm.getMusics().get(finalI).getSongPath());
+                        }
+                    });
+                }
                 con.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(name.getText() != null){
-
-                            String plname = "src\\Files\\playlists\\" + name.getText() +".txt";
-                            plname = plname.replaceAll("[ : , \t, \0 ]" , "_");
-                            File f = new File(plname);
-                            PrintWriter file = null;
-
-                            try {
-                                if (!f.exists())
-                                    f.createNewFile();
-
-                                file = new PrintWriter(new FileWriter(f));
-
-                                for(int i = 0; i < paths.size() ;i++) {
-                                    if(i == paths.size()-1)
-                                        file.print(paths.get(i));
-                                    else
-                                        file.println(paths.get(i));
-                                }
-                                file.close();
-                                playlists.add(new Album(plname));
-                                warrning = new Warrning("   PLAYLIST CREATED!",true);
-
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-
+                        playlistNameFrame.dispose();
+                        if(!name.getText().isEmpty()){
+                            list = new Playlist(name.getText(),paths);
+                            new Warrning("   DONE!",true);
+                            pm.addToPlaylists(list);
+                        }else {
+                            new Warrning("THE LIST WAS NOT CREATED! SOMETHINGS IS WRONG..!",false);
                         }
-                        else {
-                            warrning = new Warrning("   PLAYLIST WAS NOT CREATED!",false);
-                        }
-
                     }
                 });
-                playlistNameFrame.dispose();
+
+
             }
         });
+
+        if(list!=null) {
+            try {
+                insertPlaylist(list.getName(),list.getPaths(),new JSONArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
 
     }
+
+
+
+    /**
+     * read the JSON file containing the playlists
+     *
+     * @return Existing playlist JSONArray object
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
+    public static JSONArray readPlaylistJson(String name)
+            throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray jarr = null;
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(PLAYLISTS_PATH + name + "json"));
+            jarr = (JSONArray) obj;
+        } catch (IOException | NullPointerException | ParseException e) {
+            System.out.println(e);
+        }
+        return jarr;
+    }
+
+    /**
+     * Insert a new playlist into the playlists file
+     *
+     * @param name Name of Playlist to be created
+     * @param array Array of songs from Playlist
+     * @return True if successfully added or False if not
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+    public static boolean insertPlaylist(String name, ArrayList<String> array,JSONArray jarr)
+            throws IOException, FileNotFoundException, ParseException {
+
+        JSONObject aux = new JSONObject();
+        FileWriter writeFile;
+        int i = 0;
+        aux.put(name, array);
+        jarr.add(aux);
+        writeFile = new FileWriter(PLAYLISTS_PATH + name + "json");
+        JSONArray.writeJSONString(jarr, writeFile);
+        writeFile.close();
+        return true;
+    }
+
+    /**
+     * Returns required playlist
+     *
+     * @param name Name the playlist
+     * @return String ArrayList containing playlist songs
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+    public static ArrayList<String> getPlaylist(String name)
+            throws IOException, FileNotFoundException, ParseException {
+        ArrayList<String> array;
+        JSONArray jarr = readPlaylistJson(name);
+        JSONObject aux = new JSONObject();
+        if (!jarr.isEmpty()) {
+            for (int i = 0; i < jarr.size(); i++) {
+                JSONObject jobj = (JSONObject) jarr.get(i);
+                if (jobj.containsKey(name)) {
+                    array = (ArrayList<String>) jobj.get(name);
+                    return array;
+                }
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> getPaths() {
+        return paths;
+    }
+
+    public Playlist getList() {
+        return list;
+    }
 }
-//myJFrame.addWindowListener(new MyWindowListener());
+
+

@@ -51,7 +51,7 @@ public class Play extends JPanel {
 
         playButtons[0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                btnPreviousActionPerformed(evt);
+                btnPreviousActionPerformed(evt,south);
             }
         });
 
@@ -155,7 +155,7 @@ public class Play extends JPanel {
         }
     }
 
-    private void btnPreviousActionPerformed(ActionEvent evt){
+    private void btnPreviousActionPerformed(ActionEvent evt,South south){
         System.out.println("previous");
         //int index = musicsList.getSelectedIndex();
         try {
@@ -167,7 +167,7 @@ public class Play extends JPanel {
             // musicsList.setSelectedIndex(index - 1);
             m.playMusic((String) alm.getThisSong().getJsonFileName());
             playButtons[0].setEnabled(true);
-
+            alm.ChangeArtwork(alm.getThisSong(),south);
 
         } catch (Exception e) {
             e.printStackTrace();

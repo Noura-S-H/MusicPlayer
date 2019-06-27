@@ -23,7 +23,7 @@ public class Warrning extends JFrame{
         }
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(300, 100);
+        this.setSize(350, 100);
         this.setLocation(210, 310);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(icon));
         this.add(new JLabel(warrning));
@@ -35,6 +35,7 @@ public class Warrning extends JFrame{
         close.setFocusPainted(false);
         close.setBorder(BorderFactory.createEmptyBorder());
         close.setPreferredSize(new Dimension(300,30));
+        close.setFont(new Font("Trebuchet MS",Font.BOLD, 12));
 
         this.add(close,BorderLayout.SOUTH);
         close.addActionListener(new ActionListener() {

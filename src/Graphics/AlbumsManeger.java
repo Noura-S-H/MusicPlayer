@@ -27,9 +27,7 @@ public class AlbumsManeger{
             for(int i = 0; i < albums.size(); i++)
                 insertAlbums(albums.get(i).getAlbumName(),albums.get(i).getPaths(),jarr);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 

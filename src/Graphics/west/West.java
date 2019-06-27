@@ -8,13 +8,13 @@ import java.awt.*;
 public class West extends JPanel {
 
     Library library ;
-    PlayList playList;
+    PlaylistDisplay playList;
     NewPlayList newPlayList;
 
     public West(Center view){
 
         library = new Library(view);
-        playList = new PlayList();
+        playList = new PlaylistDisplay();
         newPlayList = new NewPlayList();
 
         this.setLayout(new BorderLayout());
@@ -34,7 +34,7 @@ public class West extends JPanel {
         return newPlayList;
     }
 
-    public PlayList getPlayList() {
+    public PlaylistDisplay getPlayList() {
         return playList;
     }
 
