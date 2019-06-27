@@ -67,8 +67,9 @@ public class DisplayAlbumContent extends JPanel {
                     if (e.getClickCount() == 1) {
                         JTable target = (JTable)e.getSource();
                         int row = target.getSelectedRow();
+                        int col = target.getSelectedColumn();
                         am.ChangeArtwork(songslist.get(row) , south);
-                        am.SetSong(songslist.get(row),songslist.get(row+1),songslist.get(row-1),row);
+                        am.SetSong(songslist,row,col);
 
                     }
                 }

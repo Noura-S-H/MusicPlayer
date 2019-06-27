@@ -12,11 +12,13 @@ import java.awt.*;
 
 public class South extends JPanel {
 
-   Left left = new Left();
-   Center center = new Center();
+   Left left;
+   Center center;
 
 
     public South(){
+        left = new Left();
+        center = new Center(this);
         this.setLayout(new BorderLayout());
         this.add(left,BorderLayout.WEST);
         this.add(center,BorderLayout.CENTER);

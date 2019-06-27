@@ -2,6 +2,7 @@ package Graphics;
 
 import Graphics.center.LibraryDisplay.Center;
 import Graphics.south.South;
+import Logic.PlayMusic;
 import org.json.simple.parser.ParseException;
 
 
@@ -15,13 +16,12 @@ import java.util.ArrayList;
 
 public class ActionlistenerManeger {
 
-    ArrayList<Song> thisSongs;
+    private static ArrayList<Song> thisList;
+    private PlayMusic playMusic = new PlayMusic();
+    private static int songRow = 0;
+    private static Song thisSong;
 
-    private static String name;
-    private static String path;
-    private static String nextName;
-    private static String previousName;
-    private static Song song ;
+
 
     public ActionlistenerManeger(){
 
@@ -55,21 +55,22 @@ public class ActionlistenerManeger {
     }
 
 
-    public void SetSong(Song song,ArrayList<Song> list,int col,int row) {
-     if(col!=7) {
-         name = song.getJsonFileName();
-         path = song.getSongPath();
-         nextName = list.get(row+1).getJsonFileName();
-         previousName = list.get(row-1).getJsonFileName();
-     }else{
-//         try {
-//             //deleteMusic(song.getJsonFileName());
-//         } catch (IOException e) {
-//             e.printStackTrace();
-//         } catch (ParseException e) {
-//             e.printStackTrace();
-//         }
-     }
+    public void SetSong(ArrayList<Song> list,int col,int row) {
+        thisList = list;
+        if(col == 0) {
+            this.thisSong = list.get(row);
+            songRow = row;
+        }
+        if(col == 7){
+            try {
+                playMusic.stopMusic();
+                playMusic.deleteMusic(thisSong.getJsonFileName());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
     }
 
     public void ChangeArtwork(Song s , South south){
@@ -83,23 +84,20 @@ public class ActionlistenerManeger {
 
     }
 
-    public String getSongName(){
-        return  name;
+
+
+    public ArrayList<Song> getThisList() {
+        return thisList;
     }
 
-    public String getNextSongName(){
-        return nextName;
+    public Song getThisSong() {
+        return thisSong;
     }
 
-    public  String getPreviousSongName(){
-        return previousName;
+    public int getSongRow() {
+        return songRow;
     }
-
-    public String getSongPath(){
-        return path;
-    }
-
-    }
+}
 
 
 

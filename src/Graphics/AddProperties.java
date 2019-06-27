@@ -85,7 +85,7 @@ public class AddProperties{
                 if(i == 0)
                     column.setPreferredWidth(70);
                 else if(i == 1)
-                    column.setPreferredWidth(30);
+                    column.setPreferredWidth(50);
                 else if (i == 2)
                     column.setPreferredWidth(250);//sport column is bigger
                 else if(i == 3 || i == 4 || i == 5 || i == 6)

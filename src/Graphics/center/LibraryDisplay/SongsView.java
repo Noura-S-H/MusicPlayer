@@ -81,8 +81,7 @@ public class SongsView extends JPanel {
                      int row = target.getSelectedRow();
                      int column = target.getSelectedColumn();
                      am.ChangeArtwork(songslist.get(row) , south);
-                     am.SetSong(songslist.get(row),songslist,column,row);
-
+                     am.SetSong(songslist,column,row);
                 }
             }
         });

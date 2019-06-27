@@ -3,12 +3,13 @@ import Graphics.AddProperties;
 
 import Graphics.ActionlistenerManeger;
 import Graphics.center.LibraryDisplay.SongsView;
+import Graphics.south.South;
 import Logic.PlayMusic;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+import Graphics.Song;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,7 @@ public class Play extends JPanel {
     private AddProperties pro = new AddProperties();
     private ActionlistenerManeger alm = new ActionlistenerManeger();
     private JButton[] playButtons = new JButton[6];
-    private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","34.png"};
+    private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","23.png"};
     private RunningTime playerBar = new RunningTime(0,300);
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
@@ -34,7 +35,7 @@ public class Play extends JPanel {
     private JList<String> musicsList = new JList<>();
     private String nameOfSong;
 
-    public Play(){
+    public Play(South south){
         super();
         this.nameOfSong = nameOfSong;
         this.setLayout(new FlowLayout());
@@ -47,11 +48,6 @@ public class Play extends JPanel {
             this.add(playButtons[i]);
         }
 
-        playButtons[5].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
-            }
-        });
 
         playButtons[0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -75,7 +71,7 @@ public class Play extends JPanel {
 
         playButtons[3].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                btnNextActionPerformed(evt);
+                btnNextActionPerformed(evt,south);
             }
         });
 
@@ -118,7 +114,7 @@ public class Play extends JPanel {
                     m.stopMusic();
                 }
                 //System.out.println(alm.getSongName());
-                m.playMusic((String) alm.getSongName());
+                m.playMusic((String) alm.getThisSong().getJsonFileName());
                 playButtons[0].setEnabled(true);
                 playButtons[3].setEnabled(true);
 
@@ -141,15 +137,18 @@ public class Play extends JPanel {
      */
 
 
-    private void btnNextActionPerformed(ActionEvent evt) {
+    private void btnNextActionPerformed(ActionEvent evt,South south) {
         System.out.println("next");
-        int index = musicsList.getSelectedIndex();
+
         try {
             m.stopMusic();
-            musicsList.setSelectedIndex(index + 1);
-            m.playMusic((String) alm.getNextSongName());
+            int newRow = alm.getSongRow() + 1;
+            if(newRow <= alm.getThisList().size()) {
+                alm.SetSong(alm.getThisList(), 0, newRow);
+            }
+            m.playMusic(alm.getThisSong().getJsonFileName());
             playButtons[0].setEnabled(true);
-
+            alm.ChangeArtwork(alm.getThisSong(),south);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,12 +156,16 @@ public class Play extends JPanel {
     }
 
     private void btnPreviousActionPerformed(ActionEvent evt){
-        System.out.println("next");
+        System.out.println("previous");
         //int index = musicsList.getSelectedIndex();
         try {
             m.stopMusic();
+            int newRow = alm.getSongRow() - 1;
+            if(newRow >= 0) {
+                alm.SetSong(alm.getThisList(),0,newRow);
+            }
             // musicsList.setSelectedIndex(index - 1);
-            m.playMusic((String) alm.getPreviousSongName());
+            m.playMusic((String) alm.getThisSong().getJsonFileName());
             playButtons[0].setEnabled(true);
 
 
@@ -180,20 +183,7 @@ public class Play extends JPanel {
             System.out.println(ex.getMessage());
         }
     }
-    /**
-     * Deletes from the system the selected music
-     *
-     * @param evt
-     */
-    private void deleteBtnActionPerformed(ActionEvent evt) {
 
-        try {
-            m.deleteMusic(alm.getSongName());
-
-        } catch (IOException | ParseException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
 
 
     public static JSONArray readFavoritesJson()
@@ -212,8 +202,8 @@ public class Play extends JPanel {
 
     public boolean insertMusicToFavorites(ActionEvent evt)
             throws IOException, FileNotFoundException, ParseException {
-        String music = alm.getSongName();
-        String  path = alm.getSongPath();
+        String music = alm.getThisSong().getJsonFileName();
+        String  path = alm.getThisSong().getSongPath();
         JSONArray jarr = readFavoritesJson();
         JSONObject aux = new JSONObject();
         FileWriter writeFile;
@@ -232,7 +222,7 @@ public class Play extends JPanel {
         writeFile = new FileWriter(FAVORITES_PATH);
         JSONArray.writeJSONString(jarr, writeFile);
         writeFile.close();
-    return true;
+        return true;
     }
 
     public static void deleteFromFavorite(String musicname)
@@ -258,5 +248,4 @@ public class Play extends JPanel {
         }
     }
 }
-
 
