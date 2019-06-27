@@ -9,10 +9,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class ActionlistenerManeger {
+
+    ArrayList<Song> thisSongs;
+
     private static String name;
     private static String path;
     private static String nextName;
@@ -51,12 +55,12 @@ public class ActionlistenerManeger {
     }
 
 
-    public void SetSong(Song song,Song nextSong,Song previousSong,int row) {
-     if(row!=7) {
+    public void SetSong(Song song,ArrayList<Song> list,int col,int row) {
+     if(col!=7) {
          name = song.getJsonFileName();
          path = song.getSongPath();
-         nextName = nextSong.getJsonFileName();
-         previousName = previousSong.getJsonFileName();
+         nextName = list.get(row+1).getJsonFileName();
+         previousName = list.get(row-1).getJsonFileName();
      }else{
 //         try {
 //             //deleteMusic(song.getJsonFileName());

@@ -27,7 +27,7 @@ public class SongsView extends JPanel {
     //private ArrayList<String> Allpaths = new ArrayList<String>();
     private JPanel list = new JPanel();
     private JTable table;
-    private int row;
+
 
 
     public SongsView(String pathsFile, South south){
@@ -78,9 +78,10 @@ public class SongsView extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     JTable target = (JTable)e.getSource();
-                     row = target.getSelectedRow();
+                     int row = target.getSelectedRow();
+                     int column = target.getSelectedColumn();
                      am.ChangeArtwork(songslist.get(row) , south);
-                     am.SetSong(songslist.get(row),songslist.get(row+1),songslist.get(row-1),row);
+                     am.SetSong(songslist.get(row),songslist,column,row);
 
                 }
             }
@@ -129,11 +130,6 @@ public class SongsView extends JPanel {
             }
         }
 
-    }
-
-    public String getNameOfSong(){
-
-        return songslist.get(row).getTitle();
     }
 
 

@@ -2,6 +2,7 @@ package Graphics.west;
 import Graphics.AddProperties;
 import Graphics.Warrning;
 import Graphics.Album;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -70,22 +71,6 @@ public class NewPlayList extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        JFileChooser fc = new JFileChooser();
-                        fc.setMultiSelectionEnabled(true);
-                        int i = fc.showOpenDialog(playlistNameFrame);
-                        try {
-                            if (i == JFileChooser.APPROVE_OPTION) {
-                                File[] files = fc.getSelectedFiles();
-                                for (int j = 0; j < files.length; j++) {
-                                    paths.add(files[j].getAbsolutePath());
-
-                                }
-                            }
-                            playlistNameFrame.dispose();
-                        }catch(Exception ex) {
-                            System.out.println(ex.toString());
-
-                        }
                     }
                 });
                 //actionlistener for created file from new playlist and make album from that
@@ -126,8 +111,7 @@ public class NewPlayList extends JPanel {
 
                     }
                 });
-
-
+                playlistNameFrame.dispose();
             }
         });
 

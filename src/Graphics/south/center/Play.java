@@ -89,6 +89,8 @@ public class Play extends JPanel {
             public void actionPerformed(ActionEvent evt) {
                 try {
                     insertMusicToFavorites(evt);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ParseException e) {
@@ -215,7 +217,7 @@ public class Play extends JPanel {
         JSONArray jarr = readFavoritesJson();
         JSONObject aux = new JSONObject();
         FileWriter writeFile;
-        System.out.println(jarr.isEmpty());
+
         if (!jarr.isEmpty()) {
             for (int i = 0; i < jarr.size(); i++) {
                 JSONObject jobj = (JSONObject) jarr.get(i);
