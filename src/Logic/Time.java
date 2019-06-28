@@ -21,11 +21,11 @@ public class Time extends Thread implements Runnable{
     public void run() {
         super.run();
         while (true) {
-            if(time == "00:00:00")
-                song.setLastTimePlayed("JUST NOW");
-           calculateTime(time);
+            long diff = calculateTime(time);
             try {
-                wait(60000);
+  //              if(diff<=1)
+//                    song.setLastTimePlayed("JUST NOW");
+                sleep(60000);
                 song.setLastTimePlayed(time);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -33,21 +33,23 @@ public class Time extends Thread implements Runnable{
         }
     }
 
-    public String calculateTime(String time){
+    public long calculateTime(String time){
+        if(time.equals("JUST NOW"))
+            time = "00:00:00";
         String diff = "00:00:00";
+        long difference = 0;
         String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Date date1 = null;
         try {
             date1 = format.parse(currentTime);
             Date date2 = format.parse(time);
-            long difference = date2.getTime() - date1.getTime();
-            diff = String.valueOf(difference / 1000);
+            difference = date2.getTime() - date1.getTime()/1000;
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return diff;
+        return difference;
     }
 
 
