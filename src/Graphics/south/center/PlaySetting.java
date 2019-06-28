@@ -25,4 +25,20 @@ public class PlaySetting extends JPanel {
         this.setVisible(true);
     }
 
+//    public void setLineGain(float gain)
+//    {
+//        if (source != null)
+//        {
+//            FloatControl volControl = (FloatControl) source.getControl(FloatControl.Type.MASTER_GAIN);
+//            float newGain = Math.min(Math.max(gain, volControl.getMinimum()), volControl.getMaximum());
+//
+//            volControl.setValue(newGain);
+//        }
+//    }
+//    if (audio instanceof JavaSoundAudioDevice)
+//    {
+//        JavaSoundAudioDevice jsAudio = (JavaSoundAudioDevice) audio;
+//        jsAudio.setLineGain(yourGainGoesHere);
+//    }
+
 }

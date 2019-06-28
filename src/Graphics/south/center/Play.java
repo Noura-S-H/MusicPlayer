@@ -30,8 +30,7 @@ public class Play extends JPanel {
     private JButton[] playButtons = new JButton[6];
     private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","23.png"};
 
-    private RunningTime playerBar = new RunningTime(0,300)
-            ;
+    private RunningTime playerBar = new RunningTime(0,300);
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
     PlayMusic m = new PlayMusic();
@@ -68,7 +67,7 @@ public class Play extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 btnPlayActionPerformed(evt);
-
+                m.setSong(alm.getThisSong());
             }
         });
 
@@ -124,6 +123,7 @@ public class Play extends JPanel {
         try {
             if (m.getPaused() == false) {
                 if (m.getPlaying() == true) {
+                    alm.getThisSong().setisPlaying(false);
                     m.stopMusic();
                 }
                 //System.out.println(alm.getSongName());
@@ -134,6 +134,7 @@ public class Play extends JPanel {
             } else {
                 playButtons[2].setEnabled(true);
                 playButtons[2].setEnabled(true);
+                alm.getThisSong().setisPlaying(true);
                 m.resumeMusic();
                 m.setPausedStatus(false);
             }
@@ -191,12 +192,16 @@ public class Play extends JPanel {
 
         try {
             m.pauseMusic();
+            alm.getThisSong().setisPlaying(false);
             m.setPausedStatus(true);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
+    public void calTime(int ms){
+
+    }
 
 
     public static JSONArray readFavoritesJson()

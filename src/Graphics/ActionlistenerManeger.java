@@ -1,5 +1,6 @@
 package Graphics;
 
+import Graphics.Lyrics.Lyrics;
 import Graphics.center.LibraryDisplay.Center;
 import Graphics.south.South;
 import Graphics.south.center.RunningTime;
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ActionlistenerManeger {
@@ -68,6 +70,8 @@ public class ActionlistenerManeger {
         if(col == 7){
             try {
                 playMusic.stopMusic();
+                thisSong.setLastTimePlayed(" ");
+                thisSong.setisPlaying(false);
                 playMusic.deleteMusic(thisSong.getJsonFileName());
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -81,6 +85,17 @@ public class ActionlistenerManeger {
         south.getLeft().changeArtwork(s);
         System.out.println(s.getTitle());
         south.getLeft().getCardArtworkLayout().show(south.getLeft().getPanel(),"ARTWORK");
+    }
+
+
+    public void setLyric() {
+
+        try {
+            List<String> lyr = Lyrics.getSongLyrics(thisSong.getArtists(), thisSong.getTitle());
+            System.out.println(lyr);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
