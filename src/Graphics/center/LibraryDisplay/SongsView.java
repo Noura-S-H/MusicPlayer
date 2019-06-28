@@ -80,8 +80,9 @@ public class SongsView extends JPanel {
                     JTable target = (JTable)e.getSource();
                      int row = target.getSelectedRow();
                      int column = target.getSelectedColumn();
-                     am.ChangeArtwork(songslist.get(row) , south);
-                     am.SetSong(songslist,column,row);
+                         am.ChangeArtwork(songslist.get(row), south);
+                         am.SetSong(songslist, column, row);
+                     
                 }
             }
         });

@@ -91,20 +91,13 @@ public class Play extends JPanel {
                     if(alm.getThisSong().getFavorite() == true) {
                         alm.getThisSong().setFavorite(false);
                         favorites.setIcon(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\3.png",25,25));
-                        try {
-                            playMusic.stopMusic();
-                            playMusic.deleteMusic(thisSong.getJsonFileName());
-                        } catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
                         deleteFromFavorite(alm.getThisSong().getJsonFileName());
                     }
                     else {
                         alm.getThisSong().setFavorite(true);
-                        favorites.setIcon(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\111.png",25,25));
-                        insertMusicToFavorites(evt);
+                        favorites.setIcon(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\111.png", 25, 25));
+                        insertMusicToFavorites();
                     }
-                    insertMusicToFavorites(evt);
 
 
                 } catch (IOException e) {
@@ -220,7 +213,7 @@ public class Play extends JPanel {
         return jarr;
     }
 
-    public boolean insertMusicToFavorites(ActionEvent evt)
+    public boolean insertMusicToFavorites()
             throws IOException, FileNotFoundException, ParseException {
         String music = alm.getThisSong().getJsonFileName();
         String  path = alm.getThisSong().getSongPath();
