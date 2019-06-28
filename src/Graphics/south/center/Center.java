@@ -11,7 +11,7 @@ public class Center extends JPanel {
 
 
     Play play;
-    Nothing nothing = new Nothing();
+    EqualizerBar equalizerBar = new EqualizerBar();
 
     public Center(South south){
 
@@ -19,7 +19,11 @@ public class Center extends JPanel {
         this.setLayout(new BorderLayout());
         //this.setSize(300,600);
         this.add(play,BorderLayout.CENTER);
-        this.add(nothing,BorderLayout.NORTH);
+        this.add(equalizerBar,BorderLayout.NORTH);
         this.setVisible(true);
+    }
+
+    public Play getPlay() {
+        return play;
     }
 }

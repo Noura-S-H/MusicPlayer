@@ -23,14 +23,17 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 public class Play extends JPanel {
 
+
+    private static final String FAVORITES_PATH = System.getProperty("user.dir") + "/src/Files/Favorite.json";
     private AddProperties pro = new AddProperties();
     private ActionlistenerManeger alm = new ActionlistenerManeger();
     private JButton[] playButtons = new JButton[6];
     private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","23.png"};
-    private RunningTime playerBar = new RunningTime(0,300);
+
+    private RunningTime playerBar = new RunningTime(0,300)
+            ;
     private PlaySetting playSetting = new PlaySetting();
     private JButton favorites;
-    private static final String FAVORITES_PATH = System.getProperty("user.dir") + "/src/Files/Favorite.json";
     PlayMusic m = new PlayMusic();
     private JList<String> musicsList = new JList<>();
     private String nameOfSong;
@@ -84,6 +87,23 @@ public class Play extends JPanel {
         favorites.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 try {
+
+                    if(alm.getThisSong().getFavorite() == true) {
+                        alm.getThisSong().setFavorite(false);
+                        favorites.setIcon(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\3.png",25,25));
+                        try {
+                            playMusic.stopMusic();
+                            playMusic.deleteMusic(thisSong.getJsonFileName());
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                        deleteFromFavorite(alm.getThisSong().getJsonFileName());
+                    }
+                    else {
+                        alm.getThisSong().setFavorite(true);
+                        favorites.setIcon(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\111.png",25,25));
+                        insertMusicToFavorites(evt);
+                    }
                     insertMusicToFavorites(evt);
 
 

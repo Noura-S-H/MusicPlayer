@@ -2,6 +2,7 @@ package Logic;
 
 import Graphics.Song;
 import Graphics.south.left.Artwork;
+import davaguine.jeq.spi.EqualizerInputStream;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import org.json.simple.JSONArray;
@@ -9,6 +10,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.TargetDataLine;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -197,6 +200,7 @@ public class PlayMusic {
                 System.out.println("Path Music " + way);
                 aux = way;
                 stream = new FileInputStream(way);
+            //    EqualizerInputStream eq = new EqualizerInputStream(new AudioInputStream((TargetDataLine) stream),3);
                 player = new AdvancedPlayer(stream);
                 // total duration of the music
                 duration_song = stream.available();

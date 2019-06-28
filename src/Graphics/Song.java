@@ -13,7 +13,7 @@ public class Song {
 
     private Mp3File mp3File;
     private Warrning error;
-    private boolean favorite = false;
+    private static boolean favorite = false;
     private File song;
     private ImageIcon artwork;
     private String title;
@@ -128,6 +128,9 @@ public class Song {
         return str;
     }
 
+    public boolean getFavorite(){
+        return favorite;
+    }
 
     public ImageIcon getArtwork() {
         return artwork;

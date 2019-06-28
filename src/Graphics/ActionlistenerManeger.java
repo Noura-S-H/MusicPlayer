@@ -2,11 +2,14 @@ package Graphics;
 
 import Graphics.center.LibraryDisplay.Center;
 import Graphics.south.South;
+import Graphics.south.center.RunningTime;
 import Logic.PlayMusic;
 import org.json.simple.parser.ParseException;
 
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -81,10 +84,20 @@ public class ActionlistenerManeger {
     }
 
 
-    public void changeMusic(Song song){
-        System.out.println(song.getTitle());
+    public void changeViewInPlayListDisplay(JList list,Center view,String card,Playlist playlist){
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
 
+            }
+        });
     }
+
+//
+//    public void updateRunningTime (South south){
+//        RunningTime rt = south.getCenter().getPlay().getPlayerBar();
+//        rt = new RunningTime(thisSong.getSongPath());
+//    }
 
 
 

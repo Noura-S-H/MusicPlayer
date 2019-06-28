@@ -91,11 +91,8 @@ public class DisplayAlbumContent extends JPanel {
             liveSong.setVisible(true);
 
             JLabel artworkSong = new JLabel();
-            JButton playBt = new JButton("PLAY");
             pro.setLabelProperties(artworkSong,600,110,"Brush Script MT",15,SwingConstants.LEFT);
-            pro.setButtonProperties(playBt,100,100,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
-            playBt.setIcon(pro.getImageArtwork(
-                    "src\\Graphics\\icons\\MusicIcons\\ppp.png",50,50));
+
 
             Image newimg = s.getArtwork().getImage().getScaledInstance( 100, 100,  java.awt.Image.SCALE_SMOOTH ) ;
             artworkSong.setIcon(new ImageIcon(newimg));
@@ -103,7 +100,6 @@ public class DisplayAlbumContent extends JPanel {
                     "</font><p>&emsp;"+s.getArtists()+"<br>&emsp;"+s.getLastTimePlayed()+"</html>");
 
             liveSong.add(artworkSong,BorderLayout.WEST);
-            liveSong.add(playBt,BorderLayout.EAST);
         }
 
 
