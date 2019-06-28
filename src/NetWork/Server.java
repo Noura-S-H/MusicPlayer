@@ -2,9 +2,7 @@ package NetWork;
 
 import NetWork.Client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ public class Server extends Thread implements Runnable{
     private Socket socket = null;
     private ServerSocket server = null;
     private ArrayList<Client> clients;
+    Data resive = null;
 
     // constructor with port
     public Server(int port) {
@@ -31,27 +30,30 @@ public class Server extends Thread implements Runnable{
 
         System.out.println("Server started");
         System.out.println("Waiting for a client ...");
-        while (true) {
+      //  while (true) {
             try {
 
                 socket = server.accept();
                 System.out.println("Client accepted");
 
-                // takes input from the client socket
-               // BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                //String input = in.readLine();
-                //input = appendchar(input);
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
+
+                resive = (Data)in.readObject();
+
+                System.out.println(resive.getFriendUsername());
                 System.out.println("Closing connection");
                 // close connection
-                //in.close();
+                out.flush();
+                in.close();
                 socket.close();
 
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
-        }
+        //}
 
 
     }
@@ -59,6 +61,10 @@ public class Server extends Thread implements Runnable{
     public void addClient(Client c){
         clients.add(c);
     }
+
+//    public String getData(){
+//        return data;
+//    }
 
     public static void  main(String[] args){
         Server s = new Server(2000);

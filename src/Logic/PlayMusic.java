@@ -14,7 +14,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.TargetDataLine;
 import javax.swing.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -24,6 +26,7 @@ public class PlayMusic {
 
     private static final String MUSICS_PATH = System.getProperty("user.dir") + "/src/Files/musics.json";
 
+    private Song song;
     private String aux;
     private AdvancedPlayer player;
     private FileInputStream stream;
@@ -59,6 +62,9 @@ public class PlayMusic {
         return this.playing;
     }
 
+    public void setSong(Song song) {
+        this.song = song;
+    }
 
     /**
      * read the JSON file containing the songs (and their paths) added to the system
@@ -233,7 +239,14 @@ public class PlayMusic {
             this.duration_song = 0;
             this.pause_position = 0;
             this.playing = false;
+            String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
+            Time time = new Time(currentTime,song);
+            time.start();
         }
+    }
+
+    public void lastTimePlayed(){
+
     }
 
     /**
