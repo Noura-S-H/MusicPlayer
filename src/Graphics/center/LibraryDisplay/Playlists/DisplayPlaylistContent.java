@@ -1,4 +1,4 @@
-package Graphics.center.LibraryDisplay;
+package Graphics.center.LibraryDisplay.Playlists;
 
 import Graphics.ActionlistenerManeger;
 import Graphics.AddProperties;
@@ -15,6 +15,8 @@ import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
@@ -30,6 +32,7 @@ public class DisplayPlaylistContent extends JPanel {
     //private ArrayList<String> Allpaths = new ArrayList<String>();
     private JPanel list = new JPanel();
     private JTable table;
+    JButton share = new JButton();
 
 
 
@@ -39,13 +42,6 @@ public class DisplayPlaylistContent extends JPanel {
         this.setBackground(new Color(3,11,21));
         this.setVisible(true);
 
-//        try {
-//            setPathsToAllSongsPaths(paths);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
         createListPanel(south);
         this.add(list,BorderLayout.CENTER);
@@ -98,13 +94,26 @@ public class DisplayPlaylistContent extends JPanel {
         table.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
 
         pro.setTableProperties(table,100,35,100,800,35,7);
+        pro.setButtonProperties(share,800,30,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
+        pro.getImageArtwork("src\\Graphics\\icons\\wicon\\28.png",20,20);
+
+        share.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        list.add(share,BorderLayout.NORTH);
         list.add(new JScrollPane(table),BorderLayout.CENTER);
 
     }
 
 
+
+
     //read music for create list of all music exists in library
-    public static JSONArray readMusicJson(String p)
+    public static JSONArray readShareJson(String p)
             throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray jarr = null;
@@ -120,7 +129,7 @@ public class DisplayPlaylistContent extends JPanel {
 
     public void setPathsToAllSongsPaths(String jsonpath)
             throws IOException, FileNotFoundException, ParseException {
-        JSONArray jarr = readMusicJson(jsonpath);
+        JSONArray jarr = readShareJson(jsonpath);
         JSONObject jobj;
         if(jarr != null) {
             for (int i = 0; i < jarr.size(); i++) {
@@ -133,6 +142,8 @@ public class DisplayPlaylistContent extends JPanel {
         }
 
     }
+
+
 
 
 

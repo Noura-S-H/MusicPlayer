@@ -78,7 +78,6 @@ public class Library extends JPanel {
             for (File file : files) {
                 if (insertMusic(file.getName(), file.getAbsolutePath())) {
                     return true;
-
                 }
             }
         } catch (IOException | ParseException ex) {

@@ -82,7 +82,7 @@ public class SongsView extends JPanel {
                      int column = target.getSelectedColumn();
                          am.ChangeArtwork(songslist.get(row), south);
                          am.SetSong(songslist, column, row);
-                     
+
                 }
             }
         });
