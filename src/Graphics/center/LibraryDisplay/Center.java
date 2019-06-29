@@ -1,19 +1,26 @@
 package Graphics.center.LibraryDisplay;
 import Graphics.center.LibraryDisplay.Albums.AlbumsDisplay;
 import Graphics.center.LibraryDisplay.Albums.DisplayAlbumContent;
+import Graphics.center.LibraryDisplay.Playlists.DisplayPlaylistContent;
 import Graphics.south.South;
 import Graphics.Album;
+import Graphics.Playlist;
+import Graphics.south.center.Play;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Center extends JPanel {
 
-    DisplayAlbumContent displayAlbumContent;
     Home home;
     SongsView songsView ;
     AlbumsDisplay albumsDisplay;
+    DisplayAlbumContent displayAlbumContent;
+    DisplayPlaylistContent displayPlaylistContent;
+
     String tempPath = "src\\Files\\musics.json";
     Album tempAlbum;
+    Playlist tempPlaylist;
 
     South south;
     CardLayout cardLayout = new CardLayout();
@@ -45,6 +52,13 @@ public class Center extends JPanel {
         this.tempAlbum = album;
         displayAlbumContent = new DisplayAlbumContent(album,south);
         this.add(displayAlbumContent.getPanel(),"ALBUMCONTENT");
+    }
+
+    public void changeCentralPlaylistView(Playlist playlist){
+        this.tempPlaylist = playlist;
+        displayPlaylistContent = new DisplayPlaylistContent(playlist,south);
+        this.add(displayPlaylistContent.getPanel(),"PLAYLIST");
+
     }
 
 

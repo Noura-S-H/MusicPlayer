@@ -42,12 +42,12 @@ public class PlayListManager {
                 playlists.get(i).setPaths(paths);
             }
 
-            for (int i = 0; i<playlists.size();i++){
-                System.out.println(playlists.get(i).getName());
-                for(int j = 0 ;j<playlists.get(i).getPaths().size(); j++){
-                    System.out.println(playlists.get(i).getPaths().get(j));
-                }
-            }
+//            for (int i = 0; i<playlists.size();i++){
+//                System.out.println(playlists.get(i).getName());
+//                for(int j = 0 ;j<playlists.get(i).getPaths().size(); j++){
+//                    System.out.println(playlists.get(i).getPaths().get(j));
+//                }
+//            }
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
@@ -130,8 +130,9 @@ public class PlayListManager {
         return musics;
     }
 
-    public void addToPlaylists(Playlist p){
-        playlists.add(p);
+
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
     }
 
     public static void main(String[] args){

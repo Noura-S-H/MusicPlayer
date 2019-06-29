@@ -16,16 +16,11 @@ public class Playlist {
 
     public Playlist(String name) {
         this.name = name;
-      //  createSongs();
     }
 
     public void setPaths(ArrayList<String> paths) {
         this.paths = paths;
-    }
-
-    public void addPathAndSong(String p){
-        paths.add(p);
-     //   songs.add(new Song(p));
+        createSongs();
     }
 
     public void createSongs(){

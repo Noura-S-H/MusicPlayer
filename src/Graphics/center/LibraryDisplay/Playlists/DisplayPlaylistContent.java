@@ -7,11 +7,11 @@ import Graphics.center.LibraryDisplay.ButtonEditor;
 import Graphics.center.LibraryDisplay.ButtonRenderer;
 import Graphics.center.LibraryDisplay.ImageRenderer;
 import Graphics.south.South;
+import Graphics.Playlist;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -36,12 +36,12 @@ public class DisplayPlaylistContent extends JPanel {
 
 
 
-    public DisplayPlaylistContent(ArrayList<String> paths, South south){
+    public DisplayPlaylistContent(Playlist playlist, South south){
         super();
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(3,11,21));
         this.setVisible(true);
-
+        songslist = playlist.getSongs();
 
         createListPanel(south);
         this.add(list,BorderLayout.CENTER);
@@ -108,43 +108,6 @@ public class DisplayPlaylistContent extends JPanel {
         list.add(new JScrollPane(table),BorderLayout.CENTER);
 
     }
-
-
-
-
-    //read music for create list of all music exists in library
-    public static JSONArray readShareJson(String p)
-            throws FileNotFoundException, IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray jarr = null;
-        Object obj;
-        try {
-            obj = parser.parse(new FileReader(p));
-            jarr = (JSONArray) obj;
-        } catch (IOException | NullPointerException | ParseException e) {
-            // System.out.println(e);
-        }
-        return jarr;
-    }
-
-    public void setPathsToAllSongsPaths(String jsonpath)
-            throws IOException, FileNotFoundException, ParseException {
-        JSONArray jarr = readShareJson(jsonpath);
-        JSONObject jobj;
-        if(jarr != null) {
-            for (int i = 0; i < jarr.size(); i++) {
-                jobj = (JSONObject) jarr.get(i);
-                String ss = String.valueOf(jobj.values());
-
-                songslist.add(new Song(ss.toString().substring(1, ss.toString().length() - 1)));
-
-            }
-        }
-
-    }
-
-
-
 
 
     public void sortSongByTime(){

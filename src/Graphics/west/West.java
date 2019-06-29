@@ -14,7 +14,7 @@ public class West extends JPanel {
     public West(Center view){
 
         library = new Library(view);
-        playList = new PlaylistDisplay();
+        playList = new PlaylistDisplay(view);
         newPlayList = new NewPlayList();
 
         this.setLayout(new BorderLayout());

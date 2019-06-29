@@ -13,6 +13,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -70,7 +72,8 @@ public class ActionlistenerManeger {
         if(col == 7){
             try {
                 playMusic.stopMusic();
-                thisSong.getTime().start();
+                thisSong.updateTime();
+                //thisSong.getTime().start();
                 thisSong.setisPlaying(false);
                 playMusic.deleteMusic(thisSong.getJsonFileName());
             } catch (Exception ex) {
@@ -99,11 +102,14 @@ public class ActionlistenerManeger {
     }
 
 
-    public void changeViewInPlayListDisplay(JList list,Center view,String card,Playlist playlist){
+    public void changeViewInPlayListDisplay(JList list,Center view,String card,ArrayList<Playlist> allPl){
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                int selected = list.getSelectedIndex();
 
+                view.changeCentralPlaylistView(allPl.get(selected));
+                view.getCardLayout().show(view.getPanel(),card);
             }
         });
     }
