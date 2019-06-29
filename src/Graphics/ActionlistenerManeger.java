@@ -70,7 +70,7 @@ public class ActionlistenerManeger {
         if(col == 7){
             try {
                 playMusic.stopMusic();
-                thisSong.setLastTimePlayed(" ");
+                thisSong.getTime().start();
                 thisSong.setisPlaying(false);
                 playMusic.deleteMusic(thisSong.getJsonFileName());
             } catch (Exception ex) {

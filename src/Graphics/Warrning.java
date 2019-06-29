@@ -22,7 +22,7 @@ public class Warrning extends JFrame{
             this.setTitle("ERROR");
         }
         this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(350, 100);
         this.setLocation(210, 310);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(icon));

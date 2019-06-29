@@ -11,22 +11,24 @@ import java.util.Date;
 public class Time extends Thread implements Runnable{
 
     String time;
-    Song song;
-    public Time(String time, Song song){
+    public Time(String time){
         this.time = time;
-        this.song = song;
     }
 
     @Override
     public void run() {
-        super.run();
         while (true) {
             long diff = calculateTime(time);
             try {
   //              if(diff<=1)
 //                    song.setLastTimePlayed("JUST NOW");
-                sleep(60000);
-                song.setLastTimePlayed(time);
+               // wait(6000);
+                synchronized (time) {
+                    time.wait(60000);
+                }
+                System.out.println(diff);
+
+                System.out.println("sddddddddddddd");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -52,8 +54,9 @@ public class Time extends Thread implements Runnable{
         return difference;
     }
 
-
-
+    public String getTime() {
+        return time;
+    }
 }
 
 

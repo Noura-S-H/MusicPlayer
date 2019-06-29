@@ -1,6 +1,7 @@
 package Graphics;
 
 
+import Logic.Time;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
@@ -8,6 +9,8 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Song {
 
@@ -21,8 +24,11 @@ public class Song {
     private String album;
     private String year;
     private String info;
-    private String lastTimePlayed;
+    private String lastTimePlayed = "00:00:00";
     private String jsonFileName;
+    private boolean isplaying = false;
+
+    Time time ;
 
     public Song(String path){
 
@@ -51,6 +57,9 @@ public class Song {
             System.out.println("Error - " + e.toString());
         }
 
+        String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        time = new Time(currentTime);
+        lastTimePlayed = time.getTime();
     }
 
     public byte[] last128(FileInputStream file){
@@ -176,7 +185,19 @@ public class Song {
         return jsonFileName;
     }
 
+    public void setisPlaying(boolean playingStatus) {
+        this.isplaying = playingStatus;
+    }
 
+    public boolean isPlaying(){
+        return isplaying;
+    }
 
-//
+    public void setLastTimePlayed(String lastTimePlayed) {
+        this.lastTimePlayed = lastTimePlayed;
+    }
+
+    public Time getTime() {
+        return time;
+    }
 }

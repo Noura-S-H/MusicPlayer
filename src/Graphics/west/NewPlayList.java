@@ -20,6 +20,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+
 public class NewPlayList extends JPanel {
 
     private PlayListManager pm ;
@@ -31,7 +33,7 @@ public class NewPlayList extends JPanel {
 
     private final String WINDOWS_TITLE = "NEW PLAYLIST ";
     private final String WINDOWS_ICON = "src\\Graphics\\icons\\wicon\\plus.png";
-    private static final String PLAYLISTS_PATH = System.getProperty("user.dir") + "/src/Files/Playlists/";
+    private static final String PLAYLISTS_PATH = System.getProperty("user.dir") + "/src/Files/playlists.json";
 
     public NewPlayList() {
         super();
@@ -49,7 +51,7 @@ public class NewPlayList extends JPanel {
                 JFrame playlistNameFrame = new JFrame();
                 playlistNameFrame.setTitle(WINDOWS_TITLE);
                 playlistNameFrame.setLayout(new BorderLayout());
-                playlistNameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                playlistNameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 playlistNameFrame.setSize(300, 300);
                 playlistNameFrame.setLocation(200, 100);
                 playlistNameFrame.setVisible(true);
@@ -91,14 +93,26 @@ public class NewPlayList extends JPanel {
                         }
                     });
                 }
+
                 con.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         playlistNameFrame.dispose();
+//                        for(int i =0;i < paths.size();i++){
+//                            System.out.println(paths.get(i));
+//                        }
                         if(!name.getText().isEmpty()){
                             list = new Playlist(name.getText(),paths);
+                            if(list!=null) {
+                                try {
+                                    insertPlaylist(list.getName(),list.getPaths());
+                                } catch (IOException | ParseException e1) {
+                                    e1.printStackTrace();
+                                }
+
+                            }
                             new Warrning("   DONE!",true);
-                            pm.addToPlaylists(list);
+                        //    pm.addToPlaylists(list);
                         }else {
                             new Warrning("THE LIST WAS NOT CREATED! SOMETHINGS IS WRONG..!",false);
                         }
@@ -108,18 +122,6 @@ public class NewPlayList extends JPanel {
 
             }
         });
-
-        if(list!=null) {
-            try {
-                insertPlaylist(list.getName(),list.getPaths(),new JSONArray());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-
 
 
     }
@@ -134,13 +136,14 @@ public class NewPlayList extends JPanel {
      * @throws IOException
      * @throws ParseException
      */
-    public static JSONArray readPlaylistJson(String name)
+
+    public static JSONArray readPlaylistJson()
             throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray jarr = null;
         Object obj;
         try {
-            obj = parser.parse(new FileReader(PLAYLISTS_PATH + name + "json"));
+            obj = parser.parse(new FileReader(PLAYLISTS_PATH));
             jarr = (JSONArray) obj;
         } catch (IOException | NullPointerException | ParseException e) {
             System.out.println(e);
@@ -148,29 +151,30 @@ public class NewPlayList extends JPanel {
         return jarr;
     }
 
-    /**
-     * Insert a new playlist into the playlists file
-     *
-     * @param name Name of Playlist to be created
-     * @param array Array of songs from Playlist
-     * @return True if successfully added or False if not
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ParseException
-     */
-    public static boolean insertPlaylist(String name, ArrayList<String> array,JSONArray jarr)
+    public static boolean insertPlaylist(String name, ArrayList<String> array)
             throws IOException, FileNotFoundException, ParseException {
-
+        JSONArray jarr = readPlaylistJson();
         JSONObject aux = new JSONObject();
         FileWriter writeFile;
         int i = 0;
+        if (!jarr.isEmpty()) {
+            for (i = 0; i < jarr.size(); i++) {
+                JSONObject jobj = (JSONObject) jarr.get(i);
+                if (jobj.containsKey(name)) {
+                    JOptionPane.showMessageDialog(null, "A playlist " + name
+                            + " Already in library", "Error", INFORMATION_MESSAGE);
+                    return false;
+                }
+            }
+        }
         aux.put(name, array);
         jarr.add(aux);
-        writeFile = new FileWriter(PLAYLISTS_PATH + name + "json");
+        writeFile = new FileWriter(PLAYLISTS_PATH);
         JSONArray.writeJSONString(jarr, writeFile);
         writeFile.close();
         return true;
     }
+
 
     /**
      * Returns required playlist
@@ -184,7 +188,7 @@ public class NewPlayList extends JPanel {
     public static ArrayList<String> getPlaylist(String name)
             throws IOException, FileNotFoundException, ParseException {
         ArrayList<String> array;
-        JSONArray jarr = readPlaylistJson(name);
+        JSONArray jarr = readPlaylistJson();
         JSONObject aux = new JSONObject();
         if (!jarr.isEmpty()) {
             for (int i = 0; i < jarr.size(); i++) {

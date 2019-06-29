@@ -156,6 +156,7 @@ public class Play extends JPanel {
 
         try {
             m.stopMusic();
+            alm.getThisSong().getTime().start();
             int newRow = alm.getSongRow() + 1;
             if(newRow <= alm.getThisList().size()) {
                 alm.SetSong(alm.getThisList(), 0, newRow);
@@ -174,6 +175,7 @@ public class Play extends JPanel {
         //int index = musicsList.getSelectedIndex();
         try {
             m.stopMusic();
+            alm.getThisSong().getTime().start();
             int newRow = alm.getSongRow() - 1;
             if(newRow >= 0) {
                 alm.SetSong(alm.getThisList(),0,newRow);
@@ -192,6 +194,7 @@ public class Play extends JPanel {
 
         try {
             m.pauseMusic();
+            alm.getThisSong().getTime().start();
             alm.getThisSong().setisPlaying(false);
             m.setPausedStatus(true);
         } catch (Exception ex) {

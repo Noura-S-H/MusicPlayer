@@ -239,9 +239,6 @@ public class PlayMusic {
             this.duration_song = 0;
             this.pause_position = 0;
             this.playing = false;
-            String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
-            Time time = new Time(currentTime,song);
-            time.start();
         }
     }
 
