@@ -73,7 +73,7 @@ public class ActionlistenerManeger {
         if(col == 7){
             try {
                 playMusic.stopMusic();
-                thisSong.updateTime();
+                thisSong.startTime();
                 //thisSong.getTime().start();
                 thisSong.setisPlaying(false);
                 playMusic.deleteMusic(thisSong.getJsonFileName());

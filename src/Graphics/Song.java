@@ -23,7 +23,6 @@ public class Song {
     private String artists;
     private String album;
     private String year;
-    private String info;
     private String lastTimePlayed = "00:00:00";
     private String jsonFileName;
     private boolean isplaying = false;
@@ -57,9 +56,7 @@ public class Song {
             System.out.println("Error - " + e.toString());
         }
 
-        String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
-        time = new Time(currentTime);
-        lastTimePlayed = time.getTime();
+
     }
 
     public byte[] last128(FileInputStream file){
@@ -135,6 +132,21 @@ public class Song {
         str = str.substring(0,i+1);
 
         return str;
+    }
+
+    public void startTime() {
+        time = new Time();
+        time.start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    lastTimePlayed = time.getTime();
+                }
+            }
+        }).start();
+
+
     }
 
     public boolean getFavorite(){

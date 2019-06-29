@@ -28,7 +28,7 @@ public class Play extends JPanel {
     private AddProperties pro = new AddProperties();
     private ActionlistenerManeger alm = new ActionlistenerManeger();
     private JButton[] playButtons = new JButton[6];
-    private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","23.png"};
+    private String[] buttonIcons = {"7.png","20.png","21.png","18.png","29.png","34.png"};
 
     private RunningTime playerBar = new RunningTime(0,300);
     private PlaySetting playSetting = new PlaySetting();
@@ -74,6 +74,12 @@ public class Play extends JPanel {
         playButtons[3].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnNextActionPerformed(evt,south);
+            }
+        });
+
+        playButtons[5].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
             }
         });
 
@@ -156,7 +162,8 @@ public class Play extends JPanel {
 
         try {
             m.stopMusic();
-            alm.getThisSong().getTime().start();
+            alm.getThisSong().startTime();
+//            alm.getThisSong().getTime().start();
             int newRow = alm.getSongRow() + 1;
             if(newRow <= alm.getThisList().size()) {
                 alm.SetSong(alm.getThisList(), 0, newRow);
@@ -175,7 +182,8 @@ public class Play extends JPanel {
         //int index = musicsList.getSelectedIndex();
         try {
             m.stopMusic();
-            alm.getThisSong().getTime().start();
+            alm.getThisSong().startTime();
+     //       alm.getThisSong().getTime().start();
             int newRow = alm.getSongRow() - 1;
             if(newRow >= 0) {
                 alm.SetSong(alm.getThisList(),0,newRow);
@@ -194,7 +202,8 @@ public class Play extends JPanel {
 
         try {
             m.pauseMusic();
-            alm.getThisSong().getTime().start();
+            alm.getThisSong().startTime();
+    //        alm.getThisSong().getTime().start();
             alm.getThisSong().setisPlaying(false);
             m.setPausedStatus(true);
         } catch (Exception ex) {
@@ -202,8 +211,15 @@ public class Play extends JPanel {
         }
     }
 
-    public void calTime(int ms){
 
+    private void deleteBtnActionPerformed(ActionEvent evt) {
+
+        try {
+            m.deleteMusic( (String) alm.getThisSong().getJsonFileName() );
+
+        } catch (IOException | ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 
