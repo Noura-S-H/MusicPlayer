@@ -21,6 +21,7 @@ public class EqualizerBar extends JPanel {
     public EqualizerBar(){
         super();
         this.setLayout(new BorderLayout());
+        this.setBackground(new Color(23, 32, 42));
         this.setVisible(true);
         lyric =  new JButton("LYRIC");
         pro.setButtonProperties(lyric,150,100,JButton.CENTER,JButton.LEFT,SwingConstants.CENTER);

@@ -1,6 +1,8 @@
 package Graphics.south.center;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -20,7 +22,6 @@ public class RunningTime extends JPanel {
         runningTime.setPaintLabels(true);
         runningTime.setBackground(new Color(3, 11, 21));
         runningTime.setPreferredSize(new Dimension(endsecond,20));
-
 
         this.add(runningTime);
 

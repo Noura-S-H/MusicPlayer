@@ -9,31 +9,20 @@ import java.util.ArrayList;
 public class Friend {
 
     private String username;
-    private Song lastPlayed;
-    ArrayList<Playlist> sharedPlaylists;
+  //  private String lastPlayedSongName;
+
 
     //private Song song;
 
-    public Friend(String username,Song lastPlayed,ArrayList<Playlist> sharedPlaylists){
+    public Friend(String username,String lastPlayed){
         this.username = username;
-        this.sharedPlaylists = sharedPlaylists;
-        this.lastPlayed = lastPlayed;
+       // this.lastPlayedSongName = lastPlayed;
 
-//        public String toString(){
-//            return friendUsername + lastPlayed +sharedPlaylists ;
-//
-//        }
     }
 
-    public Song getLastPlayed() {
-        return lastPlayed;
-    }
 
-    public ArrayList<Playlist> getSharedPlaylists() {
-        return sharedPlaylists;
-    }
 
-    public String username() {
+    public String getUsername() {
         return username;
     }
 

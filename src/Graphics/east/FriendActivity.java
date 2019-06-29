@@ -28,6 +28,7 @@ public class FriendActivity extends JPanel {
         this.add(friendActivity, BorderLayout.NORTH);
 
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(3,11,21));
         panel.setLayout(new GridLayout(friends.size(),1));
 
         this.add(new JScrollPane(panel), BorderLayout.CENTER);

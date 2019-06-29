@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Client extends Thread implements Runnable {
 
     Song s = new Song("src\\Files\\songTest\\ttt.mp3");
-    Friend friendData = new Friend("user",null,null);
+    Friend friendData = new Friend("user",null);
 
     ArrayList<Integer> ips = new ArrayList<Integer>();
     private Socket socket = null;
@@ -32,18 +32,18 @@ public class Client extends Thread implements Runnable {
             //new Data();
       //  PrintWriter writer = null;
         ObjectOutputStream out = null;
-        ObjectInputStream in = null;
+       // ObjectInputStream in = null;
         try {
 
             out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
+         //   in = new ObjectInputStream(socket.getInputStream());
 
            // out.defaultWriteObject(data);
             out.writeObject(friendData);
            // out.writeObject(data);
             out.flush();
             out.close();
-           // socket.close();
+            socket.close();
 
         } catch (IOException e1) {
             e1.printStackTrace();

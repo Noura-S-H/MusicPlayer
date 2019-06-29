@@ -1,5 +1,6 @@
 package NetWork;
 
+import Graphics.east.Friend;
 import NetWork.Client;
 
 import java.io.*;
@@ -12,7 +13,7 @@ public class Server extends Thread implements Runnable{
     private Socket socket = null;
     private ServerSocket server = null;
     private ArrayList<Client> clients;
-    Data resive = null;
+    Friend resive = null;
 
     // constructor with port
     public Server(int port) {
@@ -36,16 +37,16 @@ public class Server extends Thread implements Runnable{
                 socket = server.accept();
                 System.out.println("Client accepted");
 
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+               // ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
+                resive = (Friend)in.readObject();
 
-                resive = (Data)in.readObject();
+                System.out.println(resive.getUsername());
 
-                System.out.println(resive.getFriendUsername());
                 System.out.println("Closing connection");
                 // close connection
-                out.flush();
+                //out.flush();
                 in.close();
                 socket.close();
 
