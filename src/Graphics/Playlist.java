@@ -14,15 +14,18 @@ public class Playlist {
     private ArrayList<String> paths;
 
 
-    public Playlist(String name,ArrayList<String> paths) {
+    public Playlist(String name) {
         this.name = name;
+      //  createSongs();
+    }
+
+    public void setPaths(ArrayList<String> paths) {
         this.paths = paths;
-        createSongs();
     }
 
     public void addPathAndSong(String p){
         paths.add(p);
-        songs.add(new Song(p));
+     //   songs.add(new Song(p));
     }
 
     public void createSongs(){

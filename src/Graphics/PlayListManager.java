@@ -1,5 +1,6 @@
 package Graphics;
 
+import Graphics.south.center.Play;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,6 +9,9 @@ import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 
@@ -17,18 +21,36 @@ public class PlayListManager {
 
     private static final String PLAYLISTS_PATH = System.getProperty("user.dir") + "/src/Files/playlists.json";
     ArrayList<Playlist> playlists = new ArrayList<Playlist>();
+    //save all name of play lists with their position that exists
+    HashMap<Integer,String> allName_HM = new HashMap<Integer, String>();
 
 
 
     public PlayListManager(){
 
-        JSONArray jarr = new JSONArray();
-        for(int i = 0; i < playlists.size(); i++ ){
-            try {
-                insertPlaylist(playlists.get(i).getName(),playlists.get(i).getPaths(),jarr);
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
+        try {
+            getAllNamePlayList(PLAYLISTS_PATH);
+
+            for(int i : allName_HM.keySet()){
+                playlists.add(new Playlist(allName_HM.get(i)));
+                ArrayList<String> paths = new ArrayList<>();
+                JSONArray arr = (JSONArray) getPlaylist(allName_HM.get(i));
+                for (int j = 0; j < arr.size(); j++) {
+                    String p = (String) arr.get(j);
+                    paths.add(p);
+                }
+                playlists.get(i).setPaths(paths);
             }
+
+            for (int i = 0; i<playlists.size();i++){
+                System.out.println(playlists.get(i).getName());
+                for(int j = 0 ;j<playlists.get(i).getPaths().size(); j++){
+                    System.out.println(playlists.get(i).getPaths().get(j));
+                }
+            }
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
 
     }
@@ -56,29 +78,6 @@ public class PlayListManager {
         return jarr;
     }
 
-    /**
-     * Insert a new playlist into the playlists file
-     *
-     * @param name Name of Playlist to be created
-     * @param array Array of songs from Playlist
-     * @return True if successfully added or False if not
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ParseException
-     */
-    public static boolean insertPlaylist(String name, ArrayList<String> array,JSONArray jarr)
-            throws IOException, FileNotFoundException, ParseException {
-
-        JSONObject aux = new JSONObject();
-        FileWriter writeFile;
-        int i = 0;
-        aux.put(name, array);
-        jarr.add(aux);
-        writeFile = new FileWriter(PLAYLISTS_PATH);
-        JSONArray.writeJSONString(jarr, writeFile);
-        writeFile.close();
-        return true;
-    }
 
     /**
      * Returns required playlist
@@ -106,8 +105,37 @@ public class PlayListManager {
         return null;
     }
 
+
+    public HashMap<Integer,String> getAllNamePlayList(String filePath)
+            throws IOException, FileNotFoundException, ParseException {
+        JSONArray jarr = readPlaylistJson();
+        JSONObject jobj;
+        for (int i = 0; i < jarr.size(); i++) {
+            jobj = (JSONObject) jarr.get(i);
+
+            Set<String> s = jobj.keySet();
+            String songName = s.toString().substring(1, s.toString().length() - 1);
+
+            allName_HM.put(i,songName);
+
+        }
+        return allName_HM;
+    }
+
+
+    private ArrayList<String> updateMusicsList(String playlistName)
+            throws IOException, FileNotFoundException, ParseException {
+        ArrayList<String> musics = getPlaylist(playlistName);
+
+        return musics;
+    }
+
     public void addToPlaylists(Playlist p){
         playlists.add(p);
+    }
+
+    public static void main(String[] args){
+        PlayListManager pm = new PlayListManager();
     }
 
 

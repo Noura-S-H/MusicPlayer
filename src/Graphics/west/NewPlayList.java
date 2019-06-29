@@ -26,7 +26,6 @@ public class NewPlayList extends JPanel {
 
     private PlayListManager pm ;
     private SongsManeger sm = new SongsManeger("src\\Files\\musics.json");
-    private Playlist list ;
     ArrayList<String> paths = new ArrayList<String>();
     private AddProperties pro = new AddProperties();
     JButton buttonNewPlaylist;
@@ -102,15 +101,11 @@ public class NewPlayList extends JPanel {
 //                            System.out.println(paths.get(i));
 //                        }
                         if(!name.getText().isEmpty()){
-                            list = new Playlist(name.getText(),paths);
-                            if(list!=null) {
                                 try {
-                                    insertPlaylist(list.getName(),list.getPaths());
+                                    insertPlaylist(name.getText(),paths);
                                 } catch (IOException | ParseException e1) {
                                     e1.printStackTrace();
                                 }
-
-                            }
                             new Warrning("   DONE!",true);
                         //    pm.addToPlaylists(list);
                         }else {
@@ -151,6 +146,17 @@ public class NewPlayList extends JPanel {
         return jarr;
     }
 
+
+    /**
+     * Returns required playlist
+     *
+     * @param name Name the playlist
+     * @param array of paths the playlist
+     * @return String ArrayList containing playlist songs
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
     public static boolean insertPlaylist(String name, ArrayList<String> array)
             throws IOException, FileNotFoundException, ParseException {
         JSONArray jarr = readPlaylistJson();
@@ -206,9 +212,6 @@ public class NewPlayList extends JPanel {
         return paths;
     }
 
-    public Playlist getList() {
-        return list;
-    }
 }
 
 
