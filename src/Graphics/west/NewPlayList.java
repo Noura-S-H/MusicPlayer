@@ -4,6 +4,8 @@ import Graphics.Warrning;
 import Graphics.PlayListManager;
 import Graphics.ActionlistenerManeger;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +26,8 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 public class NewPlayList extends JPanel {
 
-    private PlayListManager pm ;
-    private SongsManeger sm = new SongsManeger("src\\Files\\musics.json");
+    ActionlistenerManeger am = new ActionlistenerManeger();
+    private SongsManeger sm; //= new SongsManeger("src\\Files\\musics.json");
     ArrayList<String> paths = new ArrayList<String>();
     private AddProperties pro = new AddProperties();
     JButton buttonNewPlaylist;
@@ -34,7 +36,7 @@ public class NewPlayList extends JPanel {
     private final String WINDOWS_ICON = "src\\Graphics\\icons\\wicon\\plus.png";
     private static final String PLAYLISTS_PATH = System.getProperty("user.dir") + "/src/Files/playlists.json";
 
-    public NewPlayList() {
+    public NewPlayList(PlaylistDisplay pld) {
         super();
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(3, 11, 21));
@@ -47,6 +49,7 @@ public class NewPlayList extends JPanel {
         buttonNewPlaylist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                sm = new SongsManeger("src\\Files\\musics.json");
                 JFrame playlistNameFrame = new JFrame();
                 playlistNameFrame.setTitle(WINDOWS_TITLE);
                 playlistNameFrame.setLayout(new BorderLayout());
@@ -68,30 +71,27 @@ public class NewPlayList extends JPanel {
                 pro.setButtonProperties(con,100,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
                 con.setBackground(new Color(21, 141, 32));
 
-                JPanel butt = new JPanel(new GridLayout(sm.getMusics().size(),1));
-                JButton[] bt = new JButton[sm.getMusics().size()];
-
-                for(int i = 0; i < bt.length; i++) {
-                    bt[i] =  new JButton(sm.getMusics().get(i).getJsonFileName());
-                    bt[i].setBackground(new Color(28, 40, 51));
-                    bt[i].setForeground(Color.white);
-                    butt.add(bt[i]);
+                ArrayList<String> names = new ArrayList<>();
+                for(int i = 0; i < sm.getMusics().size(); i++) {
+                    names.add("      + "+sm.getMusics().get(i).getJsonFileName());
                 }
+                JList namelist = new JList(names.toArray());
+                name.setBackground(new Color(255, 241, 118));
+                namelist.setBackground(new Color(28, 40, 51));
+                namelist.setForeground(Color.white);
                 panel.add(lab1,BorderLayout.NORTH);
-                panel.add(new JScrollPane(butt),BorderLayout.CENTER);
+                panel.add(new JScrollPane(namelist),BorderLayout.CENTER);
                 panel.add(con,BorderLayout.SOUTH);
                 playlistNameFrame.add(panel,BorderLayout.CENTER);
 
 
-                for(int i = 0; i < bt.length; i++){
-                    int finalI = i;
-                    bt[i].addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            paths.add(sm.getMusics().get(finalI).getSongPath());
-                        }
-                    });
-                }
+                namelist.addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent e) {
+                        int n = name.getSelectionEnd();
+                        paths.add(sm.getMusics().get(n).getSongPath());
+                    }
+                });
 
                 con.addActionListener(new ActionListener() {
                     @Override
@@ -101,12 +101,15 @@ public class NewPlayList extends JPanel {
 //                            System.out.println(paths.get(i));
 //                        }
                         if(!name.getText().isEmpty()){
+                            removeRepetitiousMusic(paths);
                                 try {
                                     insertPlaylist(name.getText(),paths);
                                 } catch (IOException | ParseException e1) {
                                     e1.printStackTrace();
                                 }
+
                             new Warrning("   DONE!",true);
+                                am.updatePlaylist(pld);
                         //    pm.addToPlaylists(list);
                         }else {
                             new Warrning("THE LIST WAS NOT CREATED! SOMETHINGS IS WRONG..!",false);
@@ -181,32 +184,17 @@ public class NewPlayList extends JPanel {
         return true;
     }
 
-
-    /**
-     * Returns required playlist
-     *
-     * @param name Name the playlist
-     * @return String ArrayList containing playlist songs
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ParseException
-     */
-    public static ArrayList<String> getPlaylist(String name)
-            throws IOException, FileNotFoundException, ParseException {
-        ArrayList<String> array;
-        JSONArray jarr = readPlaylistJson();
-        JSONObject aux = new JSONObject();
-        if (!jarr.isEmpty()) {
-            for (int i = 0; i < jarr.size(); i++) {
-                JSONObject jobj = (JSONObject) jarr.get(i);
-                if (jobj.containsKey(name)) {
-                    array = (ArrayList<String>) jobj.get(name);
-                    return array;
+    public void removeRepetitiousMusic(ArrayList<String> selectedPaths){
+        for(int i = 0; i<selectedPaths.size(); i++){
+            String temp = selectedPaths.get(i);
+            for(int j = 1; j < selectedPaths.size(); j++){
+                if(temp.equals(selectedPaths.get(j))){
+                    selectedPaths.remove(temp);
                 }
             }
         }
-        return null;
     }
+
 
     public ArrayList<String> getPaths() {
         return paths;

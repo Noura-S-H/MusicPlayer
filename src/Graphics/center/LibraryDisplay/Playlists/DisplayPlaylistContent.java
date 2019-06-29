@@ -29,10 +29,14 @@ public class DisplayPlaylistContent extends JPanel {
 
     private AddProperties pro = new AddProperties();
     private ArrayList<Song> songslist = new ArrayList<Song>();
-    //private ArrayList<String> Allpaths = new ArrayList<String>();
+
+    private JPanel toolPanel = new JPanel();
     private JPanel list = new JPanel();
+
     private JTable table;
-    JButton share = new JButton();
+
+
+
 
 
 
@@ -44,6 +48,8 @@ public class DisplayPlaylistContent extends JPanel {
         songslist = playlist.getSongs();
 
         createListPanel(south);
+        toolPanel(playlist);
+        this.add(toolPanel,BorderLayout.NORTH);
         this.add(list,BorderLayout.CENTER);
     }
 
@@ -94,18 +100,35 @@ public class DisplayPlaylistContent extends JPanel {
         table.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
 
         pro.setTableProperties(table,100,35,100,800,35,7);
-        pro.setButtonProperties(share,800,30,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
-        pro.getImageArtwork("src\\Graphics\\icons\\wicon\\28.png",20,20);
 
-        share.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-
-        list.add(share,BorderLayout.NORTH);
         list.add(new JScrollPane(table),BorderLayout.CENTER);
+
+    }
+
+    public void toolPanel(Playlist pl){
+        toolPanel.setLayout(new BorderLayout());
+        toolPanel.setVisible(true);
+
+        JButton share = new JButton(pro.getImageArtwork("src\\Graphics\\icons\\wicon\\28.png",20,20));
+        pro.setButtonProperties(share,50,30,JButton.CENTER,JButton.CENTER,SwingConstants.CENTER);
+        JButton addMusic = new JButton("  | ADD MUSIC TO PLAYLIST");
+        addMusic.setFont(new Font("TableHeader.cellBorder",Font.BOLD,10));
+        pro.setButtonProperties(addMusic,50,30,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
+        JButton removePlaylist = new JButton("  | REMOVE PLAYLIST");
+        removePlaylist.setFont(new Font("TableHeader.cellBorder",Font.BOLD,10));
+        pro.setButtonProperties(removePlaylist,150,30,JButton.CENTER,JButton.CENTER,SwingConstants.LEFT);
+
+        JPanel btpanel = new JPanel(new BorderLayout());
+        btpanel.add(share,BorderLayout.WEST);
+        btpanel.add(addMusic,BorderLayout.CENTER);
+        btpanel.add(removePlaylist,BorderLayout.EAST);
+
+        JLabel playlistName = new JLabel( "     "+ pl.getName());
+        pro.setLabelProperties(playlistName,400,30,"Brush Script MT",17,SwingConstants.LEFT);
+
+        toolPanel.add(playlistName,BorderLayout.WEST);
+        toolPanel.add(btpanel,BorderLayout.CENTER);
 
     }
 

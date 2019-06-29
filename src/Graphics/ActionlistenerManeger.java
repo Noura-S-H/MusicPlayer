@@ -4,6 +4,7 @@ import Graphics.Lyrics.Lyrics;
 import Graphics.center.LibraryDisplay.Center;
 import Graphics.south.South;
 import Graphics.south.center.RunningTime;
+import Graphics.west.PlaylistDisplay;
 import Logic.PlayMusic;
 import org.json.simple.parser.ParseException;
 
@@ -112,6 +113,11 @@ public class ActionlistenerManeger {
                 view.getCardLayout().show(view.getPanel(),card);
             }
         });
+    }
+
+    public void updatePlaylist(PlaylistDisplay pld){
+        pld.updateList();
+        pld.getCl().show(pld.getPanel(),"LIST");
     }
 
 //

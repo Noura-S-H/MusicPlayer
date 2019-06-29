@@ -28,15 +28,21 @@ public class Library extends JPanel {
     private JList<String> musicsList = new JList<>();
 
     private AddProperties pro = new AddProperties();
+    private static final String LABEL_TEXT = "  \uD83C\uDFA7  Your Playlist ";
     private final String[] name = {" Home"," Add To Library","Songs","Albums","Favorites ","Shared Playlist"};
 
     public Library(Center view) {
         super();
-        this.setLayout(new GridLayout(7, 1));
+        this.setLayout(new GridLayout(8, 1));
         this.setBackground(new Color(3, 11, 21));
         this.setVisible(true);
 
         buttons = new JButton[6];
+
+       // pm = new PlayListManager();
+        JLabel lab = new JLabel(LABEL_TEXT);
+        pro.setLabelProperties(lab,150,30,"",12,SwingConstants.LEFT);
+
 
         JLabel label = new JLabel("  \uD83C\uDFA7  Libray");
         pro.setLabelProperties(label,150,30,"",12,SwingConstants.LEFT);
@@ -56,9 +62,11 @@ public class Library extends JPanel {
                 if(addDirecBtnActionPerformed(evt)) {
                     alm.changeView(buttons[3],view,"ALBUMSVIEW",null);
                 }
-                addDirecBtnActionPerformed(evt);
+
             }
         });
+
+        add(lab);
 
         alm.changeView(buttons[0],view,"HOME",null);
         alm.changeView(buttons[2],view,"SONGSVIEW","src\\Files\\musics.json");
@@ -77,13 +85,13 @@ public class Library extends JPanel {
             File[] files = chooser.getSelectedFiles();
             for (File file : files) {
                 if (insertMusic(file.getName(), file.getAbsolutePath())) {
-                    return true;
+
                 }
             }
         } catch (IOException | ParseException ex) {
             System.out.println(ex);
         }
-        return false;
+        return true;
     }
 
 

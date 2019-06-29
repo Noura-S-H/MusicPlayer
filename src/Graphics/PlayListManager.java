@@ -123,14 +123,6 @@ public class PlayListManager {
     }
 
 
-    private ArrayList<String> updateMusicsList(String playlistName)
-            throws IOException, FileNotFoundException, ParseException {
-        ArrayList<String> musics = getPlaylist(playlistName);
-
-        return musics;
-    }
-
-
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
     }
