@@ -9,15 +9,16 @@ import java.util.ArrayList;
 public class Friend {
 
     private String username;
-  //  private String lastPlayedSongName;
+    private String lastPlayedSongName;
+    private String status;
 
 
     //private Song song;
 
-    public Friend(String username,String lastPlayed){
+    public Friend(String username,String lastPlayed,String status){
         this.username = username;
-       // this.lastPlayedSongName = lastPlayed;
-
+        this.lastPlayedSongName = lastPlayed;
+        this.status = status;
     }
 
 
@@ -26,4 +27,11 @@ public class Friend {
         return username;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public String getLastPlayedSongName() {
+        return lastPlayedSongName;
+    }
 }

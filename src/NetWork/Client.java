@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class Client extends Thread implements Runnable {
 
     Song s = new Song("src\\Files\\songTest\\ttt.mp3");
-    Friend friendData = new Friend("user",null);
+    Friend friendData = new Friend("user","fff","fdsfd");
+
 
     ArrayList<Integer> ips = new ArrayList<Integer>();
     private Socket socket = null;
@@ -28,6 +29,7 @@ public class Client extends Thread implements Runnable {
 
     @Override
     public void run() {
+        String data = friendData.getUsername()+":"+friendData.getLastPlayedSongName()+":"+friendData.getStatus();
         //while (true) {
             //new Data();
       //  PrintWriter writer = null;
@@ -38,9 +40,7 @@ public class Client extends Thread implements Runnable {
             out = new ObjectOutputStream(socket.getOutputStream());
          //   in = new ObjectInputStream(socket.getInputStream());
 
-           // out.defaultWriteObject(data);
-            out.writeObject(friendData);
-           // out.writeObject(data);
+            out.writeObject(data);
             out.flush();
             out.close();
             socket.close();
